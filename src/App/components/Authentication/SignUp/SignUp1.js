@@ -1,48 +1,84 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './../../../../assets/scss/style.scss';
 import Aux from "./../../../../hoc/_Aux";
-import Breadcrumb  from "./../../../../App/layout/AdminLayout/Breadcrumb"
+import Breadcrumb from "./../../../../App/layout/AdminLayout/Breadcrumb"
 /* import DEMO from "../../../store/constant"; */
 
+import UserService from "../../../../services/UserService"
+import SignUpForm from "./SignUpForm"
+import ActivationForm from "./ActivationForm"
+
 class SignUp1 extends React.Component {
-    render () {
-        return(
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            newUserId: '',
+            step: 0
+        }
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        var formData = {
+            name: e.target.username.value,
+            email: e.target.email.value,
+            password: e.target.password.value
+        }
+
+        UserService.register(formData).then((response) => {
+            console.log(response)
+            if (response) {
+                alert('Cadastrado com sucesso')
+                this.setState({ newUserId: response.data.userId })
+                this.setState({ step: 1 })
+            } else {
+                alert('Erro ao Cadastrar')
+            }
+        })
+    }
+
+    handleSubmitToken = (e) => {
+        e.preventDefault()
+        var formData = {
+            userId: this.state.newUserId,
+            token: e.target.activation_token.value
+        }
+        UserService.validateToken(formData).then((response) => {
+            console.log(response)
+            if (response) {
+                alert('token validado com sucesso')
+                window.location.href = "/login";
+            } else {
+                alert('Erro ao Cadastrar')
+            }
+        })
+    }
+
+
+    render() {
+        return (
             <Aux>
-                <Breadcrumb/>
+                <Breadcrumb />
                 <div className="auth-wrapper">
                     <div className="auth-content">
                         <div className="auth-bg">
-                            <span className="r"/>
-                            <span className="r s"/>
-                            <span className="r s"/>
-                            <span className="r"/>
+                            <span className="r" />
+                            <span className="r s" />
+                            <span className="r s" />
+                            <span className="r" />
                         </div>
                         <div className="card">
                             <div className="card-body text-center">
-                                <div className="mb-4">
-                                    <i className="feather icon-user-plus auth-icon"/>
-                                </div>
-                                <h3 className="mb-4">Sign up</h3>
-                                <div className="input-group mb-3">
-                                    <input type="text" className="form-control" placeholder="Username"/>
-                                </div>
-                                <div className="input-group mb-3">
-                                    <input type="email" className="form-control" placeholder="Email"/>
-                                </div>
-                                <div className="input-group mb-4">
-                                    <input type="password" className="form-control" placeholder="password"/>
-                                </div>
-                                <div className="form-group text-left">
-                                    <div className="checkbox checkbox-fill d-inline">
-                                        <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2"/>
-                                            {/* <label htmlFor="checkbox-fill-2" className="cr">Send me the <a href={DEMO.BLANK_LINK}> Newsletter</a> weekly.</label> */}
-                                            <label htmlFor="checkbox-fill-2" className="cr">Send me the <a href='http://www.terra.com.br'> Newsletter</a> weekly.</label>
-                                    </div>
-                                </div>
-                                <button className="btn btn-primary shadow-2 mb-4">Sign up</button>
-                                <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
+                                {
+                                    this.state.step === 0
+                                        ? <SignUpForm handleSubmit={this.handleSubmit} />
+                                        : this.state.step === 1 ? <ActivationForm handleSubmitToken={this.handleSubmitToken} />
+                                            : "vazio"
+                                }
+                                <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Ativar o Token</NavLink></p>
                             </div>
                         </div>
                     </div>
