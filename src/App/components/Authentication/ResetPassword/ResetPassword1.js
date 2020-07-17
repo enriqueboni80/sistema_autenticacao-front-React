@@ -28,7 +28,7 @@ class ResetPassword1 extends React.Component {
                                     <input type="email" className="form-control" placeholder="Email"/>
                                 </div>
                                 <button className="btn btn-primary mb-4 shadow-2">Reset Password</button>
-                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup-1">Signup</NavLink></p>
+                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
                             </div>
                         </div>
                     </div>
