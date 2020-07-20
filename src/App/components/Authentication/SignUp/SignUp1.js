@@ -15,27 +15,55 @@ class SignUp1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            username: '',
+            email: '',
+            password: '',
             newUserId: '',
+            canIRegisterNewEmail: true,
             step: 0
         }
     };
 
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    };
+
+    checkEmailFree = (value) => {
+        UserService.checkEmailFree(value).then((response) => {
+            console.log(response)
+            if (response.data.success) {
+                this.setState({ canIRegisterNewEmail: true })
+            } else {
+                this.setState({ canIRegisterNewEmail: false })
+            }
+        });
+        if (!this.state.canIRegisterNewEmail) {
+            return false
+        }
+        return true
+    }
+
+    matchPassword = (value) => {
+        return value && value === this.state.password;
+    }
+
     handleSubmit = (e) => {
+        console.log(this.state.username)
         e.preventDefault()
         var formData = {
-            name: e.target.username.value,
-            email: e.target.email.value,
-            password: e.target.password.value
+            name: this.state.username,
+            email: this.state.email,
+            password: this.state.password
         }
-
         UserService.register(formData).then((response) => {
-            console.log(response)
-            if (response) {
-                alert('Cadastrado com sucesso')
-                this.setState({ newUserId: response.data.userId })
-                this.setState({ step: 1 })
-            } else {
-                alert('Erro ao Cadastrar')
+            alert('Cadastrado com sucesso!!!!!!!!!!!!!!!!!')
+            this.setState({ newUserId: response.data.userId })
+            this.setState({ step: 1 })
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response.data.error)
             }
         })
     }
@@ -47,12 +75,11 @@ class SignUp1 extends React.Component {
             token: e.target.activation_token.value
         }
         UserService.validateToken(formData).then((response) => {
-            console.log(response)
-            if (response) {
-                alert('token validado com sucesso')
-                window.location.href = "/login";
-            } else {
-                alert('Erro ao Cadastrar')
+            alert('token validado com sucesso')
+            window.location.href = "/login";
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response.data.error)
             }
         })
     }
@@ -74,10 +101,11 @@ class SignUp1 extends React.Component {
                             <div className="card-body text-center">
                                 {
                                     this.state.step === 0
-                                        ? <SignUpForm handleSubmit={this.handleSubmit} />
+                                        ? <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} checkEmailFree={this.checkEmailFree} matchPassword={this.matchPassword} />
                                         : this.state.step === 1 ? <ActivationForm handleSubmitToken={this.handleSubmitToken} />
                                             : "vazio"
                                 }
+                                <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
                                 <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Ativar o Token</NavLink></p>
                             </div>
                         </div>

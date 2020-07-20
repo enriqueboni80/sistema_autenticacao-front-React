@@ -5,7 +5,7 @@ class UserService {
 
   static CONFIG = {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
       /* 'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
     }
   };
@@ -30,13 +30,11 @@ class UserService {
 
   static register(formData) {
     var serviceObj = this.setObject(formData)
-    console.log(serviceObj)
-    return axios.post(UserService._withBaseUrl("register"), serviceObj)
+    return axios.post(UserService._withBaseUrl("register"), serviceObj, this.CONFIG)
   }
 
   static validateToken(formData) {
     var serviceObj = this.setObject(formData)
-    console.log(serviceObj)
     return axios.post(UserService._withBaseUrl("register/validate"), serviceObj)
   }
 
@@ -53,6 +51,13 @@ class UserService {
   static changePassword(formData) {
     var serviceObj = this.setObject(formData)
     return axios.post(UserService._withBaseUrl("forgot-password/reset"), serviceObj)
+  }
+
+  static checkEmailFree(email){
+    let serviceObj = {
+      email : email
+    }
+    return axios.post(UserService._withBaseUrl("register/checkemailfree"), serviceObj)
   }
 
 }

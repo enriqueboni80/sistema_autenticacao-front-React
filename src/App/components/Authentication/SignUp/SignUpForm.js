@@ -1,30 +1,65 @@
-/* import React, { useState, useEffect } from "react"; */
 import React from 'react';
+import { ValidationForm, TextInput } from 'react-bootstrap4-form-validation';
+import { Form, Button } from 'react-bootstrap';
 
 const RegisterForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit} method='POST'>
+        <ValidationForm onSubmit={props.handleSubmit}>
             < div className="mb-4" >
                 <i className="feather icon-user-plus auth-icon" />
             </div >
             <h3 className="mb-4">Sign up</h3>
-            <div className="input-group mb-3">
-                <input type="text" className="form-control" name='username' placeholder="Username" />
-            </div>
-            <div className="input-group mb-3">
-                <input type="email" className="form-control" name='email' placeholder="Email" />
-            </div>
-            <div className="input-group mb-4">
-                <input type="password" className="form-control" name='password' placeholder="password" />
-            </div>
-            <div className="form-group text-left">
-                <div className="checkbox checkbox-fill d-inline">
-                    <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2" />
-                    {/* <label htmlFor="checkbox-fill-2" className="cr">Send me the <a href={DEMO.BLANK_LINK}> Newsletter</a> weekly.</label> */}
-                </div>
-            </div>
-            <button className="btn btn-primary shadow-2 mb-4">Sign up</button>
-        </form>
+            <Form.Group controlId="formServiceName">
+                <TextInput
+                    type="text"
+                    name="username"
+                    placeholder="UserName"
+                    autoComplete="off"
+                    onChange={props.handleChange}
+                    required
+                    pattern="(?=.*[A-Za-z]).{6,50}"
+                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
+                />
+            </Form.Group>
+            <Form.Group controlId="formServiceName">
+                <TextInput
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                    autoComplete="off"
+                    onChange={props.handleChange}
+                    required
+                    pattern="^([\w\+\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
+                    validator={props.checkEmailFree}
+                    errorMessage={{ validator: "Esse email não esta liberado", pattern: "precisa ser um email válido" }}
+                />
+            </Form.Group>
+            <Form.Group controlId="formServiceName">
+                <TextInput
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                    autoComplete="off"
+                    onChange={props.handleChange}
+                    required
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Zçã.\d]{8,}$"
+                    errorMessage={{ required: "Campo Requerido", pattern: "Mínimo de oito caracteres, pelo menos uma letra maiúscula, uma letra minúscula e um número" }}
+                />
+            </Form.Group>
+            <Form.Group controlId="formServiceName">
+                <TextInput
+                    type="password"
+                    name="confirmationPassword"
+                    placeholder="Confirmation Password"
+                    autoComplete="off"
+                    onChange={props.handleChange}
+                    required
+                    validator={props.matchPassword}
+                    errorMessage={{ required: "Campo Requerido", validator: "O password e a confirmação DEVEM SER IGUAIS" }}
+                />
+            </Form.Group>
+            <Button type="submit" className="btn btn-primary shadow-2 mb-4">Sign up</Button>
+        </ValidationForm>
     )
 }
 
