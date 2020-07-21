@@ -19,6 +19,7 @@ class SignUp1 extends React.Component {
             email: '',
             password: '',
             newUserId: '',
+            activation_token: '',
             canIRegisterNewEmail: true,
             step: 0
         }
@@ -72,7 +73,7 @@ class SignUp1 extends React.Component {
         e.preventDefault()
         var formData = {
             userId: this.state.newUserId,
-            token: e.target.activation_token.value
+            activation_token: this.state.activation_token
         }
         UserService.validateToken(formData).then((response) => {
             alert('token validado com sucesso')
@@ -102,7 +103,7 @@ class SignUp1 extends React.Component {
                                 {
                                     this.state.step === 0
                                         ? <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} checkEmailFree={this.checkEmailFree} matchPassword={this.matchPassword} />
-                                        : this.state.step === 1 ? <ActivationForm handleSubmitToken={this.handleSubmitToken} />
+                                        : this.state.step === 1 ? <ActivationForm handleSubmitToken={this.handleSubmitToken} handleChange={this.handleChange} />
                                             : "vazio"
                                 }
                                 <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>

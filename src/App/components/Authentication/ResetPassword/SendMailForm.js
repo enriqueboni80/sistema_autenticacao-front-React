@@ -1,22 +1,23 @@
-
-import React from "react";
+import React from 'react';
 import { ValidationForm, TextInput } from 'react-bootstrap4-form-validation';
 import { Form, Button } from 'react-bootstrap';
+import validator from 'validator' 
 
-const ActivationForm = (props) => {
+const SendMailForm = (props) => {
     return (
         <>
-            <h3 className="mb-4">Token Confirmation</h3>
-            <ValidationForm onSubmit={props.handleSubmitToken} method='POST'>
+            <h3 className="mb-4">Reset Password</h3>
+            <ValidationForm onSubmit={props.handleSubmitEmail} method='POST'>
                 <Form.Group controlId="formServiceName">
                     <TextInput
                         type="text"
-                        name="activation_token"
-                        placeholder="Insira o token de confirmação"
+                        name="email"
+                        placeholder="email"
                         autoComplete="off"
                         onChange={props.handleChange}
                         required
-                        errorMessage={{ validator: "Insira o token recebido no email" }}
+                        validator={validator.isEmail}
+                        errorMessage={{ validator: "insira um email válido"}}
                     />
                 </Form.Group>
                 <Button type="submit" className="btn btn-primary mb-4 shadow-2">Reset Password</Button>
@@ -25,4 +26,4 @@ const ActivationForm = (props) => {
     )
 }
 
-export default ActivationForm
+export default SendMailForm

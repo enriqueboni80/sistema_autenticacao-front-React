@@ -1,9 +1,8 @@
-
-import React from "react";
+import React from 'react';
 import { ValidationForm, TextInput } from 'react-bootstrap4-form-validation';
 import { Form, Button } from 'react-bootstrap';
 
-const ActivationForm = (props) => {
+const TokenConfirmationForm = (props) => {
     return (
         <>
             <h3 className="mb-4">Token Confirmation</h3>
@@ -16,7 +15,7 @@ const ActivationForm = (props) => {
                         autoComplete="off"
                         onChange={props.handleChange}
                         required
-                        errorMessage={{ validator: "Insira o token recebido no email" }}
+                        errorMessage={{ validator: "Insira o token recebido no email"}}
                     />
                 </Form.Group>
                 <Button type="submit" className="btn btn-primary mb-4 shadow-2">Reset Password</Button>
@@ -25,4 +24,4 @@ const ActivationForm = (props) => {
     )
 }
 
-export default ActivationForm
+export default TokenConfirmationForm

@@ -16,7 +16,7 @@ class UserService {
       "username": formData.name,
       "email": formData.email,
       "password": formData.password,
-      "activationtoken": formData.token
+      "activationtoken": formData.activation_token
     }
   }
 
@@ -43,7 +43,7 @@ class UserService {
     return axios.post(UserService._withBaseUrl("login"), serviceObj)
   }
 
-  static recoveryPassword(formData) {
+  static forgotPassword(formData) {
     var serviceObj = this.setObject(formData)
     return axios.post(UserService._withBaseUrl("forgot-password"), serviceObj)
   }
