@@ -9,6 +9,7 @@ import Breadcrumb from "./../../../../App/layout/AdminLayout/Breadcrumb"
 import UserService from "../../../../services/UserService"
 import SignUpForm from "./SignUpForm"
 import ActivationForm from "./ActivationForm"
+import ReturnMessage from "../ReturnMessage"
 
 class SignUp1 extends React.Component {
 
@@ -21,6 +22,7 @@ class SignUp1 extends React.Component {
             newUserId: '',
             activation_token: '',
             canIRegisterNewEmail: true,
+            returnMessage: '',
             step: 0
         }
     };
@@ -51,7 +53,6 @@ class SignUp1 extends React.Component {
     }
 
     handleSubmit = (e) => {
-        console.log(this.state.username)
         e.preventDefault()
         var formData = {
             name: this.state.username,
@@ -59,11 +60,11 @@ class SignUp1 extends React.Component {
             password: this.state.password
         }
         UserService.register(formData).then((response) => {
-            alert('Cadastrado com sucesso!!!!!!!!!!!!!!!!!')
             this.setState({ newUserId: response.data.userId })
             this.setState({ step: 1 })
         }).catch((error) => {
             if (error.response) {
+                this.setState({ returnMessage: { type: "warning", message: "Algo errado aconteceu!" } })
                 console.log(error.response.data.error)
             }
         })
@@ -76,15 +77,16 @@ class SignUp1 extends React.Component {
             activation_token: this.state.activation_token
         }
         UserService.validateToken(formData).then((response) => {
-            alert('token validado com sucesso')
-            window.location.href = "/login";
+            this.setState({ returnMessage: { type: "success", message: "Cadastrado, Pode Logar!" } })
+            /* alert('token validado com sucesso')
+            window.location.href = "auth/signin"; */
         }).catch((error) => {
             if (error.response) {
+                this.setState({ returnMessage: { type: "error", message: "Token não validado" } })
                 console.log(error.response.data.error)
             }
         })
     }
-
 
     render() {
         return (
@@ -101,10 +103,11 @@ class SignUp1 extends React.Component {
                         <div className="card">
                             <div className="card-body text-center">
                                 {
-                                    this.state.step === 0
-                                        ? <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} checkEmailFree={this.checkEmailFree} matchPassword={this.matchPassword} />
-                                        : this.state.step === 1 ? <ActivationForm handleSubmitToken={this.handleSubmitToken} handleChange={this.handleChange} />
-                                            : "vazio"
+                                    this.state.returnMessage ? <ReturnMessage returnMessage={this.state.returnMessage} />
+                                        : this.state.step === 0
+                                            ? <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} checkEmailFree={this.checkEmailFree} matchPassword={this.matchPassword} />
+                                            : this.state.step === 1 ? <ActivationForm handleSubmitToken={this.handleSubmitToken} handleChange={this.handleChange} />
+                                                : "Entre em contato com o SysAdmin"
                                 }
                                 <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
                                 <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Ativar o Token</NavLink></p>

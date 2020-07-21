@@ -6,6 +6,9 @@ import { Form, Button } from 'react-bootstrap';
 const ActivationForm = (props) => {
     return (
         <>
+            <div className="mb-4">
+                <i className="feather icon-mail auth-icon" />
+            </div>
             <h3 className="mb-4">Token Confirmation</h3>
             <ValidationForm onSubmit={props.handleSubmitToken} method='POST'>
                 <Form.Group controlId="formServiceName">

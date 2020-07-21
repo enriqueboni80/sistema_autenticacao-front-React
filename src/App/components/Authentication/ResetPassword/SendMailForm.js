@@ -1,11 +1,14 @@
 import React from 'react';
 import { ValidationForm, TextInput } from 'react-bootstrap4-form-validation';
 import { Form, Button } from 'react-bootstrap';
-import validator from 'validator' 
+import validator from 'validator'
 
 const SendMailForm = (props) => {
     return (
         <>
+            <div className="mb-4">
+                <i className="feather icon-mail auth-icon" />
+            </div>
             <h3 className="mb-4">Reset Password</h3>
             <ValidationForm onSubmit={props.handleSubmitEmail} method='POST'>
                 <Form.Group controlId="formServiceName">
@@ -17,7 +20,7 @@ const SendMailForm = (props) => {
                         onChange={props.handleChange}
                         required
                         validator={validator.isEmail}
-                        errorMessage={{ validator: "insira um email válido"}}
+                        errorMessage={{ validator: "insira um email válido" }}
                     />
                 </Form.Group>
                 <Button type="submit" className="btn btn-primary mb-4 shadow-2">Reset Password</Button>

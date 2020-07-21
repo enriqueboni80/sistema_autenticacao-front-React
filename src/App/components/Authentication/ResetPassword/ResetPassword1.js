@@ -9,6 +9,7 @@ import Breadcrumb from "./../../../../App/layout/AdminLayout/Breadcrumb"
 import SendMailForm from "./SendMailForm"
 import TokenConfirmationForm from "./TokenConfirmationForm"
 import ChangePasswordForm from "./ChangePasswordForm"
+import ReturnMessage from "../ReturnMessage"
 
 class ResetPassword1 extends React.Component {
 
@@ -18,6 +19,7 @@ class ResetPassword1 extends React.Component {
             activation_token: '',
             password: '',
             userId: '',
+            returnMessage: '',
             step: 0
         }
     };
@@ -38,11 +40,11 @@ class ResetPassword1 extends React.Component {
             email: e.target.email.value,
         }
         UserService.forgotPassword(formData).then((response) => {
-            alert('Email de recuperação enviado com sucesso')
             this.setState({ userId: response.data.userId })
             this.setState({ step: 1 })
         }).catch((error) => {
             if (error.response) {
+                this.setState({ returnMessage: { type: "error", message: "Esse email não existe no sistema" } })
                 console.log(error.response.data.error)
             }
         })
@@ -59,6 +61,7 @@ class ResetPassword1 extends React.Component {
             this.setState({ step: 2 })
         }).catch((error) => {
             if (error.response) {
+                this.setState({ returnMessage: { type: "error", message: "Token não validado" } })
                 console.log(error.response.data.error)
             }
         })
@@ -76,6 +79,7 @@ class ResetPassword1 extends React.Component {
             window.location.href('/')
         }).catch((error) => {
             if (error.response) {
+                this.setState({ returnMessage: { type: "warning", message: "Algo errado aconteceu!" } })
                 console.log(error.response.data.error)
             }
         })
@@ -95,14 +99,14 @@ class ResetPassword1 extends React.Component {
                         </div>
                         <div className="card">
                             <div className="card-body text-center">
-                                <div className="mb-4">
-                                    <i className="feather icon-mail auth-icon" />
-                                </div>
-                                {this.state.step === 0 ? <SendMailForm handleSubmitEmail={this.handleSubmitEmail} handleChange={this.handleChange} />
-                                    : this.state.step === 1 ? <TokenConfirmationForm handleSubmitToken={this.handleSubmitToken} handleChange={this.handleChange} />
-                                        : this.state.step === 2 ? <ChangePasswordForm handleSubmitChangePassword={this.handleSubmitChangePassword} handleChange={this.handleChange} matchPassword={this.matchPassword} />
-                                            : "Erro"
+                                {
+                                    this.state.returnMessage ? <ReturnMessage returnMessage={this.state.returnMessage} />
+                                        : this.state.step === 0 ? <SendMailForm handleSubmitEmail={this.handleSubmitEmail} handleChange={this.handleChange} />
+                                            : this.state.step === 1 ? <TokenConfirmationForm handleSubmitToken={this.handleSubmitToken} handleChange={this.handleChange} />
+                                                : this.state.step === 2 ? <ChangePasswordForm handleSubmitChangePassword={this.handleSubmitChangePassword} handleChange={this.handleChange} matchPassword={this.matchPassword} />
+                                                    : "Erro"
                                 }
+                                <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
                                 <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
                             </div>
                         </div>

@@ -5,6 +5,9 @@ import { Form, Button } from 'react-bootstrap';
 const TokenConfirmationForm = (props) => {
     return (
         <>
+            <div className="mb-4">
+                <i className="feather icon-mail auth-icon" />
+            </div>
             <h3 className="mb-4">Token Confirmation</h3>
             <ValidationForm onSubmit={props.handleSubmitToken} method='POST'>
                 <Form.Group controlId="formServiceName">
@@ -15,7 +18,7 @@ const TokenConfirmationForm = (props) => {
                         autoComplete="off"
                         onChange={props.handleChange}
                         required
-                        errorMessage={{ validator: "Insira o token recebido no email"}}
+                        errorMessage={{ validator: "Insira o token recebido no email" }}
                     />
                 </Form.Group>
                 <Button type="submit" className="btn btn-primary mb-4 shadow-2">Reset Password</Button>
