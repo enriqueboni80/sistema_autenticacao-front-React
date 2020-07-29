@@ -5,10 +5,10 @@ import './../../../../assets/scss/style.scss';
 import Aux from "./../../../../hoc/_Aux";
 import Breadcrumb from "./../../../../App/layout/AdminLayout/Breadcrumb"
 
-import UserService from "../../../../services/UserService"
+import UserService from "./../../../../services/UserService"
 import SignInForm from "./SignInForm"
 
-import ReturnMessage from "../ReturnMessage"
+import ReturnMessage from "./../ReturnMessage"
 
 
 class SignIn1 extends React.Component {
@@ -67,8 +67,19 @@ class SignIn1 extends React.Component {
                                     this.state.returnMessage ? <ReturnMessage returnMessage={this.state.returnMessage} />
                                         : <SignInForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                                 }
-                                <p className="mb-0 text-muted">Forgot password or Active User <NavLink to="/auth/reset-password">Reset or Active</NavLink></p>
-                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
+                                {this.props.LinksExternal
+                                    ?
+                                    this.props.LinksExternal.map((linkExternal) => {
+                                        return (
+                                            <p className="mb-0 text-muted">{linkExternal.text} <a href="#" onClick={linkExternal.link}><b>{linkExternal.name}</b></a></p>
+                                        )
+                                    })
+                                    :
+                                    <>
+                                        <p className="mb-0 text-muted">Forgot password or Active User <NavLink to="/auth/reset-password">Reset or Active</NavLink></p>
+                                        <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>

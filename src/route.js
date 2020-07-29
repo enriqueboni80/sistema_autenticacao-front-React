@@ -1,5 +1,6 @@
 import React from 'react';
 
+const TestePage = React.lazy(() => import('./App/components/Teste'));
 const LandingPage = React.lazy(() => import('./App/components/LandingPage'));
 const SignUp1 = React.lazy(() => import('./App/components/Authentication/SignUp/SignUp1'));
 const SignIn1 = React.lazy(() => import('./App/components/Authentication/SignIn/SignIn1'));
@@ -7,6 +8,7 @@ const ResetPassword1 = React.lazy(() => import('./App/components/Authentication/
 
 
 const route = [
+    { path: '/teste', exact: true, name: 'TestePage', component: TestePage },
     { path: '/', exact: true, name: 'LandingPage', component: LandingPage },
     { path: '/auth/signup', exact: true, name: 'Signup 1', component: SignUp1 },
     { path: '/auth/signin', exact: true, name: 'Signin 1', component: SignIn1 },
