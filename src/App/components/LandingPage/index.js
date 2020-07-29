@@ -31,24 +31,53 @@ import logo4 from './assets/images/logo4.png';
 import logo6 from './assets/images/logo6.png';
 import logo7 from './assets/images/logo7.png';
 
-/* import SigIn from './../../components/Authentication/SignIn/SignIn1' */
+import SigIn from './../../components/Authentication/SignIn/SignIn1'
+import SigUp from './../../components/Authentication/SignUp/SignUp1'
+import ForgotPassword from './../../components/Authentication/ResetPassword/ResetPassword1'
+
 
 class Landing extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            showModalLogin: false,
+            showModalSigIn: false,
+            showModalSigUp: false,
+            showModalForgotPassword: false,
         }
     };
 
-    handleShowModalLogin = (e) => {
+    handleShowModalSigIn = (e) => {
         e.preventDefault()
-        this.setState({ showModalLogin: true });
+        this.setState({ showModalSigIn: true });
+        this.setState({ showModalSigUp: false });
+        this.setState({ showModalForgotPassword: false });
     }
 
-    handleCloseModalLogin = () => {
-        this.setState({ showModalLogin: false });
+    handleCloseModalSigIn = () => {
+        this.setState({ showModalSigIn: false });
+    }
+
+    handleShowModalForgotPassword = (e) => {
+        e.preventDefault()
+        this.setState({ showModalSigIn: false });
+        this.setState({ showModalSigUp: false });
+        this.setState({ showModalForgotPassword: true });
+    }
+
+    handleCloseModalForgotPassword = () => {
+        this.setState({ showModalForgotPassword: false });
+    }
+
+    handleShowModalSigUp = (e) => {
+        e.preventDefault()
+        this.setState({ showModalSigIn: false });
+        this.setState({ showModalForgotPassword: false });
+        this.setState({ showModalSigUp: true });
+    }
+
+    handleCloseModalSigUp = () => {
+        this.setState({ showModalSigUp: false });
     }
 
 
@@ -68,10 +97,10 @@ class Landing extends React.Component {
                                     <ul className="navbar-nav mr-auto" />
                                     <ul className="navbar-nav my-2 my-lg-0">
                                         <li className="nav-item">
-                                            <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalLogin(e)}>Login</a>
+                                            <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigIn(e)}>Login</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link page-scroll" href="#">Criar Conta</a>
+                                            <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigUp(e)}>Criar Conta</a>
                                         </li>
                                         {/* <li className="nav-item dropdown">
                                             <a className="nav-link dropdown-toggle" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -84,7 +113,25 @@ class Landing extends React.Component {
                                     </ul>
                                 </div>
                             </div>
-                           {/*  <Modal show={this.state.showModalLogin} onHide={this.handleCloseModalLogin} style={{ textAlign: 'center' }}> <SigIn /> </Modal> */}
+                            <Modal size="lg" show={this.state.showModalSigIn} onHide={this.handleCloseModalSigIn} style={{ textAlign: 'center' }}>
+                                <SigIn LinksExternal={[
+                                    { 'text': 'Forgot password or Active User ', 'name': 'Forgot Password', 'link': this.handleShowModalForgotPassword },
+                                    { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }
+                                ]} />
+                            </Modal>
+                            <Modal size="lg" show={this.state.showModalForgotPassword} onHide={this.handleCloseModalForgotPassword} style={{ textAlign: 'center' }}>
+                                <ForgotPassword LinksExternal={[
+                                    { 'text': 'Allready have an account?', 'name': 'Login', 'link': this.handleShowModalSigIn },
+                                    { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }
+                                ]}
+                                />
+                            </Modal>
+                            <Modal size="lg" show={this.state.showModalSigUp} onHide={this.handleCloseModalSigUp} style={{ textAlign: 'center' }}>
+                                <SigUp LinksExternal={[
+                                    { 'text': 'Forgot password or Active User ', 'name': 'Forgot Password', 'link': this.handleShowModalForgotPassword },
+                                    { 'text': 'Allready have an account?', 'name': 'Login', 'link': this.handleShowModalSigIn },
+                                ]} />
+                            </Modal>
                         </nav>
                         <div className="main" id="main">
                             <div className="hero-section app-hero">

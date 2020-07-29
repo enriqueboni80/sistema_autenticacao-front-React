@@ -22,7 +22,7 @@ const ActivationForm = (props) => {
                         errorMessage={{ validator: "Insira o token recebido no email" }}
                     />
                 </Form.Group>
-                <Button type="submit" className="btn btn-primary mb-4 shadow-2">Reset Password</Button>
+                <Button type="submit" className="btn btn-primary mb-4 shadow-2">Verificar Token</Button>
             </ValidationForm>
         </>
     )

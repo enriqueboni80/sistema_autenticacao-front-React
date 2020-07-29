@@ -109,8 +109,19 @@ class SignUp1 extends React.Component {
                                             : this.state.step === 1 ? <ActivationForm handleSubmitToken={this.handleSubmitToken} handleChange={this.handleChange} />
                                                 : "Entre em contato com o SysAdmin"
                                 }
-                                <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
-                                <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Ativar o Token</NavLink></p>
+                                {this.props.LinksExternal
+                                    ?
+                                    this.props.LinksExternal.map((linkExternal) => {
+                                        return (
+                                            <p className="mb-0 text-muted">{linkExternal.text} <a href="#" onClick={linkExternal.link}><b>{linkExternal.name}</b></a></p>
+                                        )
+                                    })
+                                    :
+                                    <>
+                                        <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
+                                        <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Ativar o Token</NavLink></p>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>

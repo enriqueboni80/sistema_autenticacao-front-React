@@ -31,7 +31,7 @@ const ChangePasswordForm = (props) => {
                         errorMessage={{ required: "Campo Requerido", validator: "O password e a confirmação DEVEM SER IGUAIS" }}
                     />
                 </Form.Group>
-                <Button type="submit" className="btn btn-primary mb-4 shadow-2">Reset Password</Button>
+                <Button type="submit" className="btn btn-primary mb-4 shadow-2">Change Password</Button>
             </ValidationForm>
         </>
     )

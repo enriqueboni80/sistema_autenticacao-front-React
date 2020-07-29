@@ -57,7 +57,6 @@ class ResetPassword1 extends React.Component {
             activation_token: this.state.activation_token
         }
         UserService.validateToken(formData).then(() => {
-            alert('usuario encontrado')
             this.setState({ step: 2 })
         }).catch((error) => {
             if (error.response) {
@@ -75,7 +74,7 @@ class ResetPassword1 extends React.Component {
             password: this.state.password
         }
         UserService.changePassword(formData).then(() => {
-            alert('Senha trocada com sucesso')
+            this.setState({ returnMessage: { type: "success", message: "Senha Trocada, Pode Logar!" } })
             window.location.href('/')
         }).catch((error) => {
             if (error.response) {
@@ -106,8 +105,19 @@ class ResetPassword1 extends React.Component {
                                                 : this.state.step === 2 ? <ChangePasswordForm handleSubmitChangePassword={this.handleSubmitChangePassword} handleChange={this.handleChange} matchPassword={this.matchPassword} />
                                                     : "Erro"
                                 }
-                                <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
-                                <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
+                                {this.props.LinksExternal
+                                    ?
+                                    this.props.LinksExternal.map((linkExternal) => {
+                                        return (
+                                            <p className="mb-0 text-muted">{linkExternal.text} <a href="#" onClick={linkExternal.link}><b>{linkExternal.name}</b></a></p>
+                                        )
+                                    })
+                                    :
+                                    <>
+                                        <p className="mb-0 text-muted">Allready have an account? <NavLink to="/auth/signin">Login</NavLink></p>
+                                        <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup">Signup</NavLink></p>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
