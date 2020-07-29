@@ -6,7 +6,7 @@ class UserService {
   static CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      /* 'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
+      /* Verificar pq o token agora esta dentro do user (dentro do localstorage) 'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
     }
   };
 

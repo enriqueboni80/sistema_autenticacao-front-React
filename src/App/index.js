@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 import '../../node_modules/font-awesome/scss/font-awesome.scss';
@@ -15,27 +15,48 @@ const AdminLayout = Loadable({
 });
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isAuthenticated: false
+        }
+    };
+
+    UNSAFE_componentWillMount() {
+        this.checkIsAuth()
+    }
+
+    checkIsAuth = async () => {
+        if (localStorage.getItem('user_session')) {
+            this.setState({ isAuthenticated: true })
+        }
+
+    }
+
+
     render() {
         const menu = routes.map((route, index) => {
-          return (route.component) ? (
-              <Route
-                  key={index}
-                  path={route.path}
-                  exact={route.exact}
-                  name={route.name}
-                  render={props => (
-                      <route.component {...props} />
-                  )} />
-          ) : (null);
+            return (route.component) ? (
+                <Route
+                    key={index}
+                    path={route.path}
+                    exact={route.exact}
+                    name={route.name}
+                    render={props => (
+                        <route.component {...props} />
+                    )} />
+            ) : (null);
         });
 
         return (
             <Aux>
                 <ScrollToTop>
-                    <Suspense fallback={<Loader/>}>
+                    <Suspense fallback={<Loader />}>
                         <Switch>
                             {menu}
-                            <Route path="/" component={AdminLayout} />
+                            {this.state.isAuthenticated ? <Route path="/" component={AdminLayout} /> : <Redirect to='./auth/signin' />}
+                            {/* <Route path="/" component={AdminLayout} /> */}
                         </Switch>
                     </Suspense>
                 </ScrollToTop>

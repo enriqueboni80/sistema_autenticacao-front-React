@@ -15,6 +15,14 @@ export default {
                     icon: 'feather icon-sidebar'
                 },
                 {
+                    id: 'privated-access',
+                    title: 'Acesso Privado',
+                    type: 'item',
+                    url: '/privated-access',
+                    classes: 'nav-item',
+                    icon: 'feather icon-sidebar'
+                },
+                {
                     id: 'signin-1',
                     title: 'Sign in',
                     type: 'item',

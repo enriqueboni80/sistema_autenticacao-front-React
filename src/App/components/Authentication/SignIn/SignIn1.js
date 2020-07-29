@@ -36,10 +36,10 @@ class SignIn1 extends React.Component {
         }
 
         UserService.login(formData).then((response) => {
-            localStorage.removeItem('jwttoken');
-            localStorage.setItem('jwttoken', response.data.jwtToken);
-            console.log(localStorage.getItem('jwttoken'))
-            window.location.href = "/";
+            /* JWTToken esta dentro do usuario */
+            localStorage.removeItem('user_session');
+            localStorage.setItem('user_session', JSON.stringify(response.data.user));
+            window.location.href = "/home";
         }).catch((error) => {
             if (error.response.data.validated === false) {
                 this.setState({ returnMessage: { type: "error", message: "Usuário não validado" } })
