@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Carousel, Modal } from 'react-bootstrap';
 
 import SigIn from './../../components/Authentication/SignIn/SignIn1'
@@ -130,19 +131,19 @@ class Landing extends React.Component {
                                                         <a className="nav-link page-scroll" href="/">Meus Ingressos</a>
                                                     </li>
                                                     <li className="nav-item dropdown">
-                                                        <a className="nav-link dropdown-toggle" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{this.state.loggedUser.username}</a>
+                                                        <NavLink to="#!" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{this.state.loggedUser.username}</NavLink>
                                                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                            <a className="dropdown-item" href="#" onClick={this.logOut}>LogOut</a>
+                                                            <NavLink to="#" className="dropdown-item" onClick={this.logOut}>LogOut</NavLink>
                                                         </div>
                                                     </li>
                                                 </>
                                                 :
                                                 <>
                                                     <li className="nav-item">
-                                                        <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigIn(e)}>Login</a>
+                                                        <NavLink to="#" className="nav-link page-scroll" onClick={(e) => this.handleShowModalSigIn(e)}>Login</NavLink>
                                                     </li>
                                                     <li className="nav-item">
-                                                        <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigUp(e)}>Criar Conta</a>
+                                                        <NavLink to="#" className="nav-link page-scroll" onClick={(e) => this.handleShowModalSigUp(e)}>Criar Conta</NavLink>
                                                     </li>
                                                 </>
                                         }

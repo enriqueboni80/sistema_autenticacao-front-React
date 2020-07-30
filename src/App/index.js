@@ -45,10 +45,10 @@ class App extends Component {
                 if(grupo !== CONSTANT.CLIENTS){
                     this.setState({ isAdmin: true })
                 }
+                return ""
             })
         }
     }
-
 
     render() {
         const menu = routes.map((route, index) => {

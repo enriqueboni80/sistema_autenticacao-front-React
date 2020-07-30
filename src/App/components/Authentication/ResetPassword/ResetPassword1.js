@@ -109,7 +109,7 @@ class ResetPassword1 extends React.Component {
                                     ?
                                     this.props.LinksExternal.map((linkExternal) => {
                                         return (
-                                            <p className="mb-0 text-muted">{linkExternal.text} <a href="#" onClick={linkExternal.link}><b>{linkExternal.name}</b></a></p>
+                                            <p className="mb-0 text-muted">{linkExternal.text} <NavLink to="#" onClick={linkExternal.link}><b>{linkExternal.name}</b></NavLink></p>
                                         )
                                     })
                                     :
