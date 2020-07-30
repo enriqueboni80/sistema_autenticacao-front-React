@@ -1,6 +1,10 @@
 import React from 'react';
 import { Carousel, Modal } from 'react-bootstrap';
 
+import SigIn from './../../components/Authentication/SignIn/SignIn1'
+import SigUp from './../../components/Authentication/SignUp/SignUp1'
+import ForgotPassword from './../../components/Authentication/ResetPassword/ResetPassword1'
+
 
 import './assets/css/styles.scss';
 import Aux from "../../../hoc/_Aux";
@@ -31,9 +35,7 @@ import logo4 from './assets/images/logo4.png';
 import logo6 from './assets/images/logo6.png';
 import logo7 from './assets/images/logo7.png';
 
-import SigIn from './../../components/Authentication/SignIn/SignIn1'
-import SigUp from './../../components/Authentication/SignUp/SignUp1'
-import ForgotPassword from './../../components/Authentication/ResetPassword/ResetPassword1'
+
 
 
 class Landing extends React.Component {
@@ -44,8 +46,27 @@ class Landing extends React.Component {
             showModalSigIn: false,
             showModalSigUp: false,
             showModalForgotPassword: false,
+            isAuthenticated: false,
+            loggedUser: ''
         }
     };
+
+    UNSAFE_componentWillMount() {
+        this.checkIsAuth()
+    }
+
+    checkIsAuth = async () => {
+        if (localStorage.getItem('user_session')) {
+            this.setState({ isAuthenticated: true })
+            this.setState({ loggedUser: JSON.parse(localStorage.getItem('user_session')) })
+        }
+    }
+
+    logOut = () => {
+        localStorage.removeItem('user_session')
+        this.setState({ username: 'não logado' })
+        window.location.href = "/"
+    }
 
     handleShowModalSigIn = (e) => {
         e.preventDefault()
@@ -89,27 +110,41 @@ class Landing extends React.Component {
                     <div>
                         <nav className="navbar navbar-expand-lg navbar-light navbar-default navbar-fixed-top past-main" role="navigation">
                             <div className="container">
-                                <a className="navbar-brand page-scroll" href="#main"><img src={logo} alt="Datta Able Logo" /></a>
+                                <a className="navbar-brand-2 page-scroll" href="#main"><img src={logo} alt="Datta Able Logo" /></a>
                                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="navbar-toggler-icon" />
                                 </button>
                                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul className="navbar-nav mr-auto" />
                                     <ul className="navbar-nav my-2 my-lg-0">
-                                        <li className="nav-item">
-                                            <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigIn(e)}>Login</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigUp(e)}>Criar Conta</a>
-                                        </li>
-                                        {/* <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a className="dropdown-item" href="#!">Level 1</a>
-                                                <a className="dropdown-item" href="#!">Level 2</a>
-                                                <a className="dropdown-item" href="#!">Level 3</a>
-                                            </div>
-                                        </li>*/}
+
+                                        {
+                                            this.state.isAuthenticated
+                                                ?
+                                                <>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link page-scroll" href="#">Meus Eventos</a>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link page-scroll" href="#">Meus Ingressos</a>
+                                                    </li>
+                                                    <li className="nav-item dropdown">
+                                                        <a className="nav-link dropdown-toggle" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{this.state.loggedUser.username}</a>
+                                                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a className="dropdown-item" href="#" onClick={this.logOut}>LogOut</a>
+                                                        </div>
+                                                    </li>
+                                                </>
+                                                :
+                                                <>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigIn(e)}>Login</a>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link page-scroll" href="#" onClick={(e) => this.handleShowModalSigUp(e)}>Criar Conta</a>
+                                                    </li>
+                                                </>
+                                        }
                                     </ul>
                                 </div>
                             </div>

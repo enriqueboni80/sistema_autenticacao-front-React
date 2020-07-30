@@ -309,13 +309,13 @@ body {
     background-color: #111111;
 }
 
-.navbar-default .navbar-brand .navbar-toggle .collapsed {
+.navbar-default .navbar-brand-2 .navbar-toggle .collapsed {
     padding: 4px 6px;
     font-size: 16px;
     color: #111111;
 }
 
-.navbar-default .navbar-brand {
+.navbar-default .navbar-brand-2 {
     padding: 0 0;
     -webkit-transition: 200ms;
     -moz-transition: 200ms;
@@ -323,7 +323,7 @@ body {
     transition: 200ms;
 }
 
-.navbar-default .navbar-brand:hover {
+.navbar-default .navbar-brand-2:hover {
     transition: 1s;
 }
 
@@ -403,7 +403,7 @@ body {
         color: #222222;
     }
 
-    .navbar-default .navbar-brand {
+    .navbar-default .navbar-brand-2 {
         color: #FFFFFF;
         padding: 8px 8px !important;
     }
@@ -439,7 +439,7 @@ body {
         transition: height 0.6s;
     }
 
-    .navbar-default.past-main .navbar-brand {
+    .navbar-default.past-main .navbar-brand-2 {
         padding: 8px 0;
     }
 

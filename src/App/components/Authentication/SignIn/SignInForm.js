@@ -4,8 +4,6 @@ import { Form, Button } from 'react-bootstrap';
 
 import validator from 'validator' 
 
-import './../../../../assets/scss/style.scss';
-
 const RegisterForm = (props) => {
 
     return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import CONSTANT from './../../../../store/constant'
 
 import './../../../../assets/scss/style.scss';
 import Aux from "./../../../../hoc/_Aux";
@@ -37,9 +38,17 @@ class SignIn1 extends React.Component {
 
         UserService.login(formData).then((response) => {
             /* JWTToken esta dentro do usuario */
+            alert('lembre-se que para acessar a rota privada /home é necessário inserir um grupo diferente de client no banco')
             localStorage.removeItem('user_session');
             localStorage.setItem('user_session', JSON.stringify(response.data.user));
-            window.location.href = "/home";
+            response.data.user.grupos.map((grupo) => {
+                if (grupo === CONSTANT.CLIENTS) {
+                    window.location.href = "/";
+                } else {
+                    window.location.href = "/home";
+                }
+            })
+            /* window.location.href = "/home"; */
         }).catch((error) => {
             if (error.response.data.validated === false) {
                 this.setState({ returnMessage: { type: "error", message: "Usuário não validado" } })
