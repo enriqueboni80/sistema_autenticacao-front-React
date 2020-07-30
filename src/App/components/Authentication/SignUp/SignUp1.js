@@ -6,7 +6,7 @@ import Aux from "./../../../../hoc/_Aux";
 import Breadcrumb from "./../../../../App/layout/AdminLayout/Breadcrumb"
 /* import DEMO from "../../../store/constant"; */
 
-import UserService from "../../../../services/UserService"
+import AuthService from "../../../../services/AuthService"
 import SignUpForm from "./SignUpForm"
 import ActivationForm from "./ActivationForm"
 import ReturnMessage from "../ReturnMessage"
@@ -34,7 +34,7 @@ class SignUp1 extends React.Component {
     };
 
     checkEmailFree = (value) => {
-        UserService.checkEmailFree(value).then((response) => {
+        AuthService.checkEmailFree(value).then((response) => {
             console.log(response)
             if (response.data.success) {
                 this.setState({ canIRegisterNewEmail: true })
@@ -59,7 +59,7 @@ class SignUp1 extends React.Component {
             email: this.state.email,
             password: this.state.password
         }
-        UserService.register(formData).then((response) => {
+        AuthService.register(formData).then((response) => {
             this.setState({ newUserId: response.data.userId })
             this.setState({ step: 1 })
         }).catch((error) => {
@@ -76,7 +76,7 @@ class SignUp1 extends React.Component {
             userId: this.state.newUserId,
             activation_token: this.state.activation_token
         }
-        UserService.validateToken(formData).then((response) => {
+        AuthService.validateToken(formData).then((response) => {
             this.setState({ returnMessage: { type: "success", message: "Cadastrado, Pode Logar!" } })
             /* alert('token validado com sucesso')
             window.location.href = "auth/signin"; */

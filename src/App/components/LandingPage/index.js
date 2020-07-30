@@ -5,8 +5,9 @@ import SigIn from './../../components/Authentication/SignIn/SignIn1'
 import SigUp from './../../components/Authentication/SignUp/SignUp1'
 import ForgotPassword from './../../components/Authentication/ResetPassword/ResetPassword1'
 
-
+//Esse CSS tem que vir após os components (por causa do CSS dos components)
 import './assets/css/styles.scss';
+
 import Aux from "../../../hoc/_Aux";
 import DEMO from "../../../store/constant";
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
@@ -123,10 +124,10 @@ class Landing extends React.Component {
                                                 ?
                                                 <>
                                                     <li className="nav-item">
-                                                        <a className="nav-link page-scroll" href="#">Meus Eventos</a>
+                                                        <a className="nav-link page-scroll" href="/">Meus Eventos</a>
                                                     </li>
                                                     <li className="nav-item">
-                                                        <a className="nav-link page-scroll" href="#">Meus Ingressos</a>
+                                                        <a className="nav-link page-scroll" href="/">Meus Ingressos</a>
                                                     </li>
                                                     <li className="nav-item dropdown">
                                                         <a className="nav-link dropdown-toggle" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{this.state.loggedUser.username}</a>

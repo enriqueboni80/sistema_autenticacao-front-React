@@ -1,7 +1,7 @@
 import axios from "axios";
 /* require('dotenv').config() */
 
-class UserService {
+class AuthService {
 
   static CONFIG = {
     headers: {
@@ -21,45 +21,45 @@ class UserService {
   }
 
   static _withBaseUrl(path = "") {
-    return `http://localhost:3000/${path}`;
+    return `http://localhost:3000/auth/${path}`;
   }
 
   static getValues() {
-    return axios(UserService._withBaseUrl("login"));
+    return axios(AuthService._withBaseUrl("login"));
   }
 
   static register(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.post(UserService._withBaseUrl("register"), serviceObj, this.CONFIG)
+    return axios.post(AuthService._withBaseUrl("register"), serviceObj, this.CONFIG)
   }
 
   static validateToken(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.post(UserService._withBaseUrl("register/validate"), serviceObj)
+    return axios.post(AuthService._withBaseUrl("register/validate"), serviceObj)
   }
 
   static login(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.post(UserService._withBaseUrl("login"), serviceObj)
+    return axios.post(AuthService._withBaseUrl("login"), serviceObj)
   }
 
   static forgotPassword(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.post(UserService._withBaseUrl("forgot-password"), serviceObj)
+    return axios.post(AuthService._withBaseUrl("forgot-password"), serviceObj)
   }
 
   static changePassword(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.post(UserService._withBaseUrl("forgot-password/reset"), serviceObj)
+    return axios.post(AuthService._withBaseUrl("forgot-password/reset"), serviceObj)
   }
 
   static checkEmailFree(email){
     let serviceObj = {
       email : email
     }
-    return axios.post(UserService._withBaseUrl("register/checkemailfree"), serviceObj)
+    return axios.post(AuthService._withBaseUrl("register/checkemailfree"), serviceObj)
   }
 
 }
 
-export default UserService
+export default AuthService

@@ -6,7 +6,7 @@ import './../../../../assets/scss/style.scss';
 import Aux from "./../../../../hoc/_Aux";
 import Breadcrumb from "./../../../../App/layout/AdminLayout/Breadcrumb"
 
-import UserService from "./../../../../services/UserService"
+import AuthService from "./../../../../services/AuthService"
 import SignInForm from "./SignInForm"
 
 import ReturnMessage from "./../ReturnMessage"
@@ -36,7 +36,7 @@ class SignIn1 extends React.Component {
             password: this.state.password
         }
 
-        UserService.login(formData).then((response) => {
+        AuthService.login(formData).then((response) => {
             /* JWTToken esta dentro do usuario */
             alert('lembre-se que para acessar a rota privada /home é necessário inserir um grupo diferente de client no banco')
             localStorage.removeItem('user_session');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import UserService from "../../../../services/UserService"
+import AuthService from "../../../../services/AuthService"
 
 import './../../../../assets/scss/style.scss';
 import Aux from "./../../../../hoc/_Aux";
@@ -39,7 +39,7 @@ class ResetPassword1 extends React.Component {
         var formData = {
             email: e.target.email.value,
         }
-        UserService.forgotPassword(formData).then((response) => {
+        AuthService.forgotPassword(formData).then((response) => {
             this.setState({ userId: response.data.userId })
             this.setState({ step: 1 })
         }).catch((error) => {
@@ -56,7 +56,7 @@ class ResetPassword1 extends React.Component {
             userId: this.state.userId,
             activation_token: this.state.activation_token
         }
-        UserService.validateToken(formData).then(() => {
+        AuthService.validateToken(formData).then(() => {
             this.setState({ step: 2 })
         }).catch((error) => {
             if (error.response) {
@@ -73,7 +73,7 @@ class ResetPassword1 extends React.Component {
             activation_token: this.state.activation_token,
             password: this.state.password
         }
-        UserService.changePassword(formData).then(() => {
+        AuthService.changePassword(formData).then(() => {
             this.setState({ returnMessage: { type: "success", message: "Senha Trocada, Pode Logar!" } })
             window.location.href('/')
         }).catch((error) => {
