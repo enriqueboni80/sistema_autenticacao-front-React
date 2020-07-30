@@ -2,16 +2,16 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Carousel, Modal } from 'react-bootstrap';
 
-import SigIn from './../../components/Authentication/SignIn/SignIn1'
-import SigUp from './../../components/Authentication/SignUp/SignUp1'
-import ForgotPassword from './../../components/Authentication/ResetPassword/ResetPassword1'
+import SigIn from '../../components/Authentication/SignIn/SignIn1'
+import SigUp from '../../components/Authentication/SignUp/SignUp1'
+import ForgotPassword from '../../components/Authentication/ResetPassword/ResetPassword1'
 
 //Esse CSS tem que vir após os components (por causa do CSS dos components)
 import './assets/css/styles.scss';
 
 import Aux from "../../../hoc/_Aux";
 import DEMO from "../../../store/constant";
-import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
+import Breadcrumb from "../AdminLayout/Breadcrumb";
 
 import logo from '../../../assets/images/logo.png';
 import heroImage1 from './assets/images/app_hero_1.png';
