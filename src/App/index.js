@@ -16,33 +16,30 @@ const AdminLayout = Loadable({
     loading: Loader
 });
 
+const LandingPageLayout = Loadable({
+    loader: () => import('./layout/LandingPageLayout'),
+    loading: Loader
+});
+
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            /* isAuthenticated: false, */
             isAdmin: false
         }
     };
 
     UNSAFE_componentWillMount() {
-        /* this.checkIsAuth() */
         this.checkIsAdmin()
     }
-
-    /* checkIsAuth = async () => {
-        if (localStorage.getItem('user_session')) {
-            this.setState({ isAuthenticated: true })
-        }
-    } */
 
     checkIsAdmin = async () => {
         if (localStorage.getItem('user_session')) {
             let gruposQuePertence = JSON.parse(localStorage.getItem('user_session')).grupos
             //TODO PERMISSÃO PROVISORIO - SE FOR DIFERENTE DE CLIENT PODE ACESSAR
             gruposQuePertence.map((grupo) => {
-                if(grupo !== CONSTANT.CLIENTS){
+                if (grupo !== CONSTANT.CLIENTS) {
                     this.setState({ isAdmin: true })
                 }
                 return ""
@@ -70,8 +67,11 @@ class App extends Component {
                     <Suspense fallback={<Loader />}>
                         <Switch>
                             {menu}
-                            {this.state.isAdmin ? <Route path="/" component={AdminLayout} /> : <Redirect to='/' />}
-                            {/* <Route path="/" component={AdminLayout} /> */}
+                            {
+                                !this.state.isAdmin ? <Route path="/" component={LandingPageLayout} /> :
+                                    this.state.isAdmin ? <Route path="/" component={AdminLayout} />
+                                        : <Redirect to='/' />
+                            }
                         </Switch>
                     </Suspense>
                 </ScrollToTop>
