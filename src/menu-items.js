@@ -10,7 +10,7 @@ export default {
                     id: 'sample-page',
                     title: 'Sample Page',
                     type: 'item',
-                    url: '/sample-page',
+                    url: '/home/sample-page',
                     classes: 'nav-item',
                     icon: 'feather icon-sidebar'
                 },
@@ -18,7 +18,7 @@ export default {
                     id: 'privated-access',
                     title: 'Acesso Privado',
                     type: 'item',
-                    url: '/privated-access',
+                    url: '/home/privated-access',
                     classes: 'nav-item',
                     icon: 'feather icon-sidebar'
                 },

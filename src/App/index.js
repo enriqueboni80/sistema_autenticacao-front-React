@@ -9,8 +9,6 @@ import Aux from "../hoc/_Aux";
 import ScrollToTop from './layout/ScrollToTop';
 import routes from "../route";
 
-import CONSTANT from "./../store/constant"
-
 const AdminLayout = Loadable({
     loader: () => import('./layout/AdminLayout'),
     loading: Loader
@@ -23,29 +21,6 @@ const LandingPageLayout = Loadable({
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isAdmin: false
-        }
-    };
-
-    UNSAFE_componentWillMount() {
-        this.checkIsAdmin()
-    }
-
-    checkIsAdmin = async () => {
-        if (localStorage.getItem('user_session')) {
-            let gruposQuePertence = JSON.parse(localStorage.getItem('user_session')).grupos
-            //TODO PERMISSÃO PROVISORIO - SE FOR DIFERENTE DE CLIENT PODE ACESSAR
-            gruposQuePertence.map((grupo) => {
-                if (grupo !== CONSTANT.CLIENTS) {
-                    this.setState({ isAdmin: true })
-                }
-                return ""
-            })
-        }
-    }
 
     render() {
         const menu = routes.map((route, index) => {
@@ -67,11 +42,8 @@ class App extends Component {
                     <Suspense fallback={<Loader />}>
                         <Switch>
                             {menu}
-                            {
-                                !this.state.isAdmin ? <Route path="/" component={LandingPageLayout} /> :
-                                    this.state.isAdmin ? <Route path="/" component={AdminLayout} />
-                                        : <Redirect to='/' />
-                            }
+                            {<Route path="/home" component={AdminLayout} />}
+                            {<Route path="/" component={LandingPageLayout} />}
                         </Switch>
                     </Suspense>
                 </ScrollToTop>
