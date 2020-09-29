@@ -4,7 +4,8 @@ require('dotenv').config()
 class TesteIntegracaoService {
 
   static _withBaseUrl(path = "") {
-    return `http://localhost:3000/tools/${path}`;
+    const API_SERVER_URL = process.env.REACT_APP_API_SERVER_URL
+    return `${API_SERVER_URL}/tools/${path}`;
   }
 
   static getValues() {

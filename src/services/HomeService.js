@@ -11,7 +11,8 @@ class HomeService {
   };
 
   static _withBaseUrl(path = "") {
-    return `http://localhost:3000/${path}`;
+    const API_SERVER_URL = process.env.REACT_APP_API_SERVER_URL
+    return `${API_SERVER_URL}/${path}`;
   }
 
   static getValues() {
