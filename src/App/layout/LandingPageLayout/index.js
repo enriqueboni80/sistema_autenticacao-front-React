@@ -9,6 +9,7 @@ import Loader from "../Loader";
 
 //Esse CSS tem que vir após o component NavBar (por causa do CSS dos components)
 import './assets/css/styles.scss';
+import './assets/css/custom-style.scss'
 
 import Aux from "../../../hoc/_Aux";
 import DEMO from "../../../store/constant";
