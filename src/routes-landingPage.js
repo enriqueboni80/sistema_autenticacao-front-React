@@ -5,7 +5,7 @@ const MeusEventos = React.lazy(() => import('./App/components/LandingPage/MeusEv
 
 
 const route = [
-    { path: '/', exact: true, name: 'Home', component: LandingPageHome },
+    { path: '/', exact: true, name: 'index', component: LandingPageHome },
     { path: '/meus-eventos', exact: true, name: 'Home', component: MeusEventos }
 ];
 
