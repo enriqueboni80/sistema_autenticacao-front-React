@@ -7,10 +7,10 @@ export default {
             icon: 'icon-pages',
             children: [
                 {
-                    id: 'sample-page',
-                    title: 'Sample Page',
+                    id: 'gerenciar-evento',
+                    title: 'Gerenciar Eventos',
                     type: 'item',
-                    url: '/home/sample-page',
+                    url: '/home/gerenciar-eventos',
                     classes: 'nav-item',
                     icon: 'feather icon-sidebar'
                 },
