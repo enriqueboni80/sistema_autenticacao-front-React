@@ -41,6 +41,10 @@ class Create extends React.Component {
         })
     };
 
+    toggleHandler = () => {
+        this.setState(prevState => { return { defaultSwitch: !prevState.defaultSwitch } })
+    };
+
     handleSubmit = (event) => {
         event.preventDefault()
         var formData = {
@@ -62,13 +66,13 @@ class Create extends React.Component {
         }
 
 
-
         if (this.state.id === undefined) {
+            console.log(formData)
             Service.create(formData).then(() => {
                 this.props.handleCloseCreate()
                 this.props.getAll()
             }).catch((errors) => {
-                this.showErrors(errors.response.data.errors)
+                console.log(errors.response.data.error)
             })
         }
         else {
@@ -80,10 +84,6 @@ class Create extends React.Component {
                 console.log(errors.response.data)
             })
         }
-    }
-
-    showErrors(errors) {
-        console.log('Resolver aqui')
     }
 
     getById = () => {
@@ -136,13 +136,23 @@ class Create extends React.Component {
                                                 /* required */
                                                 />
                                             </Form.Group>
-                                            <Form.Group controlId="formServiceQtdVagas">
-                                                <Form.Label>Quantidade de Vagas *</Form.Label>
+                                            <Form.Group controlId="formServiceDescricao">
+                                                <Form.Label>Descrição *</Form.Label>
                                                 <TextInput
-                                                    type="text"
-                                                    name="qtd_vagas"
-                                                    placeholder="Quantidade de vagas"
-                                                    defaultValue={this.state.qtd_vagas}
+                                                    name="descricao"
+                                                    placeholder="Descrição"
+                                                    defaultValue={this.state.descricao}
+                                                    autoComplete="off"
+                                                    onChange={this.handleChange}
+                                                /* required */
+                                                />
+                                            </Form.Group>
+                                            <Form.Group controlId="formServiceDetalhes">
+                                                <Form.Label>Detalhes *</Form.Label>
+                                                <TextInput
+                                                    name="detalhes"
+                                                    placeholder="Detalhes"
+                                                    defaultValue={this.state.detalhes}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                 /* required */
@@ -160,6 +170,19 @@ class Create extends React.Component {
                                                 /* required */
                                                 />
                                             </Form.Group>
+                                            <Form.Group controlId="formServiceQtdVagas">
+                                                <Form.Label>Quantidade de Vagas *</Form.Label>
+                                                <TextInput
+                                                    type="text"
+                                                    name="qtd_vagas"
+                                                    placeholder="Quantidade de vagas"
+                                                    defaultValue={this.state.qtd_vagas}
+                                                    autoComplete="off"
+                                                    onChange={this.handleChange}
+                                                /* required */
+                                                />
+                                            </Form.Group>
+
                                             <Form.Group controlId="formServiceuUrlImagem">
                                                 <Form.Label>Url da Imagem *</Form.Label>
                                                 <TextInput
@@ -172,17 +195,7 @@ class Create extends React.Component {
                                                 /* required */
                                                 />
                                             </Form.Group>
-                                            <Form.Group controlId="formServiceDetalhes">
-                                                <Form.Label>Detalhes *</Form.Label>
-                                                <TextInput
-                                                    name="detalhes"
-                                                    placeholder="Detalhes"
-                                                    defaultValue={this.state.detalhes}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                /* required */
-                                                />
-                                            </Form.Group>
+
                                             <Form.Group controlId="formServiceCategoria">
                                                 <Form.Label>Categoria *</Form.Label>
                                                 <TextInput
@@ -195,17 +208,7 @@ class Create extends React.Component {
                                                 /* required */
                                                 />
                                             </Form.Group>
-                                            <Form.Group controlId="formServiceDescricao">
-                                                <Form.Label>Descrição *</Form.Label>
-                                                <TextInput
-                                                    name="descricao"
-                                                    placeholder="Descrição"
-                                                    defaultValue={this.state.descricao}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                /* required */
-                                                />
-                                            </Form.Group>
+
                                             <Form.Group controlId="formServiceAtivo">
                                                 <Form.Label>Ativo *</Form.Label>
                                                 <TextInput
@@ -215,9 +218,21 @@ class Create extends React.Component {
                                                     defaultValue={this.state.ativo}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    /* required */
                                                 />
                                             </Form.Group>
+
+
+{/*                                             <Form.Group>
+                                                <div className="switch switch-primary d-inline m-r-10">
+                                                    <Form.Control type="checkbox" id="checked-primary" defaultChecked={this.state.ativo} onChange={this.toggleHandler} />
+                                                    <Form.Label htmlFor="checked-primary" className="cr" />
+                                                </div>
+                                                <Form.Label>Ativo</Form.Label>
+                                            </Form.Group> */}
+
+
+
                                             <Form.Group controlId="formServiceGratuito">
                                                 <Form.Label>Gratuito *</Form.Label>
                                                 <TextInput

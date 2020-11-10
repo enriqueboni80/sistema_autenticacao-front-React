@@ -28,7 +28,7 @@ class EventoService extends Component {
       "detalhes": formData.detalhes,
       "descricao": formData.descricao,
       "categoria": parseInt(formData.categoria),
-      "ativo": true,
+      "ativo": formData.ativo,
       "gratuito": true,
       "preco": formData.price === "" ? 0 : parseFloat(formData.preco),
       "privado": parseInt(formData.privado),

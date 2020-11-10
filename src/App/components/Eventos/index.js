@@ -114,7 +114,7 @@ class Index extends React.Component {
                 <Modal show={this.state.showModalDelete} onHide={this.handleCloseDelete} style={{ textAlign: 'center' }}>
                     <Delete id={this.state.id} handleCloseDelete={this.handleCloseDelete} getAll={this.getAll} />
                 </Modal>
-                <Modal show={this.state.showModalCreate} onHide={this.handleCloseCreate}>
+                <Modal size="lg" show={this.state.showModalCreate} onHide={this.handleCloseCreate}>
                     <Create id={this.state.id} handleCloseCreate={this.handleCloseCreate} getAll={this.getAll} />
                 </Modal>
             </Aux>
