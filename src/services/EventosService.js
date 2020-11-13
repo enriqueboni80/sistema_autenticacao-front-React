@@ -11,15 +11,6 @@ class EventoService extends Component {
   };
 
   static setObject = (formData) => {
-
-    /*     "name": formData.name,
-        "description": formData.description,
-        "duration": formData.duration === "" ? 0 : parseInt(formData.duration),
-        "price": 
-        "percentage_commission": formData.percentage_commission === "" ? 0 : parseFloat(formData.percentage_commission),
-        "fixed_commission": formData.fixed_commission === "" ? 0 : parseFloat(formData.fixed_commission),
-        "type_commission": formData.type_commission === "" ? 0 : parseInt(formData.type_commission), */
-
     return {
       "name": formData.name,
       "qtd_vagas": parseInt(formData.qtd_vagas),
@@ -29,10 +20,10 @@ class EventoService extends Component {
       "descricao": formData.descricao,
       "categoria": parseInt(formData.categoria),
       "ativo": formData.ativo,
-      "gratuito": true,
+      "gratuito": formData.gratuito,
       "preco": formData.price === "" ? 0 : parseFloat(formData.preco),
-      "privado": parseInt(formData.privado),
-      "cancelado": parseInt(formData.cancelado),
+      "privado": formData.privado,
+      "cancelado": formData.cancelado,
       "data_inicio": formData.data_inicio,
       "data_fim": formData.data_fim,
       "prazo_inscricao": formData.prazo_inscricao

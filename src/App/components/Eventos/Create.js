@@ -18,14 +18,15 @@ class Create extends React.Component {
             detalhes: "",
             descricao: "",
             categoria: "",
-            ativo: "",
-            gratuito: "",
+            ativo: false,
+            gratuito: false,
             preco: "",
-            privado: "",
-            cancelado: "",
+            privado: false,
+            cancelado: false,
             data_inicio: "",
             data_fim: "",
             prazo_inscricao: "",
+            defaultSwitch: true,
         }
     };
 
@@ -41,8 +42,10 @@ class Create extends React.Component {
         })
     };
 
-    toggleHandler = () => {
-        this.setState(prevState => { return { defaultSwitch: !prevState.defaultSwitch } })
+    toggleHandler = (e) => {
+        this.setState({
+            [e.target.name]: e.target.checked
+        })
     };
 
     handleSubmit = (event) => {
@@ -55,11 +58,11 @@ class Create extends React.Component {
             detalhes: this.state.detalhes,
             descricao: this.state.descricao,
             categoria: this.state.categoria,
-            ativo: this.state.ativo,
-            gratuito: this.state.gratuito,
+            ativo: this.state.ativo ? true : false,
+            gratuito: this.state.gratuito ? true : false,
             preco: this.state.preco,
-            privado: this.state.privado,
-            cancelado: this.state.cancelado,
+            privado: this.state.privado ? true : false,
+            cancelado: this.state.cancelado ? true : false,
             data_inicio: this.state.data_inicio,
             data_fim: this.state.data_fim,
             prazo_inscricao: this.state.prazo_inscricao
@@ -209,68 +212,38 @@ class Create extends React.Component {
                                                 />
                                             </Form.Group>
 
-                                            <Form.Group controlId="formServiceAtivo">
-                                                <Form.Label>Ativo *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="ativo"
-                                                    placeholder="Ativo"
-                                                    defaultValue={this.state.ativo}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    /* required */
-                                                />
-                                            </Form.Group>
-
-
-{/*                                             <Form.Group>
+                                            <Form.Group>
                                                 <div className="switch switch-primary d-inline m-r-10">
-                                                    <Form.Control type="checkbox" id="checked-primary" defaultChecked={this.state.ativo} onChange={this.toggleHandler} />
-                                                    <Form.Label htmlFor="checked-primary" className="cr" />
+                                                    <Form.Control type="checkbox" id="checked-ativo" name="ativo" checked={this.state.ativo} onChange={this.toggleHandler} />
+                                                    <Form.Label htmlFor="checked-ativo" className="cr" />
                                                 </div>
                                                 <Form.Label>Ativo</Form.Label>
-                                            </Form.Group> */}
-
-
-
-                                            <Form.Group controlId="formServiceGratuito">
-                                                <Form.Label>Gratuito *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="gratuito"
-                                                    placeholder="Gratuito"
-                                                    defaultValue={this.state.gratuito}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                /* required */
-                                                />
                                             </Form.Group>
 
-                                            <Form.Group controlId="formServicePrivado">
-                                                <Form.Label>Privado *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="privado"
-                                                    placeholder="Privado"
-                                                    defaultValue={this.state.privado}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                /* required */
-                                                />
+                                            <Form.Group>
+                                                <div className="switch switch-primary d-inline m-r-10">
+                                                    <Form.Control type="checkbox" id="checked-gratuito" name="gratuito" checked={this.state.gratuito} onChange={this.toggleHandler} />
+                                                    <Form.Label htmlFor="checked-gratuito" className="cr" />
+                                                </div>
+                                                <Form.Label>Gratuito</Form.Label>
                                             </Form.Group>
 
-                                            <Form.Group controlId="formServiceCancelado">
-                                                <Form.Label>Cancelado *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="cancelado"
-                                                    placeholder="Cancelado"
-                                                    defaultValue={this.state.cancelado}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                /* required */
-                                                />
+                                            <Form.Group>
+                                                <div className="switch switch-primary d-inline m-r-10">
+                                                    <Form.Control type="checkbox" id="checked-privado" name="privado" checked={this.state.privado} onChange={this.toggleHandler} />
+                                                    <Form.Label htmlFor="checked-privado" className="cr" />
+                                                </div>
+                                                <Form.Label>Privado</Form.Label>
                                             </Form.Group>
+
+                                            <Form.Group>
+                                                <div className="switch switch-primary d-inline m-r-10">
+                                                    <Form.Control type="checkbox" id="checked-cancelado" name="cancelado" checked={this.state.cancelado} onChange={this.toggleHandler} />
+                                                    <Form.Label htmlFor="checked-cancelado" className="cr" />
+                                                </div>
+                                                <Form.Label>Cancelado</Form.Label>
+                                            </Form.Group>
+
 
                                             <Form.Group controlId="formServiceDataInicio">
                                                 <Form.Label>Data Inicio *</Form.Label>
