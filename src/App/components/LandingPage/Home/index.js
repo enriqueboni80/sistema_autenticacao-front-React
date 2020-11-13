@@ -4,7 +4,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import Aux from "./../../../../hoc/_Aux";
 /* import Card from "./../../../../App/components/MainCard"; */
 
-import EventoService from "./../../../../services/EventosService"
+import EventoService from "./../../../../services/EventoService"
 
 class Index extends Component {
 

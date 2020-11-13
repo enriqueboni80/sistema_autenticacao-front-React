@@ -1,7 +1,8 @@
 import React from 'react';
 import { Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { ValidationForm, TextInput, TextInputGroup, SelectGroup } from 'react-bootstrap4-form-validation';
-import Service from "../../../services/EventosService"
+import Service from "../../../services/EventoService"
+import CategoriaService from "../../../services/EventoCategoriaService"
 import Aux from "../../../hoc/_Aux";
 import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
 
@@ -26,13 +27,14 @@ class Create extends React.Component {
             data_inicio: "",
             data_fim: "",
             prazo_inscricao: "",
-            defaultSwitch: true,
+            categorias: []
         }
     };
 
 
     UNSAFE_componentWillMount() {
         this.getById()
+        this.getCategorias()
     };
 
 
@@ -110,6 +112,12 @@ class Create extends React.Component {
                 data_fim: _dataReturned.data.data_fim,
                 prazo_inscricao: _dataReturned.data.prazo_inscricao
             })
+        })
+    }
+
+    getCategorias = () => {
+        CategoriaService.getAll().then((_categorias) => {
+            this.setState({ categorias: _categorias.data })
         })
     }
 
@@ -199,17 +207,19 @@ class Create extends React.Component {
                                                 />
                                             </Form.Group>
 
-                                            <Form.Group controlId="formServiceCategoria">
+                                            <Form.Group controlId="formServiceCategorias">
                                                 <Form.Label>Categoria *</Form.Label>
-                                                <TextInput
-                                                    type="text"
+                                                <SelectGroup
                                                     name="categoria"
-                                                    placeholder="Categoria"
-                                                    defaultValue={this.state.categoria}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                /* required */
-                                                />
+                                                    id="categoria"
+                                                    value={this.state.categoria}
+                                                    onChange={this.handleChange}>
+                                                    {this.state.categorias.map((categoria) => {
+                                                        return (
+                                                            <option value={categoria.id}>{categoria.name}</option>
+                                                        )
+                                                    })}
+                                                </SelectGroup>
                                             </Form.Group>
 
                                             <Form.Group>
@@ -311,19 +321,6 @@ class Create extends React.Component {
                                                     />
                                                 </Form.Group> */}
                                             </Form.Row>
-
-                                            {/* <Form.Group controlId="formServiceTypeCommission">
-                                                <Form.Label>Qual comissão será utilizada *</Form.Label>
-                                                <SelectGroup
-                                                    name="type_commission"
-                                                    id="type_commission"
-                                                    value={this.state.type_commission}
-                                                    onChange={this.handleChange}>
-                                                    <option value="0">Não aplicada</option>
-                                                    <option value="1">Porcentagem</option>
-                                                    <option value="2">Fixa</option>
-                                                </SelectGroup>
-                                            </Form.Group> */}
                                             <Form.Group style={{ marginTop: '45px', textAlign: 'right' }}>
                                                 <Button variant="secondary" onClick={this.props.handleCloseCreate}>CANCELAR</Button>
                                                 <Button type="submit" variant="primary">SALVAR</Button>

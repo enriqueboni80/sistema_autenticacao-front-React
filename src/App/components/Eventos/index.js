@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Card, Table, Modal, Button } from 'react-bootstrap';
-import Service from "../../../services/EventosService"
+import Service from "../../../services/EventoService"
 import Aux from "../../../hoc/_Aux";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa"
 import { convertCurrencyUStoPT } from "../../../helpers/convertCurrency"

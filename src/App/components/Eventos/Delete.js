@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import Aux from "../../../hoc/_Aux";
 import { AiOutlineWarning } from "react-icons/ai"
-import Service from "../../../services/EventosService"
+import Service from "../../../services/EventoService"
 
 class Delete extends React.Component {
 
