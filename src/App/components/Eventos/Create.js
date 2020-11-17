@@ -72,7 +72,6 @@ class Create extends React.Component {
 
 
         if (this.state.id === undefined) {
-            console.log(formData)
             Service.create(formData).then(() => {
                 this.props.handleCloseCreate()
                 this.props.getAll()
@@ -86,7 +85,7 @@ class Create extends React.Component {
                 this.props.handleCloseCreate()
                 this.props.getAll()
             }).catch((errors) => {
-                console.log(errors.response.data)
+                console.log(errors.response.data.error)
             })
         }
     }

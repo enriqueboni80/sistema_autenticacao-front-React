@@ -12,6 +12,7 @@ class EventoService extends Component {
 
   static setObject = (formData) => {
     return {
+      "id": formData.id,
       "name": formData.name,
       "qtd_vagas": parseInt(formData.qtd_vagas),
       "palestrante": formData.palestrante,
@@ -19,7 +20,7 @@ class EventoService extends Component {
       "detalhes": formData.detalhes,
       "descricao": formData.descricao,
       "categoria": parseInt(formData.categoria),
-      "ativo": formData.ativo,
+      "publicado": formData.publicado,
       "gratuito": formData.gratuito,
       "preco": formData.price === "" ? 0 : parseFloat(formData.preco),
       "privado": formData.privado,
@@ -45,15 +46,14 @@ class EventoService extends Component {
 
   static create(formData) {
     var serviceObj = this.setObject(formData)
-    console.log(serviceObj);
     return axios.post(EventoService._withBaseUrl("eventos/store"), serviceObj, this.CONFIG)
   }
 
-  /*      static update(formData) {
-      let id = formData.id
-      var serviceObj = this.setObject(formData)
-      return axios.put(ServiceService._withBaseUrl(`eventos/${id}`), serviceObj, this.CONFIG)
-    }*/
+  static update(formData) {
+    let id = formData.id
+    var serviceObj = this.setObject(formData)
+    return axios.put(EventoService._withBaseUrl(`eventos/update`), serviceObj, this.CONFIG)
+  }
 
   static delete(id) {
     return axios.delete(EventoService._withBaseUrl(`eventos/${id}/delete`), {
