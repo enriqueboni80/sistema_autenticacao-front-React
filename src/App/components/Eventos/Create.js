@@ -19,7 +19,7 @@ class Create extends React.Component {
             detalhes: "",
             descricao: "",
             categoria: "",
-            ativo: false,
+            publicado: false,
             gratuito: false,
             preco: "",
             privado: false,
@@ -60,7 +60,7 @@ class Create extends React.Component {
             detalhes: this.state.detalhes,
             descricao: this.state.descricao,
             categoria: this.state.categoria,
-            ativo: this.state.ativo ? true : false,
+            publicado: this.state.publicado ? true : false,
             gratuito: this.state.gratuito ? true : false,
             preco: this.state.preco,
             privado: this.state.privado ? true : false,
@@ -103,7 +103,7 @@ class Create extends React.Component {
                 detalhes: _dataReturned.data.detalhes,
                 descricao: _dataReturned.data.descricao,
                 categoria: _dataReturned.data.categoria,
-                ativo: _dataReturned.data.ativo,
+                publicado: _dataReturned.data.publicado,
                 gratuito: _dataReturned.data.gratuito,
                 preco: _dataReturned.data.preco,
                 privado: _dataReturned.data.privado,
@@ -224,10 +224,10 @@ class Create extends React.Component {
 
                                             <Form.Group>
                                                 <div className="switch switch-primary d-inline m-r-10">
-                                                    <Form.Control type="checkbox" id="checked-ativo" name="ativo" checked={this.state.ativo} onChange={this.toggleHandler} />
-                                                    <Form.Label htmlFor="checked-ativo" className="cr" />
+                                                    <Form.Control type="checkbox" id="checked-publicado" name="publicado" checked={this.state.publicado} onChange={this.toggleHandler} />
+                                                    <Form.Label htmlFor="checked-publicado" className="cr" />
                                                 </div>
-                                                <Form.Label>Ativo</Form.Label>
+                                                <Form.Label>Publicado</Form.Label>
                                             </Form.Group>
 
                                             <Form.Group>
