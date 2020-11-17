@@ -71,7 +71,7 @@ class Index extends React.Component {
                                                 <th>Vagas</th>
                                                 <th>Categoria</th>
                                                 <th>Preço</th>
-                                                <th>Privado</th>
+                                                <th>Publicado</th>
                                                 <th>Data Início</th>
                                                 <th>Data Fim</th>
                                                 <th>Ações</th>
@@ -86,7 +86,7 @@ class Index extends React.Component {
                                                         <td>{data.qtd_vagas}</td>
                                                         <td>{data.categoria} min</td>
                                                         <td>R$ {convertCurrencyUStoPT(data.preco)}</td>
-                                                        <td>{data.privado}</td>
+                                                        <td>{data.publicado ? "Sim": "Não"}</td>
                                                         <td>{data.data_inicio}</td>
                                                         <td>{data.data_fim}</td>
                                                         <td>
