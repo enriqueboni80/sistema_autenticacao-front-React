@@ -144,6 +144,8 @@ class Create extends React.Component {
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                     required
+                                                    pattern="(?=.*[A-Za-z]).{6,50}"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDescricao">
@@ -155,6 +157,8 @@ class Create extends React.Component {
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                     required
+                                                    pattern="(?=.*[A-Za-z]).{6,50}"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDetalhes">
@@ -166,6 +170,8 @@ class Create extends React.Component {
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                     required
+                                                    pattern="(?=.*[A-Za-z]).{6,50}"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServicePalestrante">
@@ -178,6 +184,8 @@ class Create extends React.Component {
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                     required
+                                                    pattern="(?=.*[A-Za-z]).{6,50}"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceQtdVagas">
@@ -190,6 +198,8 @@ class Create extends React.Component {
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                     required
+                                                    pattern="[0-9]*"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "só pode ser numero" }}
                                                 />
                                             </Form.Group>
 
