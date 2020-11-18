@@ -84,7 +84,7 @@ class Index extends React.Component {
                                                         <th scope="row">{data.id}</th>
                                                         <td>{data.name}</td>
                                                         <td>{data.qtd_vagas}</td>
-                                                        <td>{data.categoria} min</td>
+                                                        <td>{data.categoria}</td>
                                                         <td>R$ {convertCurrencyUStoPT(data.preco)}</td>
                                                         <td>{data.publicado ? "Sim": "Não"}</td>
                                                         <td>{data.data_inicio}</td>
