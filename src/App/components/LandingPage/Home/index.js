@@ -38,7 +38,7 @@ class Index extends Component {
                                 <Col md={6} xl={4}>
                                     <Card>
                                         <Card.Body>
-                                            <Card.Img src='https://media-exp1.licdn.com/dms/image/C4D1BAQFAC3o2eHS_vA/company-background_10000/0?e=2159024400&v=beta&t=EUdtqUGN2pXf17w9xlDLBdSI60wIgV4gI0W36q8NHto' />
+                                            <Card.Img src={evento.url_imagem} />
                                             <h5 className="m-t-35">{evento.name}</h5>
                                             <span className="text-muted d-block m-b-30">{evento.descricao}</span>
                                             <p className="border-top m-b-20 p-t-10 m-t-20"></p>
