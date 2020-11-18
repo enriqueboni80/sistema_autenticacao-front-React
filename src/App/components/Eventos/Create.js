@@ -223,6 +223,7 @@ class Create extends React.Component {
                                                     id="categoria"
                                                     value={this.state.categoria}
                                                     onChange={this.handleChange}>
+                                                    <option value={0}>Sem Categoria</option>
                                                     {this.state.categorias.map((categoria) => {
                                                         return (
                                                             <option value={categoria.id}>{categoria.name}</option>
