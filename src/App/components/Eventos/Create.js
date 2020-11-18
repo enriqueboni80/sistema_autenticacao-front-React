@@ -143,7 +143,7 @@ class Create extends React.Component {
                                                     defaultValue={this.state.name}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    required
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDescricao">
@@ -154,7 +154,7 @@ class Create extends React.Component {
                                                     defaultValue={this.state.descricao}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    required
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDetalhes">
@@ -165,7 +165,7 @@ class Create extends React.Component {
                                                     defaultValue={this.state.detalhes}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    required
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServicePalestrante">
@@ -177,7 +177,7 @@ class Create extends React.Component {
                                                     defaultValue={this.state.palestrante}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    required
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceQtdVagas">
@@ -189,7 +189,7 @@ class Create extends React.Component {
                                                     defaultValue={this.state.qtd_vagas}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    required
                                                 />
                                             </Form.Group>
 
@@ -202,7 +202,7 @@ class Create extends React.Component {
                                                     defaultValue={this.state.url_imagem}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    required
                                                 />
                                             </Form.Group>
 

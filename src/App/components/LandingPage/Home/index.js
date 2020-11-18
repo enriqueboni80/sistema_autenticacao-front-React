@@ -20,10 +20,7 @@ class Index extends Component {
         this.getTodosEventos()
     }
 
-    componentWillUpdate(){
-        this.getTodosEventos()
-    }
-
+    
     getTodosEventos = async () => {
         EventoService.getAll().then((res) => {
             this.setState({ 'eventos': res.data })
