@@ -6,6 +6,8 @@ import Aux from "./../../../../hoc/_Aux";
 
 import EventoService from "./../../../../services/EventoService"
 
+import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
+
 class Index extends Component {
 
 
@@ -25,7 +27,6 @@ class Index extends Component {
         EventoService.getAll().then((res) => {
             this.setState({ 'eventos': res.data })
         })
-
     }
 
     render() {
@@ -35,16 +36,16 @@ class Index extends Component {
                     {this.state.eventos.map((evento) => {
                         if (evento.publicado) {
                             return (
-                                <Col md={6} xl={4}>
+                                <Col md={6} xl={4} key={evento.id}>
                                     <Card>
                                         <Card.Body>
-                                            <Card.Img src={evento.url_imagem} />
+                                            <Card.Img src={evento.url_imagem ? evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
                                             <h5 className="m-t-35">{evento.name}</h5>
                                             <span className="text-muted d-block m-b-30">{evento.descricao}</span>
                                             <p className="border-top m-b-20 p-t-10 m-t-20"></p>
                                             <div className="row" style={{ textAlign: "center" }}>
                                                 <div className="col">
-                                                    <h5>R$ {evento.preco} </h5>
+                                                    <h5>R$ {evento.preco ? convertCurrencyUStoPT(evento.preco) : ''} </h5>
                                                     <span>Investimento</span>
                                                 </div>
                                                 <div className="col">

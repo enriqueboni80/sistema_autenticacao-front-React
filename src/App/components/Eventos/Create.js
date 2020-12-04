@@ -62,7 +62,7 @@ class Create extends React.Component {
             categoria: this.state.categoria,
             publicado: this.state.publicado ? true : false,
             gratuito: this.state.gratuito ? true : false,
-            preco: this.state.preco,
+            preco: convertCurrencyPTtoUS(this.state.preco),
             privado: this.state.privado ? true : false,
             cancelado: this.state.cancelado ? true : false,
             data_inicio: this.state.data_inicio,
@@ -104,7 +104,7 @@ class Create extends React.Component {
                 categoria: _dataReturned.data.categoria,
                 publicado: _dataReturned.data.publicado,
                 gratuito: _dataReturned.data.gratuito,
-                preco: _dataReturned.data.preco,
+                preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : "",
                 privado: _dataReturned.data.privado,
                 cancelado: _dataReturned.data.cancelado,
                 data_inicio: _dataReturned.data.data_inicio,
@@ -212,7 +212,6 @@ class Create extends React.Component {
                                                     defaultValue={this.state.url_imagem}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                    required
                                                 />
                                             </Form.Group>
 
@@ -264,7 +263,6 @@ class Create extends React.Component {
                                                 <Form.Label>Cancelado</Form.Label>
                                             </Form.Group>
 
-
                                             <Form.Group controlId="formServiceDataInicio">
                                                 <Form.Label>Data Inicio *</Form.Label>
                                                 <TextInput
@@ -311,25 +309,12 @@ class Create extends React.Component {
                                                         defaultValue={this.state.preco}
                                                         autoComplete="off"
                                                         onChange={this.handleChange}
-                                                    /* required */
-                                                    /*                                                         pattern="([\d,]*)"
-                                                                                                            errorMessage={{ required: "Campo Requerido", pattern: "Esse campo não pode conter letras" }}
-                                                                                                            prepend={<span className="input-group-text">R$</span>} */
+                                                        required
+                                                        pattern="([\d,]*)"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "Esse campo não pode conter letras" }}
+                                                        prepend={<span className="input-group-text">R$</span>}
                                                     />
                                                 </Form.Group>
-                                                {/*                                                 <Form.Group as={Col} controlId="formServiceDuration">
-                                                    <Form.Label>Duração</Form.Label>
-                                                    <TextInputGroup
-                                                        name="duration"
-                                                        placeholder="Duration"
-                                                        defaultValue={this.state.duration}
-                                                        autoComplete="off"
-                                                        onChange={this.handleChange}
-                                                        pattern="([\d]*)"
-                                                        errorMessage={{ required: "Campo Requerido", pattern: "Esse campo deve ser numérico" }}
-                                                        append={<span className="input-group-text">min</span>}
-                                                    />
-                                                </Form.Group> */}
                                             </Form.Row>
                                             <Form.Group style={{ marginTop: '45px', textAlign: 'right' }}>
                                                 <Button variant="secondary" onClick={this.props.handleCloseCreate}>CANCELAR</Button>
