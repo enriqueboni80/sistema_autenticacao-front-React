@@ -71,7 +71,7 @@ class Create extends React.Component {
         }
 
 
-        if ((this.state.id === undefined || this.state.id === null)) {
+        if (!this.props.id) {
             Service.create(formData).then(() => {
                 this.props.handleCloseCreate()
                 this.props.getAll()
@@ -79,7 +79,8 @@ class Create extends React.Component {
                 console.log(errors.response.data.error)
             })
         }
-        else {
+
+        if (!!this.props.id) {
             formData.id = this.state.id
             Service.update(formData).then(() => {
                 this.props.handleCloseCreate()
@@ -88,6 +89,7 @@ class Create extends React.Component {
                 console.log(errors.response.data.error)
             })
         }
+        
     }
 
     getById = () => {
@@ -128,7 +130,7 @@ class Create extends React.Component {
                     <Col>
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h5">CADASTRO DE EVENTOS</Card.Title>
+                                <Card.Title as="h5">CADASTRO DE SERVIÇOS</Card.Title>
                             </Card.Header>
                             <Card.Body>
                                 <Row>
