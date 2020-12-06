@@ -7,6 +7,7 @@ import Aux from "./../../../../hoc/_Aux";
 import EventoService from "./../../../../services/EventoService"
 
 import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
+import { convertDateUStoPT } from "../../../../helpers/convertDate"
 
 class Index extends Component {
 
@@ -49,7 +50,7 @@ class Index extends Component {
                                                     <span>Investimento</span>
                                                 </div>
                                                 <div className="col">
-                                                    <h5>{evento.prazo_inscricao}</h5>
+                                                    <h5>{convertDateUStoPT(evento.prazo_inscricao)}</h5>
                                                     <span>Prazo Inscrição</span>
                                                 </div>
 
