@@ -71,7 +71,7 @@ class Create extends React.Component {
         }
 
 
-        if (this.state.id === undefined) {
+        if ((this.state.id === undefined || this.state.id === null)) {
             Service.create(formData).then(() => {
                 this.props.handleCloseCreate()
                 this.props.getAll()
@@ -128,7 +128,7 @@ class Create extends React.Component {
                     <Col>
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h5">CADASTRO DE SERVIÇOS</Card.Title>
+                                <Card.Title as="h5">CADASTRO DE EVENTOS</Card.Title>
                             </Card.Header>
                             <Card.Body>
                                 <Row>

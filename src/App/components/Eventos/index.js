@@ -25,7 +25,7 @@ class Index extends React.Component {
         this.getAll()
     };
 
-    handleShowCreate = (e, id = null) => {
+    handleShowCreate = (e, id = undefined) => {
         e.preventDefault()
         this.setState({ id: id })
         this.setState({ showModalCreate: true });
