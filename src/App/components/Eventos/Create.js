@@ -5,6 +5,7 @@ import Service from "../../../services/EventoService"
 import CategoriaService from "../../../services/EventoCategoriaService"
 import Aux from "../../../hoc/_Aux";
 import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
+import { convertDatePTtoUS, convertDateUStoPT } from "../../../helpers/convertDate"
 
 class Create extends React.Component {
 
@@ -65,9 +66,9 @@ class Create extends React.Component {
             preco: convertCurrencyPTtoUS(this.state.preco),
             privado: this.state.privado ? true : false,
             cancelado: this.state.cancelado ? true : false,
-            data_inicio: this.state.data_inicio,
-            data_fim: this.state.data_fim,
-            prazo_inscricao: this.state.prazo_inscricao
+            data_inicio: convertDatePTtoUS(this.state.data_inicio),
+            data_fim: convertDatePTtoUS(this.state.data_fim),
+            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao)
         }
 
 
@@ -89,7 +90,7 @@ class Create extends React.Component {
                 console.log(errors.response.data.error)
             })
         }
-        
+
     }
 
     getById = () => {
@@ -109,9 +110,9 @@ class Create extends React.Component {
                 preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : "",
                 privado: _dataReturned.data.privado,
                 cancelado: _dataReturned.data.cancelado,
-                data_inicio: _dataReturned.data.data_inicio,
-                data_fim: _dataReturned.data.data_fim,
-                prazo_inscricao: _dataReturned.data.prazo_inscricao
+                data_inicio: convertDateUStoPT(_dataReturned.data.data_inicio),
+                data_fim: convertDateUStoPT(_dataReturned.data.data_fim),
+                prazo_inscricao: convertDateUStoPT(_dataReturned.data.prazo_inscricao)
             })
         })
     }

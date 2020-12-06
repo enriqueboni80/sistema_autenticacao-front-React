@@ -4,6 +4,7 @@ import Service from "../../../services/EventoService"
 import Aux from "../../../hoc/_Aux";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa"
 import { convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
+import { convertDateUStoPT } from "../../../helpers/convertDate"
 import Create from "./Create"
 import Delete from "./Delete"
 
@@ -87,8 +88,8 @@ class Index extends React.Component {
                                                         <td>{data.categoria}</td>
                                                         <td>R$ {convertCurrencyUStoPT(data.preco)}</td>
                                                         <td>{data.publicado ? "Sim": "Não"}</td>
-                                                        <td>{data.data_inicio}</td>
-                                                        <td>{data.data_fim}</td>
+                                                        <td>{convertDateUStoPT(data.data_inicio)}</td>
+                                                        <td>{convertDateUStoPT(data.data_fim)}</td>
                                                         <td>
                                                             <FaRegEdit size={20}
                                                                 onClick={(e) => this.handleShowCreate(e, data.id)}
