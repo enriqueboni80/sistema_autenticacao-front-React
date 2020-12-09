@@ -38,7 +38,7 @@ class SignIn1 extends React.Component {
 
         AuthService.login(formData).then((response) => {
             /* JWTToken esta dentro do usuario */
-            alert('lembre-se que para acessar a rota privada /home é necessário inserir um grupo diferente de client no banco')
+            /*lembre-se que para acessar a rota privada /home é necessário inserir um grupo diferente de client no banco*/
             localStorage.removeItem('user_session');
             localStorage.setItem('user_session', JSON.stringify(response.data.user));
             response.data.user.grupos.map((grupo) => {

@@ -34,8 +34,8 @@ class Create extends React.Component {
 
 
     UNSAFE_componentWillMount() {
-        this.getById()
         this.getCategorias()
+        this.getById()
     };
 
 
