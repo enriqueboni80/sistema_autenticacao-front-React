@@ -5,6 +5,7 @@ import Aux from "./../../../../hoc/_Aux";
 /* import Card from "./../../../../App/components/MainCard"; */
 
 import EventoService from "./../../../../services/EventoService"
+import InscricaoService from "./../../../../services/InscricaoService"
 
 import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
 import { convertDateUStoPT } from "../../../../helpers/convertDate"
@@ -15,20 +16,37 @@ class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loggedUser: '',
             eventos: []
         }
     };
 
     UNSAFE_componentWillMount() {
         this.getTodosEventos()
+        this.checkIsAuth()
     }
 
-    
+
     getTodosEventos = async () => {
         EventoService.getAll().then((res) => {
             this.setState({ 'eventos': res.data })
         })
     }
+
+    checkIsAuth = async () => {
+        if (localStorage.getItem('user_session')) {
+            this.setState({ isAuthenticated: true })
+            this.setState({ loggedUser: JSON.parse(localStorage.getItem('user_session')) })
+        }
+    }
+
+    inscricaoEvento = async (eventoId) => {
+        InscricaoService.inscrever(eventoId, this.state.loggedUser.id).then((res) => {
+            console.log(res)
+        })
+    }
+
+
 
     render() {
         return (
@@ -55,9 +73,9 @@ class Index extends Component {
                                                 </div>
 
                                             </div>
-                                            <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>
+                                            <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>                                                
                                                 <div className="col-6 p-r-0">
-                                                    <a href='#' className="btn btn-primary  text-uppercase btn-block">Inscrever</a>
+                                                    <a href='#' className="btn btn-primary  text-uppercase btn-block" onClick={() => this.inscricaoEvento(evento.id)}>Inscrever</a>
                                                 </div>
                                                 <div className="col-6">
                                                     <a href='#' className="btn text-uppercase border btn-block btn-outline-secondary">Ver Detalhes</a>
