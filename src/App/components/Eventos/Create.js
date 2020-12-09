@@ -110,9 +110,9 @@ class Create extends React.Component {
                 preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : "",
                 privado: _dataReturned.data.privado,
                 cancelado: _dataReturned.data.cancelado,
-                data_inicio: convertDateUStoPT(_dataReturned.data.data_inicio),
-                data_fim: convertDateUStoPT(_dataReturned.data.data_fim),
-                prazo_inscricao: convertDateUStoPT(_dataReturned.data.prazo_inscricao)
+                data_inicio: _dataReturned.data.data_inicio? convertDateUStoPT(_dataReturned.data.data_inicio): "",
+                data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim): "",
+                prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao): ""
             })
         })
     }
