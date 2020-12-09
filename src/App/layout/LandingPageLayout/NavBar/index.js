@@ -8,6 +8,9 @@ import SigIn from './../../../components/Authentication/SignIn/SignIn1'
 import SigUp from './../../../components/Authentication/SignUp/SignUp1'
 import ForgotPassword from './../../../components/Authentication/ResetPassword/ResetPassword1'
 
+import CONSTANT from '../../../../store/constant'
+import { Link } from 'react-router-dom'
+
 
 class Navigation extends React.Component {
 
@@ -88,14 +91,12 @@ class Navigation extends React.Component {
                                     ?
                                     <>
                                         <li className="nav-item">
-                                            <NavLink className="nav-link page-scroll" to="/meus-eventos">Meus Eventos</NavLink>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link page-scroll" href="/">Meus Ingressos</a>
+                                            <Link className="nav-link page-scroll" to={`./meus-ingressos/${this.state.loggedUser.id}`}>Meus Ingresso</Link>
                                         </li>
                                         <li className="nav-item dropdown">
                                             <NavLink to="#!" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{this.state.loggedUser.username}</NavLink>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                {this.state.loggedUser.grupos == CONSTANT.ADMINISTRATORS ? <NavLink to='/home' className="dropdown-item">Painel Administrativo</NavLink> : ""}
                                                 <NavLink to="#" className="dropdown-item" onClick={this.logOut}>LogOut</NavLink>
                                             </div>
                                         </li>

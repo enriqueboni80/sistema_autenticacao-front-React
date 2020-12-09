@@ -8,6 +8,7 @@ import DEMO from "../../../../../store/constant";
 import Avatar1 from '../../../../../assets/images/user/avatar-1.jpg';
 import Avatar2 from '../../../../../assets/images/user/avatar-2.jpg';
 import Avatar3 from '../../../../../assets/images/user/avatar-3.jpg';
+import { Link } from 'react-router-dom';
 
 class NavRight extends Component {
     /* state = {
@@ -24,9 +25,9 @@ class NavRight extends Component {
 
     componentDidMount() {
         let user = JSON.parse(localStorage.getItem('user_session'))
-        if(user){
+        if (user) {
             this.setState({ username: user.username })
-        }else{
+        } else {
             this.setState({ username: 'não logado' })
         }
     }
@@ -34,7 +35,7 @@ class NavRight extends Component {
     logOut = () => {
         localStorage.removeItem('user_session')
         this.setState({ username: 'não logado' })
-        window.location.href="/"
+        window.location.href = "/"
     }
 
 
@@ -43,7 +44,7 @@ class NavRight extends Component {
         return (
             <Aux>
                 <ul className="navbar-nav ml-auto">
-                    <li>
+{/*                     <li>
                         <Dropdown alignRight={!this.props.rtlLayout}>
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
                                 <i className="icon feather icon-bell" />
@@ -99,10 +100,10 @@ class NavRight extends Component {
                                 </div>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </li>
-                    <li className={this.props.rtlLayout ? 'm-r-15' : 'm-l-15'}>
+                    </li> */}
+{/*                     <li className={this.props.rtlLayout ? 'm-r-15' : 'm-l-15'}>
                         <a href={DEMO.BLANK_LINK} className="displayChatbox" onClick={() => { this.setState({ listOpen: true }); }}><i className="icon feather icon-mail" /></a>
-                    </li>
+                    </li> */}
                     <li>
                         <Dropdown alignRight={!this.props.rtlLayout} className="drp-user">
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
@@ -117,10 +118,11 @@ class NavRight extends Component {
                                     </a>
                                 </div>
                                 <ul className="pro-body">
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings" /> Settings</a></li>
+                                    <li><Link to="/" className="dropdown-item"><i className="feather icon-settings" />Visualizar Home</Link></li>
+                                    {/* <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings" /> Settings</a></li>
                                     <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user" /> Profile</a></li>
                                     <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail" /> My Messages</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-lock" /> Lock Screen</a></li>
+                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-lock" /> Lock Screen</a></li> */}
                                 </ul>
                             </Dropdown.Menu>
                         </Dropdown>

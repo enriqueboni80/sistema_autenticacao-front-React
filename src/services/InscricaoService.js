@@ -35,6 +35,10 @@ class InscricaoService extends Component {
     return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${eventoId}`));
   }
 
+  static getInscricoesByUserId(userId) {
+    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${userId}/user`));
+  }
+
 
 }
 
