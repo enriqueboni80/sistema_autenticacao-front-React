@@ -271,7 +271,7 @@ class Create extends React.Component {
                                                 <TextInput
                                                     type="text"
                                                     name="data_inicio"
-                                                    placeholder="data_inicio"
+                                                    placeholder="dd/mm/aaaa"
                                                     defaultValue={this.state.data_inicio}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
@@ -284,7 +284,7 @@ class Create extends React.Component {
                                                 <TextInput
                                                     type="text"
                                                     name="data_fim"
-                                                    placeholder="data_fim"
+                                                    placeholder="dd/mm/aaaa"
                                                     defaultValue={this.state.data_fim}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
@@ -296,7 +296,7 @@ class Create extends React.Component {
                                                 <TextInput
                                                     type="text"
                                                     name="prazo_inscricao"
-                                                    placeholder="prazo inscrição"
+                                                    placeholder="dd/mm/aaaa"
                                                     defaultValue={this.state.prazo_inscricao}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
