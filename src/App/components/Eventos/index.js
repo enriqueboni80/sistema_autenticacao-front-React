@@ -7,6 +7,7 @@ import { convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
 import { convertDateUStoPT } from "../../../helpers/convertDate"
 import Create from "./Create"
 import Delete from "./Delete"
+import { Link } from 'react-router-dom'
 
 
 class Index extends React.Component {
@@ -90,8 +91,10 @@ class Index extends React.Component {
                                                         <td>{data.publicado ? "Sim" : "Não"}</td>
                                                         <td>{convertDateUStoPT(data.data_inicio)}</td>
                                                         <td>{convertDateUStoPT(data.data_fim)}</td>
-                                                        <td style={{display: "flex", justifyContent: "center"}}>
-                                                            <div><FaListOl size={19} style={{ cursor: 'pointer', marginRight:'5px' }}/></div>
+                                                        <td style={{ display: "flex", justifyContent: "center" }}>
+                                                            <Link to={`./gerenciar-eventos/inscricoes/${data.id}`}>
+                                                                <div><FaListOl size={19} style={{ cursor: 'pointer', marginRight: '5px' }} /></div>
+                                                            </Link>
                                                             <div><FaRegEdit size={19}
                                                                 onClick={(e) => this.handleShowCreate(e, data.id)}
                                                                 style={{ cursor: 'pointer' }}

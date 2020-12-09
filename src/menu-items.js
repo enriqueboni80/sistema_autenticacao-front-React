@@ -14,7 +14,7 @@ export default {
                     classes: 'nav-item',
                     icon: 'feather icon-sidebar'
                 },
-                {
+/*                 {
                     id: 'privated-access',
                     title: 'Acesso Privado',
                     type: 'item',
@@ -80,7 +80,7 @@ export default {
                             ]
                         }
                     ]
-                }
+                } */
             ]
         }
     ]
