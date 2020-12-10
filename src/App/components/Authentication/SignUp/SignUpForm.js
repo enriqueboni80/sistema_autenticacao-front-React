@@ -43,7 +43,7 @@ const RegisterForm = (props) => {
                         autoComplete="off"
                         onChange={props.handleChange}
                         required
-                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Zçã.\d]{7,}$"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Zçã@!.\d]{7,}$"
                         errorMessage={{ required: "Campo Requerido", pattern: "Mínimo de oito caracteres, pelo menos uma letra maiúscula, uma letra minúscula e um número" }}
                     />
                 </Form.Group>
