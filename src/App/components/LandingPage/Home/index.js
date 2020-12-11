@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Modal } from 'react-bootstrap';
 
 import Aux from "./../../../../hoc/_Aux";
 /* import Card from "./../../../../App/components/MainCard"; */
 
 import EventoService from "./../../../../services/EventoService"
 import InscricaoService from "./../../../../services/InscricaoService"
+import SigIn from './../../../components/Authentication/SignIn/SignIn1'
 
 import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
 import { convertDateUStoPT } from "../../../../helpers/convertDate"
@@ -17,7 +18,11 @@ class Index extends Component {
         super(props);
         this.state = {
             loggedUser: '',
-            eventos: []
+            eventos: [],
+            showModalSigIn: false,
+            eventosInscritos: [],
+            inscrito: false,
+            isAuthenticated:false
         }
     };
 
@@ -41,12 +46,30 @@ class Index extends Component {
     }
 
     inscricaoEvento = async (eventoId) => {
-        InscricaoService.inscrever(eventoId, this.state.loggedUser.id).then((res) => {
-            console.log(res)
+        let inscricoes = await InscricaoService.getInscricoesByUserId(this.state.loggedUser.id)
+        let jaInscrito = false
+        inscricoes.data.map(inscricao => {
+            if(inscricao.evento_id === eventoId) {
+                jaInscrito = true
+            }
+        })
+        if(!jaInscrito){
+            InscricaoService.inscrever(eventoId, this.state.loggedUser.id).then((res) => {
+                this.setState({inscrito: true})
+            })
+        }
+    }
+
+    desinscricaoEvento = async (eventoId) => {
+        InscricaoService.desinscrever(eventoId, this.state.loggedUser.id).then((res) => {
+            this.setState({inscrito: false})
         })
     }
 
-
+    handleShowModalSigIn = (e) => {
+        e.preventDefault()
+        this.setState({ showModalSigIn: true });
+    }
 
     render() {
         return (
@@ -75,7 +98,10 @@ class Index extends Component {
                                             </div>
                                             <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>                                                
                                                 <div className="col-6 p-r-0">
-                                                    <a href='#' className="btn btn-primary  text-uppercase btn-block" onClick={() => this.inscricaoEvento(evento.id)}>Inscrever</a>
+                                                {this.state.isAuthenticated 
+                                                ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={() => this.inscricaoEvento(evento.id)}>Inscrever</a>
+                                                :<a href='#' className="btn text-uppercase border btn-block btn-outline-secondary" onClick={(e) => this.handleShowModalSigIn(e)}>Inscrever</a>}
+                                                <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={() => this.desinscricaoEvento(evento.id)}>desinscrever (Provisório)</a>
                                                 </div>
                                                 <div className="col-6">
                                                     <a href='#' className="btn text-uppercase border btn-block btn-outline-secondary">Ver Detalhes</a>
@@ -88,6 +114,11 @@ class Index extends Component {
                         }
                     })}
                 </Row>
+                    <Modal size="lg" show={this.state.showModalSigIn} onHide={this.handleCloseModalSigIn} style={{ textAlign: 'center' }}>
+                            <SigIn LinksExternal={[
+                            { 'text': 'Forgot password or Active User ', 'name': 'Forgot Password', 'link': this.handleShowModalForgotPassword },
+                            { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }]} /> 
+                    </Modal>
             </Aux>
         );
     }

@@ -31,6 +31,15 @@ class InscricaoService extends Component {
     return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes"), serviceObj, this.CONFIG);
   }
 
+  static desinscrever(eventoId, userId) {
+    var formData = {
+      eventoId,
+      userId
+    }
+    var serviceObj = this.setObject(formData)
+    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/desinscrever"), serviceObj, this.CONFIG);
+  }
+
   static getByEventoId(eventoId) {
     return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${eventoId}`));
   }
@@ -38,7 +47,6 @@ class InscricaoService extends Component {
   static getInscricoesByUserId(userId) {
     return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${userId}/user`));
   }
-
 
 }
 

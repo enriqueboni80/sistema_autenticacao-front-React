@@ -78,7 +78,7 @@ class Navigation extends React.Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light navbar-default navbar-fixed-top past-main" role="navigation">
                 <div className="container">
-                    <a className="navbar-brand-2 page-scroll" href="#main"><img src={logo} alt="Datta Able Logo" /></a>
+                    <a className="navbar-brand-2 page-scroll" href="/"><img src={logo} alt="Datta Able Logo" /></a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
@@ -91,7 +91,7 @@ class Navigation extends React.Component {
                                     ?
                                     <>
                                         <li className="nav-item">
-                                            <Link className="nav-link page-scroll" to={`./meus-ingressos/${this.state.loggedUser.id}`}>Meus Ingresso</Link>
+                                            <Link className="nav-link page-scroll" to={`/meus-ingressos/${this.state.loggedUser.id}`}>Meus Ingresso</Link>
                                         </li>
                                         <li className="nav-item dropdown">
                                             <NavLink to="#!" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{this.state.loggedUser.username}</NavLink>
