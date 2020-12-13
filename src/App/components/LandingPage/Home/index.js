@@ -45,7 +45,8 @@ class Index extends Component {
         }
     }
 
-    inscricaoEvento = async (eventoId) => {
+    inscricaoEvento = async (e, eventoId) => {
+        e.preventDefault()
         let inscricoes = await InscricaoService.getInscricoesByUserId(this.state.loggedUser.id)
         let jaInscrito = false
         inscricoes.data.map(inscricao => {
@@ -56,6 +57,7 @@ class Index extends Component {
         if(!jaInscrito){
             InscricaoService.inscrever(eventoId, this.state.loggedUser.id).then((res) => {
                 this.setState({inscrito: true})
+                window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
             })
         }
     }
@@ -99,9 +101,8 @@ class Index extends Component {
                                             <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>                                                
                                                 <div className="col-6 p-r-0">
                                                 {this.state.isAuthenticated 
-                                                ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={() => this.inscricaoEvento(evento.id)}>Inscrever</a>
+                                                ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.inscricaoEvento(e, evento.id)}>Inscrever</a>
                                                 :<a href='#' className="btn text-uppercase border btn-block btn-outline-secondary" onClick={(e) => this.handleShowModalSigIn(e)}>Inscrever</a>}
-                                                <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={() => this.desinscricaoEvento(evento.id)}>desinscrever (Provisório)</a>
                                                 </div>
                                                 <div className="col-6">
                                                     <a href='#' className="btn text-uppercase border btn-block btn-outline-secondary">Ver Detalhes</a>
