@@ -26,8 +26,11 @@ class Create extends React.Component {
             privado: false,
             cancelado: false,
             data_inicio: "",
+            hora_inicio: "",
             data_fim: "",
+            hora_fim: "",
             prazo_inscricao: "",
+            hora_fim_prazo_incricao: "",
             categorias: []
         }
     };
@@ -66,9 +69,9 @@ class Create extends React.Component {
             preco: convertCurrencyPTtoUS(this.state.preco),
             privado: this.state.privado ? true : false,
             cancelado: this.state.cancelado ? true : false,
-            data_inicio: convertDatePTtoUS(this.state.data_inicio),
-            data_fim: convertDatePTtoUS(this.state.data_fim),
-            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao)
+            data_inicio: convertDatePTtoUS(this.state.data_inicio, this.state.hora_inicio),
+            data_fim: convertDatePTtoUS(this.state.data_fim, this.state.hora_fim),
+            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao, this.state.hora_fim_prazo_incricao)
         }
 
 
@@ -278,7 +281,18 @@ class Create extends React.Component {
                                                 /* required */
                                                 />
                                             </Form.Group>
-
+                                            <Form.Group controlId="formServiceDataInicio">
+                                                <Form.Label>Hora Inicio *</Form.Label>
+                                                <TextInput
+                                                    type="text"
+                                                    name="hora_inicio"
+                                                    placeholder="HH:MM"
+                                                    defaultValue={this.state.hora_inicio}
+                                                    autoComplete="off"
+                                                    onChange={this.handleChange}
+                                                /* required */
+                                                />
+                                            </Form.Group>
                                             <Form.Group controlId="formServiceDataInicio">
                                                 <Form.Label>Data Fim *</Form.Label>
                                                 <TextInput
@@ -291,6 +305,18 @@ class Create extends React.Component {
                                                 /* required */
                                                 />
                                             </Form.Group>
+                                            <Form.Group controlId="formServiceDataInicio">
+                                                <Form.Label>Hora Fim *</Form.Label>
+                                                <TextInput
+                                                    type="text"
+                                                    name="hora_fim"
+                                                    placeholder="HH:MM"
+                                                    defaultValue={this.state.hora_fim}
+                                                    autoComplete="off"
+                                                    onChange={this.handleChange}
+                                                /* required */
+                                                />
+                                            </Form.Group>
                                             <Form.Group controlId="formServicePrazoInscricao">
                                                 <Form.Label>Prazo Inscrição *</Form.Label>
                                                 <TextInput
@@ -298,6 +324,18 @@ class Create extends React.Component {
                                                     name="prazo_inscricao"
                                                     placeholder="dd/mm/aaaa"
                                                     defaultValue={this.state.prazo_inscricao}
+                                                    autoComplete="off"
+                                                    onChange={this.handleChange}
+                                                /* required */
+                                                />
+                                            </Form.Group>
+                                            <Form.Group controlId="formServiceDataInicio">
+                                                <Form.Label>Hora Fim Prazo Incricao *</Form.Label>
+                                                <TextInput
+                                                    type="text"
+                                                    name="hora_fim_prazo_incricao"
+                                                    placeholder="HH:MM"
+                                                    defaultValue={this.state.hora_fim_prazo_incricao}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                 /* required */

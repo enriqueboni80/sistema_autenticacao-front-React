@@ -1,9 +1,9 @@
-const convertDatePTtoUS = (date) => {
+const convertDatePTtoUS = (date, time) => {
     var _date = date.split('/');
     var dia = _date[0]
     var mes = _date[1]
     var ano = _date[2]
-    return `${ano}-${mes}-${dia}`
+    return `${ano}-${mes}-${dia} ${time}`
 }
 
 const convertDateUStoPT = (dateWithTime) => {
