@@ -5,7 +5,7 @@ import Service from "../../../services/EventoService"
 import CategoriaService from "../../../services/EventoCategoriaService"
 import Aux from "../../../hoc/_Aux";
 import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
-import { convertDatePTtoUS, convertDateUStoPT } from "../../../helpers/convertDate"
+import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../helpers/convertDate"
 
 class Create extends React.Component {
 
@@ -30,7 +30,7 @@ class Create extends React.Component {
             data_fim: "",
             hora_fim: "",
             prazo_inscricao: "",
-            hora_fim_prazo_incricao: "",
+            hora_fim_prazo_inscricao: "",
             categorias: []
         }
     };
@@ -69,11 +69,10 @@ class Create extends React.Component {
             preco: convertCurrencyPTtoUS(this.state.preco),
             privado: this.state.privado ? true : false,
             cancelado: this.state.cancelado ? true : false,
-            data_inicio: convertDatePTtoUS(this.state.data_inicio, this.state.hora_inicio),
-            data_fim: convertDatePTtoUS(this.state.data_fim, this.state.hora_fim),
-            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao, this.state.hora_fim_prazo_incricao)
+            data_inicio: convertDatePTtoUS(this.state.data_inicio).concat(" ",this.state.hora_inicio),
+            data_fim: convertDatePTtoUS(this.state.data_fim).concat(" ",this.state.hora_fim),
+            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao).concat(" ",this.state.hora_fim_prazo_inscricao)
         }
-
 
         if (!this.props.id) {
             Service.create(formData).then(() => {
@@ -114,8 +113,11 @@ class Create extends React.Component {
                 privado: _dataReturned.data.privado,
                 cancelado: _dataReturned.data.cancelado,
                 data_inicio: _dataReturned.data.data_inicio? convertDateUStoPT(_dataReturned.data.data_inicio): "",
+                hora_inicio: _dataReturned.data.data_inicio? getTimeSplited(_dataReturned.data.data_inicio): "",
                 data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim): "",
-                prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao): ""
+                hora_fim: _dataReturned.data.data_fim ? getTimeSplited(_dataReturned.data.data_fim): "",
+                prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao): "",
+                hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao): ""
             })
         })
     }
@@ -335,7 +337,7 @@ class Create extends React.Component {
                                                     type="text"
                                                     name="hora_fim_prazo_incricao"
                                                     placeholder="HH:MM"
-                                                    defaultValue={this.state.hora_fim_prazo_incricao}
+                                                    defaultValue={this.state.hora_fim_prazo_inscricao}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
                                                 /* required */
