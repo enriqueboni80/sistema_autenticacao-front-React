@@ -16,10 +16,9 @@ const convertDateUStoPT = (dateWithTime) => {
 }
 
 const getTimeSplited = (dateWithTime) => {
-    var time = dateWithTime.split("T")[1]
-    var arrTime = time.split(':')
-    var hora = arrTime[0]
-    var minuto = arrTime[1]
+    var d = new Date(dateWithTime)
+    var hora = ((d.getHours() < 10) ? `0${d.getHours()}`: d.getHours())
+    var minuto = ((d.getMinutes() < 10) ? `0${d.getMinutes()}`: d.getMinutes())
     return `${hora}:${minuto}`
 }
 

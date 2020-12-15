@@ -122,6 +122,7 @@ class Create extends React.Component {
         })
     }
 
+    
     getCategorias = () => {
         CategoriaService.getAll().then((_categorias) => {
             this.setState({ categorias: _categorias.data })
@@ -335,7 +336,7 @@ class Create extends React.Component {
                                                 <Form.Label>Hora Fim Prazo Incricao *</Form.Label>
                                                 <TextInput
                                                     type="text"
-                                                    name="hora_fim_prazo_incricao"
+                                                    name="hora_fim_prazo_inscricao"
                                                     placeholder="HH:MM"
                                                     defaultValue={this.state.hora_fim_prazo_inscricao}
                                                     autoComplete="off"
