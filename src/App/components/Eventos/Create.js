@@ -69,9 +69,9 @@ class Create extends React.Component {
             preco: convertCurrencyPTtoUS(this.state.preco),
             privado: this.state.privado ? true : false,
             cancelado: this.state.cancelado ? true : false,
-            data_inicio: convertDatePTtoUS(this.state.data_inicio).concat(" ",this.state.hora_inicio),
-            data_fim: convertDatePTtoUS(this.state.data_fim).concat(" ",this.state.hora_fim),
-            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao).concat(" ",this.state.hora_fim_prazo_inscricao)
+            data_inicio: convertDatePTtoUS(this.state.data_inicio).concat(" ", this.state.hora_inicio),
+            data_fim: convertDatePTtoUS(this.state.data_fim).concat(" ", this.state.hora_fim),
+            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao).concat(" ", this.state.hora_fim_prazo_inscricao)
         }
 
         if (!this.props.id) {
@@ -112,12 +112,12 @@ class Create extends React.Component {
                 preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : "",
                 privado: _dataReturned.data.privado,
                 cancelado: _dataReturned.data.cancelado,
-                data_inicio: _dataReturned.data.data_inicio? convertDateUStoPT(_dataReturned.data.data_inicio): "",
-                hora_inicio: _dataReturned.data.data_inicio? getTimeSplited(_dataReturned.data.data_inicio): "",
-                data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim): "",
-                hora_fim: _dataReturned.data.data_fim ? getTimeSplited(_dataReturned.data.data_fim): "",
-                prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao): "",
-                hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao): ""
+                data_inicio: _dataReturned.data.data_inicio ? convertDateUStoPT(_dataReturned.data.data_inicio) : "",
+                hora_inicio: _dataReturned.data.data_inicio ? getTimeSplited(_dataReturned.data.data_inicio) : "",
+                data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim) : "",
+                hora_fim: _dataReturned.data.data_fim ? getTimeSplited(_dataReturned.data.data_fim) : "",
+                prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao) : "",
+                hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao) : ""
             })
         })
     }
@@ -197,21 +197,36 @@ class Create extends React.Component {
                                                     errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
                                                 />
                                             </Form.Group>
-                                            <Form.Group controlId="formServiceQtdVagas">
-                                                <Form.Label>Quantidade de Vagas *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="qtd_vagas"
-                                                    placeholder="Quantidade de vagas"
-                                                    defaultValue={this.state.qtd_vagas}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    required
-                                                    pattern="[0-9]*"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "só pode ser numero" }}
-                                                />
-                                            </Form.Group>
-
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formServiceQtdVagas">
+                                                    <Form.Label>Quantidade de Vagas *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="qtd_vagas"
+                                                        placeholder="Quantidade de vagas"
+                                                        defaultValue={this.state.qtd_vagas}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        required
+                                                        pattern="[0-9]*"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "só pode ser numero" }}
+                                                    />
+                                                </Form.Group>
+                                                <Form.Group as={Col} controlId="formServicePrice">
+                                                    <Form.Label>valor *</Form.Label>
+                                                    <TextInputGroup
+                                                        name="preco"
+                                                        placeholder="Preço"
+                                                        defaultValue={this.state.preco}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        required
+                                                        pattern="([\d,]*)"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "Esse campo não pode conter letras" }}
+                                                        prepend={<span className="input-group-text">R$</span>}
+                                                    />
+                                                </Form.Group>
+                                            </Form.Row>
                                             <Form.Group controlId="formServiceuUrlImagem">
                                                 <Form.Label>Url da Imagem *</Form.Label>
                                                 <TextInput
@@ -239,130 +254,119 @@ class Create extends React.Component {
                                                     })}
                                                 </SelectGroup>
                                             </Form.Group>
-
-                                            <Form.Group>
-                                                <div className="switch switch-primary d-inline m-r-10">
-                                                    <Form.Control type="checkbox" id="checked-publicado" name="publicado" checked={this.state.publicado} onChange={this.toggleHandler} />
-                                                    <Form.Label htmlFor="checked-publicado" className="cr" />
-                                                </div>
-                                                <Form.Label>Publicado</Form.Label>
-                                            </Form.Group>
-
-                                            <Form.Group>
-                                                <div className="switch switch-primary d-inline m-r-10">
-                                                    <Form.Control type="checkbox" id="checked-gratuito" name="gratuito" checked={this.state.gratuito} onChange={this.toggleHandler} />
-                                                    <Form.Label htmlFor="checked-gratuito" className="cr" />
-                                                </div>
-                                                <Form.Label>Gratuito</Form.Label>
-                                            </Form.Group>
-
-                                            <Form.Group>
-                                                <div className="switch switch-primary d-inline m-r-10">
-                                                    <Form.Control type="checkbox" id="checked-privado" name="privado" checked={this.state.privado} onChange={this.toggleHandler} />
-                                                    <Form.Label htmlFor="checked-privado" className="cr" />
-                                                </div>
-                                                <Form.Label>Privado</Form.Label>
-                                            </Form.Group>
-
-                                            <Form.Group>
-                                                <div className="switch switch-primary d-inline m-r-10">
-                                                    <Form.Control type="checkbox" id="checked-cancelado" name="cancelado" checked={this.state.cancelado} onChange={this.toggleHandler} />
-                                                    <Form.Label htmlFor="checked-cancelado" className="cr" />
-                                                </div>
-                                                <Form.Label>Cancelado</Form.Label>
-                                            </Form.Group>
-
-                                            <Form.Group controlId="formServiceDataInicio">
-                                                <Form.Label>Data Inicio *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="data_inicio"
-                                                    placeholder="dd/mm/aaaa"
-                                                    defaultValue={this.state.data_inicio}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group controlId="formServiceDataInicio">
-                                                <Form.Label>Hora Inicio *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="hora_inicio"
-                                                    placeholder="hh:mm"
-                                                    defaultValue={this.state.hora_inicio}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group controlId="formServiceDataInicio">
-                                                <Form.Label>Data Fim *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="data_fim"
-                                                    placeholder="dd/mm/aaaa"
-                                                    defaultValue={this.state.data_fim}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group controlId="formServiceDataInicio">
-                                                <Form.Label>Hora Fim *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="hora_fim"
-                                                    placeholder="hh:mm"
-                                                    defaultValue={this.state.hora_fim}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group controlId="formServicePrazoInscricao">
-                                                <Form.Label>Prazo Inscrição *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="prazo_inscricao"
-                                                    placeholder="dd/mm/aaaa"
-                                                    defaultValue={this.state.prazo_inscricao}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group controlId="formServiceDataInicio">
-                                                <Form.Label>Hora Fim Prazo Incricao *</Form.Label>
-                                                <TextInput
-                                                    type="text"
-                                                    name="hora_fim_prazo_inscricao"
-                                                    placeholder="hh:mm"
-                                                    defaultValue={this.state.hora_fim_prazo_inscricao}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
-                                                />
-                                            </Form.Group>
                                             <Form.Row>
-                                                <Form.Group as={Col} controlId="formServicePrice">
-                                                    <Form.Label>Preço *</Form.Label>
-                                                    <TextInputGroup
-                                                        name="preco"
-                                                        placeholder="Preço"
-                                                        defaultValue={this.state.preco}
+                                                <Form.Group as={Col}>
+                                                    <div className="switch switch-primary d-inline m-r-10">
+                                                        <Form.Control type="checkbox" id="checked-publicado" name="publicado" checked={this.state.publicado} onChange={this.toggleHandler} />
+                                                        <Form.Label htmlFor="checked-publicado" className="cr" />
+                                                    </div>
+                                                    <Form.Label>Publicado</Form.Label>
+                                                </Form.Group>
+                                                <Form.Group as={Col}>
+                                                    <div className="switch switch-primary d-inline m-r-10">
+                                                        <Form.Control type="checkbox" id="checked-gratuito" name="gratuito" checked={this.state.gratuito} onChange={this.toggleHandler} />
+                                                        <Form.Label htmlFor="checked-gratuito" className="cr" />
+                                                    </div>
+                                                    <Form.Label>Gratuito</Form.Label>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Form.Group as={Col}>
+                                                    <div className="switch switch-primary d-inline m-r-10">
+                                                        <Form.Control type="checkbox" id="checked-privado" name="privado" checked={this.state.privado} onChange={this.toggleHandler} />
+                                                        <Form.Label htmlFor="checked-privado" className="cr" />
+                                                    </div>
+                                                    <Form.Label>Privado</Form.Label>
+                                                </Form.Group>
+                                                <Form.Group as={Col}>
+                                                    <div className="switch switch-primary d-inline m-r-10">
+                                                        <Form.Control type="checkbox" id="checked-cancelado" name="cancelado" checked={this.state.cancelado} onChange={this.toggleHandler} />
+                                                        <Form.Label htmlFor="checked-cancelado" className="cr" />
+                                                    </div>
+                                                    <Form.Label>Cancelado</Form.Label>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formServiceDataInicio">
+                                                    <Form.Label>Data Inicio *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="data_inicio"
+                                                        placeholder="dd/mm/aaaa"
+                                                        defaultValue={this.state.data_inicio}
                                                         autoComplete="off"
                                                         onChange={this.handleChange}
-                                                        required
-                                                        pattern="([\d,]*)"
-                                                        errorMessage={{ required: "Campo Requerido", pattern: "Esse campo não pode conter letras" }}
-                                                        prepend={<span className="input-group-text">R$</span>}
+                                                        pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
+                                                    />
+                                                </Form.Group>
+                                                <Form.Group as={Col} controlId="formServiceDataInicio">
+                                                    <Form.Label>Hora Inicio *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="hora_inicio"
+                                                        placeholder="hh:mm"
+                                                        defaultValue={this.state.hora_inicio}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
+                                                    />
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formServiceDataInicio">
+                                                    <Form.Label>Data Fim *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="data_fim"
+                                                        placeholder="dd/mm/aaaa"
+                                                        defaultValue={this.state.data_fim}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
+                                                    />
+                                                </Form.Group>
+                                                <Form.Group as={Col} controlId="formServiceDataInicio">
+                                                    <Form.Label>Hora Fim *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="hora_fim"
+                                                        placeholder="hh:mm"
+                                                        defaultValue={this.state.hora_fim}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
+                                                    />
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formServicePrazoInscricao">
+                                                    <Form.Label>Prazo Inscrição *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="prazo_inscricao"
+                                                        placeholder="dd/mm/aaaa"
+                                                        defaultValue={this.state.prazo_inscricao}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
+                                                    />
+                                                </Form.Group>
+                                                <Form.Group as={Col} controlId="formServiceDataInicio">
+                                                    <Form.Label>Hora Fim Prazo Incricao *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="hora_fim_prazo_inscricao"
+                                                        placeholder="hh:mm"
+                                                        defaultValue={this.state.hora_fim_prazo_inscricao}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
                                                     />
                                                 </Form.Group>
                                             </Form.Row>
