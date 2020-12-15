@@ -122,7 +122,7 @@ class Create extends React.Component {
         })
     }
 
-    
+
     getCategorias = () => {
         CategoriaService.getAll().then((_categorias) => {
             this.setState({ categorias: _categorias.data })
@@ -281,7 +281,8 @@ class Create extends React.Component {
                                                     defaultValue={this.state.data_inicio}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDataInicio">
@@ -289,11 +290,12 @@ class Create extends React.Component {
                                                 <TextInput
                                                     type="text"
                                                     name="hora_inicio"
-                                                    placeholder="HH:MM"
+                                                    placeholder="hh:mm"
                                                     defaultValue={this.state.hora_inicio}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDataInicio">
@@ -305,7 +307,8 @@ class Create extends React.Component {
                                                     defaultValue={this.state.data_fim}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDataInicio">
@@ -313,11 +316,12 @@ class Create extends React.Component {
                                                 <TextInput
                                                     type="text"
                                                     name="hora_fim"
-                                                    placeholder="HH:MM"
+                                                    placeholder="hh:mm"
                                                     defaultValue={this.state.hora_fim}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServicePrazoInscricao">
@@ -329,7 +333,8 @@ class Create extends React.Component {
                                                     defaultValue={this.state.prazo_inscricao}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "dd/mm/yyyy" }}
                                                 />
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDataInicio">
@@ -337,11 +342,12 @@ class Create extends React.Component {
                                                 <TextInput
                                                     type="text"
                                                     name="hora_fim_prazo_inscricao"
-                                                    placeholder="HH:MM"
+                                                    placeholder="hh:mm"
                                                     defaultValue={this.state.hora_fim_prazo_inscricao}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                /* required */
+                                                    pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "hh:mm" }}
                                                 />
                                             </Form.Group>
                                             <Form.Row>
