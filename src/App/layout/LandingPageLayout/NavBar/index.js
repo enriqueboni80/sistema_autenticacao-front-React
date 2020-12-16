@@ -91,12 +91,12 @@ class Navigation extends React.Component {
                                     ?
                                     <>
                                         <li className="nav-item">
-                                            <Link className="nav-link page-scroll" to={`/meus-ingressos/${this.state.loggedUser.id}`}>Meus Ingresso</Link>
+                                            <Link className="nav-link page-scroll" to={`/meus-ingressos/${this.state.loggedUser.id}`}>Meus Ingressos</Link>
                                         </li>
                                         <li className="nav-item dropdown">
                                             <NavLink to="#!" className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{this.state.loggedUser.username}</NavLink>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                {this.state.loggedUser.grupos == CONSTANT.ADMINISTRATORS ? <NavLink to='#' onClick={() => window.location.href="/home"} className="dropdown-item">Painel Administrativo</NavLink> : ""}
+                                                {parseInt(this.state.loggedUser.grupos) === CONSTANT.ADMINISTRATORS ? <NavLink to='#' onClick={() => window.location.href="/home"} className="dropdown-item">Painel Administrativo</NavLink> : ""}
                                                 <NavLink to="#" className="dropdown-item" onClick={this.logOut}>LogOut</NavLink>
                                             </div>
                                         </li>

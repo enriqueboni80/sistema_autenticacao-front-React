@@ -16,10 +16,14 @@ class InscricaoService extends Component {
       "user_id": formData.userId,
     }
   }
-
+  
   static _withBaseUrl(path = "") {
     const BACKEND_SERVER_URL = process.env.REACT_APP_API_SERVER_URL
     return `${BACKEND_SERVER_URL}/${path}`;
+  }
+
+  static getAll() {
+    return axios(InscricaoService._withBaseUrl("eventos-inscricoes"));
   }
 
   static inscrever(eventoId, userId) {

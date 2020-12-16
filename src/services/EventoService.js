@@ -50,7 +50,6 @@ class EventoService extends Component {
   }
 
   static update(formData) {
-    let id = formData.id
     var serviceObj = this.setObject(formData)
     return axios.put(EventoService._withBaseUrl(`eventos/update`), serviceObj, this.CONFIG)
   }
