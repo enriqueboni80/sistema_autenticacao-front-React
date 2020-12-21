@@ -52,6 +52,15 @@ class InscricaoService extends Component {
     return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${userId}/user`));
   }
 
+  static estevePresente(eventoId, userId) {
+    var formData = {
+      eventoId,
+      userId
+    }
+    var serviceObj = this.setObject(formData)
+    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/esteve-presente"), serviceObj, this.CONFIG);
+  }
+
 }
 
 export default InscricaoService
