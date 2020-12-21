@@ -7,6 +7,8 @@ import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../.
 import { FaRegCheckSquare, FaRegSquare } from "react-icons/fa"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
+import { FileSaver, saveAs } from 'file-saver'
+
 
 class Index extends React.Component {
 
@@ -17,8 +19,7 @@ class Index extends React.Component {
             eventoId: this.props.match.params.id,
             evento: '',
             dataCollection: [],
-            estevePresente: false,
-            check1: false
+            estevePresente: false
         }
     };
 
@@ -45,6 +46,36 @@ class Index extends React.Component {
         })
     }
 
+    geraCrachas = () => {
+        this.state.dataCollection.map(user => {
+            var blob = new Blob(
+                [
+                    `${this.state.evento.name}
+                    ${user.username}`
+                ],
+                { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            saveAs(blob, `${user.username}_${this.state.evento.name}_CRACHA.doc`);
+        })
+    }
+
+    geraCertificados = () => {
+        var houveAlgumaPresenca = false
+        this.state.dataCollection.map(user => {
+            if(user.esteve_presente){
+                houveAlgumaPresenca = true
+                var blob = new Blob(
+                    [
+                        `${user.username} participou do evento ${this.state.evento.name}`
+                    ],
+                    { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+                saveAs(blob, `${user.username}_${this.state.evento.name}_CERTIFICADO.doc`);
+            }
+        })
+        if(!houveAlgumaPresenca){
+            alert('nao houveram inscritos nesse evento')
+        }
+    }
+
 
     render() {
         return (
@@ -64,7 +95,7 @@ class Index extends React.Component {
                                     <span class="d-block m-t-5">
                                         <b>Prazo Inscrição:</b> {convertDateUStoPT(this.state.evento.prazo_inscricao)} as: {getTimeSplited(this.state.evento.prazo_inscricao)}
                                     </span>
-                                    <br/>
+                                    <br />
                                     <ReactHTMLTableToExcel
                                         id="test-table-xls-button"
                                         className="btn btn-primary"
@@ -73,6 +104,8 @@ class Index extends React.Component {
                                         sheet={this.state.evento.name}
                                         buttonText="Exportar lista de Presença"
                                     />
+                                    <button className="btn btn-primary" onClick={() => this.geraCrachas()}>Gera Crachas em Lote</button>
+                                    <button className="btn btn-primary" onClick={() => this.geraCertificados()}>Gera Certificados em Lote</button>
                                 </div>
                             </Card.Header>
                             <div class="card-block table-border-style">
@@ -88,7 +121,7 @@ class Index extends React.Component {
                                                 <th>Nome</th>
                                                 <th>Email</th>
                                                 <th>Data Inscricao</th>
-                                                <th style={{ textAlign: 'center' }}>Esteve Presente</th>
+                                                <th style={{ textAlign: 'center' }}>Compareceu ao Evento?</th>
                                             </tr>
                                         </thead>
                                         <tbody>
