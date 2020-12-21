@@ -5,6 +5,7 @@ import EventoService from "../../../../services/EventoService"
 import Aux from "../../../../hoc/_Aux";
 import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
 import { FaRegCheckSquare, FaRegSquare } from "react-icons/fa"
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 
 class Index extends React.Component {
@@ -63,12 +64,25 @@ class Index extends React.Component {
                                     <span class="d-block m-t-5">
                                         <b>Prazo Inscrição:</b> {convertDateUStoPT(this.state.evento.prazo_inscricao)} as: {getTimeSplited(this.state.evento.prazo_inscricao)}
                                     </span>
+                                    <br/>
+                                    <ReactHTMLTableToExcel
+                                        id="test-table-xls-button"
+                                        className="btn btn-primary"
+                                        table="table-to-xls"
+                                        filename={this.state.evento.name}
+                                        sheet={this.state.evento.name}
+                                        buttonText="Exportar lista de Presença"
+                                    />
                                 </div>
                             </Card.Header>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table" id="table-to-xls">
                                         <thead>
+                                            <tr style={{ display: 'None' }}>Evento: {this.state.evento.name}</tr>
+                                            <tr style={{ display: 'None' }}>Inicio: {convertDateUStoPT(this.state.evento.data_inicio)} as: {getTimeSplited(this.state.evento.data_inicio)}</tr>
+                                            <tr style={{ display: 'None' }}>Fim: {convertDateUStoPT(this.state.evento.data_inicio)} as: {getTimeSplited(this.state.evento.data_fim)}</tr>
+                                            <tr style={{ display: 'None' }}>Prazo Inscricao: {convertDateUStoPT(this.state.evento.prazo_inscricao)} as: {getTimeSplited(this.state.evento.prazo_inscricao)}</tr>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nome</th>
