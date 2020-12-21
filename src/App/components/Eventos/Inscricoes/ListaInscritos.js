@@ -46,7 +46,15 @@ class Index extends React.Component {
                             <Card.Header>
                                 <div class="card-header">
                                     <h5>{this.state.evento.name}</h5>
-                                    <span class="d-block m-t-5">Inicio: {convertDateUStoPT(this.state.evento.data_inicio)} | Fim: {convertDateUStoPT(this.state.evento.data_fim)}</span>
+                                    <span class="d-block m-t-5">
+                                        <b>Inicio</b>: {convertDateUStoPT(this.state.evento.data_inicio)} as: {getTimeSplited(this.state.evento.data_inicio)}
+                                    </span>
+                                    <span class="d-block m-t-5">
+                                        <b>Fim:</b> {convertDateUStoPT(this.state.evento.data_inicio)} as: {getTimeSplited(this.state.evento.data_fim)}
+                                    </span>
+                                    <span class="d-block m-t-5">
+                                        <b>Prazo Inscrição:</b> {convertDateUStoPT(this.state.evento.prazo_inscricao)} as: {getTimeSplited(this.state.evento.prazo_inscricao)}
+                                    </span>
                                 </div>
                             </Card.Header>
                             <div class="card-block table-border-style">
@@ -63,6 +71,7 @@ class Index extends React.Component {
                                             {this.state.dataCollection.map(user => {
                                                 return (
                                                     <tr>
+                                                        {console.log(user)}
                                                         <th scope="row">1</th>
                                                         <td>{user.username}</td>
                                                         <td>{user.email}</td>

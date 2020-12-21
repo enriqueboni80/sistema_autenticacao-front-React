@@ -21,6 +21,7 @@ class Create extends React.Component {
         this.state = {
             id: this.props.match.params.id,
             evento: "",
+            inscrito: false,
             categorias: [],
             isAuthenticated: false,
             loggedUser: '',
@@ -52,7 +53,7 @@ class Create extends React.Component {
         let inscricoes = await InscricaoService.getInscricoesByUserId(usuarioAutenticado.id)
         let jaInscrito = false
         inscricoes.data.map(inscricao => {
-            if (inscricao.evento_id === this.state.id) {
+            if (parseInt(inscricao.evento_id) == this.state.id) {
                 jaInscrito = true
             }
         })
@@ -66,6 +67,7 @@ class Create extends React.Component {
     inscricaoEvento = async (e) => {
         e.preventDefault()
         let jaInscrito = await this.checkJaInscritoNoEvento()
+        console.log(jaInscrito)
         if (!jaInscrito) {
             InscricaoService.inscrever(this.state.id, this.state.loggedUser.id).then((res) => {
                 this.setState({ inscrito: true })
