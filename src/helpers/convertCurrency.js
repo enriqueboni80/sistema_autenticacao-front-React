@@ -1,10 +1,16 @@
 const convertCurrencyPTtoUS = (valor) => {
-    return valor.replace(',', '.');
+    if (valor !== undefined) {
+        return valor.replace(',', '.');
+    }
+    return ""
 }
 
 const convertCurrencyUStoPT = (valor) => {
-    let valorConvertido = valor.toFixed(2).toString();
-    return valorConvertido.replace('.', ',');
+    if (valor !== undefined) {
+        let valorConvertido = valor.toFixed(2).toString();
+        return valorConvertido.replace('.', ',');
+    }
+    return ""
 }
 
 export { convertCurrencyPTtoUS, convertCurrencyUStoPT };

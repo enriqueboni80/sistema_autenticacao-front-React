@@ -20,24 +20,7 @@ class Create extends React.Component {
         super(props);
         this.state = {
             id: this.props.match.params.id,
-            name: "",
-            qtd_vagas: "",
-            palestrante: "",
-            url_imagem: "",
-            detalhes: "",
-            descricao: "",
-            categoria: "",
-            publicado: false,
-            gratuito: false,
-            preco: "",
-            privado: false,
-            cancelado: false,
-            data_inicio: "",
-            hora_inicio: "",
-            data_fim: "",
-            hora_fim: "",
-            prazo_inscricao: "",
-            hora_fim_prazo_inscricao: "",
+            evento: "",
             categorias: [],
             isAuthenticated: false,
             loggedUser: '',
@@ -98,6 +81,12 @@ class Create extends React.Component {
         })
     }
 
+    getCategorias = () => {
+        CategoriaService.getAll().then((_categorias) => {
+            this.setState({ categorias: _categorias.data })
+        })
+    }
+
     handleShowModalSigIn = (e) => {
         e.preventDefault()
         this.setState({ showModalSigIn: true });
@@ -131,65 +120,38 @@ class Create extends React.Component {
         this.setState({ showModalSigUp: false });
     }
 
-
     getById = (eventoId) => {
         Service.getById(eventoId).then((_dataReturned) => {
             this.setState({
-                id: _dataReturned.data.id,
-                name: _dataReturned.data.name,
-                qtd_vagas: _dataReturned.data.qtd_vagas,
-                palestrante: _dataReturned.data.palestrante,
-                url_imagem: _dataReturned.data.url_imagem,
-                detalhes: _dataReturned.data.detalhes,
-                descricao: _dataReturned.data.descricao,
-                categoria: _dataReturned.data.categoria,
-                publicado: _dataReturned.data.publicado,
-                gratuito: _dataReturned.data.gratuito,
-                preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : "",
-                privado: _dataReturned.data.privado,
-                cancelado: _dataReturned.data.cancelado,
-                data_inicio: _dataReturned.data.data_inicio ? convertDateUStoPT(_dataReturned.data.data_inicio) : "",
-                hora_inicio: _dataReturned.data.data_inicio ? getTimeSplited(_dataReturned.data.data_inicio) : "",
-                data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim) : "",
-                hora_fim: _dataReturned.data.data_fim ? getTimeSplited(_dataReturned.data.data_fim) : "",
-                prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao) : "",
-                hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao) : ""
+                evento: _dataReturned.data
             })
         })
-    }
 
-
-    getCategorias = () => {
-        CategoriaService.getAll().then((_categorias) => {
-            this.setState({ categorias: _categorias.data })
-        })
     }
 
     render() {
         return (
             <Aux>
-                <Col style={{ margin: "auto" }} md={7} xl={7} key={this.state.id}>
+                <Col style={{ margin: "auto" }} md={7} xl={7} key={this.state.evento.id}>
                     <Card>
                         <Card.Body>
-                            <Card.Img src={this.state.url_imagem ? this.state.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
-                            <h5 className="m-t-35">{this.state.name}</h5>
-                            <span className="text-muted d-block m-b-30">{this.state.descricao}</span>
+                            <Card.Img src={this.state.evento.url_imagem ? this.state.evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
+                            <h5 className="m-t-35">{this.state.evento.name}</h5>
+                            <span className="text-muted d-block m-b-30">{this.state.evento.descricao}</span>
                             <p className="border-top m-b-20 p-t-10 m-t-20"></p>
                             <div className="row" style={{ textAlign: "center" }}>
                                 <div className="col">
-                                    <h5>R$ {this.state.preco ? this.state.preco : ''} </h5>
+                                    <h5>R$ {convertCurrencyUStoPT(this.state.evento.preco)} </h5>
                                     <span>Investimento</span>
                                 </div>
                                 <div className="col">
-                                    <h5>{this.state.prazo_inscricao}</h5>
+                                    <h5>{convertDateUStoPT(this.state.evento.prazo_inscricao)}</h5>
                                     <span>Prazo Inscrição</span>
                                 </div>
 
                             </div>
                             <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>
                                 <div className="col-6 p-r-0">
-
-
                                     {this.state.isAuthenticated && this.state.inscrito
                                         ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e)}>Desinscrever</a>
                                         : this.state.isAuthenticated ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.inscricaoEvento(e)}>Inscrever</a>

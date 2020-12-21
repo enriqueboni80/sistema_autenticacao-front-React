@@ -3,7 +3,7 @@ import { Row, Col, Card, Table, Modal, Button } from 'react-bootstrap';
 import Service from "../../../../services/InscricaoService"
 import EventoService from "../../../../services/EventoService"
 import Aux from "../../../../hoc/_Aux";
-import { convertDateUStoPT } from "../../../../helpers/convertDate"
+import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
 
 
 class Index extends React.Component {
@@ -46,7 +46,7 @@ class Index extends React.Component {
                             <Card.Header>
                                 <div class="card-header">
                                     <h5>{this.state.evento.name}</h5>
-                                    <span class="d-block m-t-5">Inicio: {this.state.evento.data_inicio} | Fim: {this.state.evento.data_fim}</span>
+                                    <span class="d-block m-t-5">Inicio: {convertDateUStoPT(this.state.evento.data_inicio)} | Fim: {convertDateUStoPT(this.state.evento.data_fim)}</span>
                                 </div>
                             </Card.Header>
                             <div class="card-block table-border-style">
