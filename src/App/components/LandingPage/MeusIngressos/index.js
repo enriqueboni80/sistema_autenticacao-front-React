@@ -6,6 +6,8 @@ import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
 import { convertDateUStoPT } from "../../../../helpers/convertDate"
 import InscricaoService from "./../../../../services/InscricaoService"
 
+import { Link } from 'react-router-dom'
+
 
 
 class Index extends React.Component {
@@ -42,7 +44,7 @@ class Index extends React.Component {
     desinscricaoEvento = async (e, eventoId) => {
         e.preventDefault()
         InscricaoService.desinscrever(eventoId, this.state.loggedUser.id).then((res) => {
-            this.setState({inscrito: false})
+            this.setState({ inscrito: false })
             this.getInscricoesByUserId(this.state.loggedUser.id)
         })
     }
@@ -73,12 +75,12 @@ class Index extends React.Component {
                                                 </div>
 
                                             </div>
-                                            <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>                                                
+                                            <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>
                                                 <div className="col-6 p-r-0">
-                                                {this.state.isAuthenticated ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e, evento.evento_id)}>desinscrever</a>: ""}
+                                                    {this.state.isAuthenticated ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e, evento.evento_id)}>desinscrever</a> : ""}
                                                 </div>
                                                 <div className="col-6">
-                                                    <a href='#' className="btn text-uppercase border btn-block btn-outline-secondary">Ver Detalhes</a>
+                                                    <Link to={`../evento/${evento.id}`} className="btn text-uppercase border btn-block btn-outline-secondary">Ver Detalhes</Link>
                                                 </div>
                                             </div>
                                         </Card.Body>

@@ -7,6 +7,8 @@ import Aux from "./../../../../hoc/_Aux";
 import EventoService from "./../../../../services/EventoService"
 import InscricaoService from "./../../../../services/InscricaoService"
 import SigIn from './../../../components/Authentication/SignIn/SignIn1'
+import SigUp from './../../../components/Authentication/SignUp/SignUp1'
+import ForgotPassword from './../../../components/Authentication/ResetPassword/ResetPassword1'
 
 import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
 import { convertDateUStoPT } from "../../../../helpers/convertDate"
@@ -21,10 +23,12 @@ class Index extends Component {
         this.state = {
             loggedUser: '',
             eventos: [],
-            showModalSigIn: false,
             eventosInscritos: [],
             inscrito: false,
-            isAuthenticated: false
+            isAuthenticated: false,
+            showModalSigIn: false,
+            showModalSigUp: false,
+            showModalForgotPassword: false
         }
     };
 
@@ -59,9 +63,9 @@ class Index extends Component {
         if (!jaInscrito) {
             InscricaoService.inscrever(eventoId, this.state.loggedUser.id).then((res) => {
                 this.setState({ inscrito: true })
-                window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
             })
         }
+        window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
     }
 
     desinscricaoEvento = async (eventoId) => {
@@ -73,6 +77,34 @@ class Index extends Component {
     handleShowModalSigIn = (e) => {
         e.preventDefault()
         this.setState({ showModalSigIn: true });
+        this.setState({ showModalSigUp: false });
+        this.setState({ showModalForgotPassword: false });
+    }
+
+    handleCloseModalSigIn = () => {
+        this.setState({ showModalSigIn: false });
+    }
+
+    handleShowModalForgotPassword = (e) => {
+        e.preventDefault()
+        this.setState({ showModalSigIn: false });
+        this.setState({ showModalSigUp: false });
+        this.setState({ showModalForgotPassword: true });
+    }
+
+    handleCloseModalForgotPassword = () => {
+        this.setState({ showModalForgotPassword: false });
+    }
+
+    handleShowModalSigUp = (e) => {
+        e.preventDefault()
+        this.setState({ showModalSigIn: false });
+        this.setState({ showModalForgotPassword: false });
+        this.setState({ showModalSigUp: true });
+    }
+
+    handleCloseModalSigUp = () => {
+        this.setState({ showModalSigUp: false });
     }
 
     render() {
@@ -120,7 +152,21 @@ class Index extends Component {
                 <Modal size="lg" show={this.state.showModalSigIn} onHide={this.handleCloseModalSigIn} style={{ textAlign: 'center' }}>
                     <SigIn LinksExternal={[
                         { 'text': 'Forgot password or Active User ', 'name': 'Forgot Password', 'link': this.handleShowModalForgotPassword },
-                        { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }]} />
+                        { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }
+                    ]} />
+                </Modal>
+                <Modal size="lg" show={this.state.showModalForgotPassword} onHide={this.handleCloseModalForgotPassword} style={{ textAlign: 'center' }}>
+                    <ForgotPassword LinksExternal={[
+                        { 'text': 'Allready have an account?', 'name': 'Login', 'link': this.handleShowModalSigIn },
+                        { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }
+                    ]}
+                    />
+                </Modal>
+                <Modal size="lg" show={this.state.showModalSigUp} onHide={this.handleCloseModalSigUp} style={{ textAlign: 'center' }}>
+                    <SigUp LinksExternal={[
+                        { 'text': 'Forgot password or Active User ', 'name': 'Forgot Password', 'link': this.handleShowModalForgotPassword },
+                        { 'text': 'Allready have an account?', 'name': 'Login', 'link': this.handleShowModalSigIn },
+                    ]} />
                 </Modal>
             </Aux>
         );
