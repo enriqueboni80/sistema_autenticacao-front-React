@@ -67,19 +67,15 @@ class Create extends React.Component {
     inscricaoEvento = async (e) => {
         e.preventDefault()
         let jaInscrito = await this.checkJaInscritoNoEvento()
-        console.log(jaInscrito)
-/*         if (!jaInscrito) {
-            InscricaoService.inscrever(this.state.id, this.state.loggedUser.id).then((res) => {
-                this.setState({ inscrito: true })
-                window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
-            })
-        } */
+
         if (!jaInscrito) {
             let dadoGravado = await InscricaoService.inscrever(this.state.id, this.state.loggedUser.id)
-            if(dadoGravado){
+            if (dadoGravado) {
                 this.setState({ inscrito: true })
                 window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
             }
+        } else {
+            window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
         }
     }
 

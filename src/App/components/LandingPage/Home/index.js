@@ -62,10 +62,13 @@ class Index extends Component {
         })
         if (!jaInscrito) {
             let dadoGravado = await InscricaoService.inscrever(eventoId, this.state.loggedUser.id)
-            if(dadoGravado){
+            if (dadoGravado) {
                 this.setState({ inscrito: true })
                 window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
             }
+        }
+        else {
+            window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
         }
     }
 
