@@ -64,9 +64,9 @@ class Index extends Component {
             let dadoGravado = await InscricaoService.inscrever(eventoId, this.state.loggedUser.id)
             if(dadoGravado){
                 this.setState({ inscrito: true })
+                window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
             }
         }
-        window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
     }
 
     desinscricaoEvento = async (eventoId) => {
