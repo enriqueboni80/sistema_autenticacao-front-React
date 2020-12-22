@@ -61,9 +61,10 @@ class Index extends Component {
             }
         })
         if (!jaInscrito) {
-            InscricaoService.inscrever(eventoId, this.state.loggedUser.id).then((res) => {
+            let dadoGravado = await InscricaoService.inscrever(eventoId, this.state.loggedUser.id)
+            if(dadoGravado){
                 this.setState({ inscrito: true })
-            })
+            }
         }
         window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
     }
