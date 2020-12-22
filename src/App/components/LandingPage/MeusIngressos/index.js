@@ -35,10 +35,9 @@ class Index extends React.Component {
         }
     }
 
-    getInscricoesByUserId = (userId) => {
-        Service.getInscricoesByUserId(userId).then((_dataCollection) => {
-            this.setState({ eventos: _dataCollection.data })
-        })
+    getInscricoesByUserId = async (userId) => {
+        let _eventos = await Service.getInscricoesByUserId(userId)
+        this.setState({ eventos: _eventos.data })
     }
 
     desinscricaoEvento = async (e, eventoId) => {
