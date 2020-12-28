@@ -50,16 +50,19 @@ class Create extends React.Component {
 
     checkJaInscritoNoEvento = async () => {
         let usuarioAutenticado = await this.checkIsAuth()
-        let inscricoes = await InscricaoService.getInscricoesByUserId(usuarioAutenticado.id)
-        let jaInscrito = false
-        inscricoes.data.map(inscricao => {
-            if (parseInt(inscricao.evento_id) == this.state.id) {
-                jaInscrito = true
+        if(usuarioAutenticado){
+            let inscricoes = await InscricaoService.getInscricoesByUserId(usuarioAutenticado.id)
+            let jaInscrito = false
+            inscricoes.data.map(inscricao => {
+                if (parseInt(inscricao.evento_id) == this.state.id) {
+                    jaInscrito = true
+                }
+            })
+            if (jaInscrito) {
+                this.setState({ inscrito: true })
+                return true
             }
-        })
-        if (jaInscrito) {
-            this.setState({ inscrito: true })
-            return true
+            return false
         }
         return false
     }

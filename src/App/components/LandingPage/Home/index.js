@@ -133,8 +133,8 @@ class Index extends Component {
                                                     <span>Investimento</span>
                                                 </div>
                                                 <div className="col">
-                                                    <h5>{convertDateUStoPT(evento.prazo_inscricao)}</h5>
-                                                    <span>Prazo Inscrição</span>
+                                                    <span>Data: {convertDateUStoPT(evento.data_inicio)}</span><br/>
+                                                    <span>Inscrição: {convertDateUStoPT(evento.prazo_inscricao)}</span>
                                                 </div>
 
                                             </div>
