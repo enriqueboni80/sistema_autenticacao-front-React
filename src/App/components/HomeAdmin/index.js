@@ -96,7 +96,7 @@ class Index extends Component {
                                                 <tr className="unread" key={key}>
                                                     <td>
                                                         <h6 className="mb-1">{data.name}</h6>
-                                                        <p className="m-0">{data.descricao}</p>
+                                                        <p className="m-0">{data.detalhes}</p>
                                                     </td>
                                                     <td>
                                                         <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15" />Inicio: {convertDateUStoPT(data.data_inicio)}</h6>

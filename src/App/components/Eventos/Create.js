@@ -7,6 +7,9 @@ import Aux from "../../../hoc/_Aux";
 import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
 import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../helpers/convertDate"
 
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
+
 class Create extends React.Component {
 
     constructor(props) {
@@ -47,6 +50,12 @@ class Create extends React.Component {
             [e.target.name]: e.target.value
         })
     };
+
+    descricaoChange = (value) => {
+        this.setState({
+            descricao: value
+        })
+    }
 
     toggleHandler = (e) => {
         this.setState({
@@ -359,7 +368,8 @@ class Create extends React.Component {
                                             </Form.Row>
                                             <Form.Group controlId="formServiceDescricao">
                                                 <Form.Label>Descrição *</Form.Label>
-                                                <TextInput
+                                                <SunEditor name="descricao" onChange={(value) => this.descricaoChange(value)} setContents={this.state.descricao} />
+                                                {/*<TextInput
                                                     name="descricao"
                                                     placeholder="Descrição"
                                                     defaultValue={this.state.descricao}
@@ -370,7 +380,7 @@ class Create extends React.Component {
                                                     required
                                                     pattern="(?=.*[A-Za-z]).{10,5000}"
                                                     errorMessage={{ required: "Campo Requerido", pattern: "Entre 10 e 5000 caracteres" }}
-                                                />
+                                                />*/}
                                             </Form.Group>
                                             <Form.Group style={{ marginTop: '45px', textAlign: 'right' }}>
                                                 <Button variant="secondary" onClick={this.props.handleCloseCreate}>CANCELAR</Button>

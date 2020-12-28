@@ -171,7 +171,10 @@ class Create extends React.Component {
 
                             <p className="border-top m-b-20 p-t-10 m-t-20"></p>
                             <div className="text-muted d-block m-b-30" style={{ width: '95%', margin: 'auto' }}>
-                                {this.state.evento.descricao}
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: this.state.evento.descricao
+                                    }}></div>
                             </div>
                         </Card.Body>
                     </Card>
