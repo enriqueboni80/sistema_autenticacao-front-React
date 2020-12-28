@@ -50,7 +50,7 @@ class Create extends React.Component {
 
     checkJaInscritoNoEvento = async () => {
         let usuarioAutenticado = await this.checkIsAuth()
-        if(usuarioAutenticado){
+        if (usuarioAutenticado) {
             let inscricoes = await InscricaoService.getInscricoesByUserId(usuarioAutenticado.id)
             let jaInscrito = false
             inscricoes.data.map(inscricao => {
@@ -139,32 +139,39 @@ class Create extends React.Component {
     render() {
         return (
             <Aux>
-                <Col style={{ margin: "auto" }} md={7} xl={7} key={this.state.evento.id}>
+                <Col style={{ margin: "auto" }} md={8} xl={8} key={this.state.evento.id}>
                     <Card>
                         <Card.Body>
-                            <Card.Img src={this.state.evento.url_imagem ? this.state.evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
-                            <h5 className="m-t-35">{this.state.evento.name}</h5>
-                            <span className="text-muted d-block m-b-30">{this.state.evento.descricao}</span>
-                            <p className="border-top m-b-20 p-t-10 m-t-20"></p>
-                            <div className="row" style={{ textAlign: "center" }}>
-                                <div className="col">
-                                    <h5>{this.state.evento.gratuito ? 'GRATUITO' : this.state.evento.preco ? 'R$ ' + convertCurrencyUStoPT(this.state.evento.preco) : ''}</h5>
-                                    <span>Investimento</span>
+                            <div style={{ width: '80%', margin: 'auto' }}>
+                                <div style={{ textAlign: "center" }}>
+                                    <Card.Img style={{ width: '100%' }} src={this.state.evento.url_imagem ? this.state.evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
                                 </div>
-                                <div className="col">
-                                    <h5>{convertDateUStoPT(this.state.evento.prazo_inscricao)}</h5>
-                                    <span>Prazo Inscrição</span>
-                                </div>
-
                             </div>
-                            <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>
-                                <div className="col-6 p-r-0">
-                                    {this.state.isAuthenticated && this.state.inscrito
-                                        ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e)}>Desinscrever</a>
-                                        : this.state.isAuthenticated ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.inscricaoEvento(e)}>Inscrever</a>
-                                            : <a href='#' className="btn text-uppercase border btn-block btn-outline-secondary" onClick={(e) => this.handleShowModalSigIn(e)}>Inscrever</a>
-                                    }
-                                </div>
+                            <div style={{ width: '95%', margin: 'auto' }}>
+                                <Row className="m-t-35">
+                                    <Col md={8} xl={8}>
+                                        <h5 style={{ fontWeight: "bold", fontSize: '23px' }}>{this.state.evento.name}</h5>
+                                        <span style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="m-t-10">Dia {convertDateUStoPT(this.state.evento.data_inicio)} as {getTimeSplited(this.state.evento.data_inicio)}</span>
+                                        <span className="text-muted d-block m-b-30">{this.state.evento.detalhes}</span>
+                                    </Col>
+                                    <Col md={4} xl={4}>
+                                        <h5 style={{ textAlign: "center", marginBottom: "5px" }}>
+                                            {this.state.evento.gratuito ? '* EVENTO GRATUITO *' : this.state.evento.preco ? 'Valor: R$ ' + convertCurrencyUStoPT(this.state.evento.preco) : ''}
+                                        </h5>
+                                        <div>
+                                            {this.state.isAuthenticated && this.state.inscrito
+                                                ? <a href='#' className="btn btn-danger text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e)}>Desinscrever</a>
+                                                : this.state.isAuthenticated ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.inscricaoEvento(e)}>Inscrever</a>
+                                                    : <a href='#' className="btn btn-success text-uppercase btn-block" onClick={(e) => this.handleShowModalSigIn(e)}>Inscrever</a>
+                                            }
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </div>
+
+                            <p className="border-top m-b-20 p-t-10 m-t-20"></p>
+                            <div className="text-muted d-block m-b-30" style={{ width: '95%', margin: 'auto' }}>
+                                {this.state.evento.descricao}
                             </div>
                         </Card.Body>
                     </Card>

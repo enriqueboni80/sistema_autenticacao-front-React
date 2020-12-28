@@ -11,7 +11,7 @@ import SigUp from './../../../components/Authentication/SignUp/SignUp1'
 import ForgotPassword from './../../../components/Authentication/ResetPassword/ResetPassword1'
 
 import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
-import { convertDateUStoPT } from "../../../../helpers/convertDate"
+import { convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
 
 import { Link } from 'react-router-dom'
 
@@ -119,61 +119,21 @@ class Index extends Component {
                         if (evento.publicado) {
                             return (
                                 <Col md={6} xl={4} key={evento.id}>
-                                    <Card>
-                                        <Card.Body>
-                                            <Card.Img src={evento.url_imagem ? evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
-                                            <h5 className="m-t-35">{evento.name}</h5>
-                                            <span className="text-muted d-block m-b-30">{evento.descricao}</span>
-                                            <p className="border-top m-b-20 p-t-10 m-t-20"></p>
-                                            <div className="row" style={{ textAlign: "center" }}>
-                                                <div className="col">
-                                                    <h5>
-                                                        {evento.gratuito ? 'GRATUITO' : evento.preco ? 'R$ ' + convertCurrencyUStoPT(evento.preco) : ''}
-                                                    </h5>
-                                                    <span>Investimento</span>
-                                                </div>
-                                                <div className="col">
-                                                    <span>Data: {convertDateUStoPT(evento.data_inicio)}</span><br/>
-                                                    <span>Inscrição: {convertDateUStoPT(evento.prazo_inscricao)}</span>
-                                                </div>
-
-                                            </div>
-                                            <div className="row m-t-30" style={{ margin: "30px auto 1px" }}>
-                                                <div className="col-6 p-r-0">
-                                                    {this.state.isAuthenticated
-                                                        ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.inscricaoEvento(e, evento.id)}>Inscrever</a>
-                                                        : <a href='#' className="btn text-uppercase border btn-block btn-outline-secondary" onClick={(e) => this.handleShowModalSigIn(e)}>Inscrever</a>}
-                                                </div>
-                                                <div className="col-6">
-                                                    <Link to={`evento/${evento.id}`} className="btn text-uppercase border btn-block btn-outline-secondary">Ver Detalhes</Link>
-                                                </div>
-                                            </div>
-                                        </Card.Body>
-                                    </Card>
+                                    <Link to={`evento/${evento.id}`} className="btn btn-block">
+                                        <Card>
+                                            <Card.Body style={{ textAlign: "left" }}>
+                                                <Card.Img src={evento.url_imagem ? evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
+                                                <h5 style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="m-t-10">Dia {convertDateUStoPT(evento.data_inicio)} as {getTimeSplited(evento.data_inicio)}</h5>
+                                                <h5 style={{ fontSize: "20px" }} className="m-t-5">{evento.name}</h5>
+                                                <span className="text-muted d-block m-b-30">{evento.detalhes}</span>
+                                            </Card.Body>
+                                        </Card>
+                                    </Link>
                                 </Col>
                             )
                         }
                     })}
                 </Row>
-                <Modal size="lg" show={this.state.showModalSigIn} onHide={this.handleCloseModalSigIn} style={{ textAlign: 'center' }}>
-                    <SigIn LinksExternal={[
-                        { 'text': 'Forgot password or Active User ', 'name': 'Forgot Password', 'link': this.handleShowModalForgotPassword },
-                        { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }
-                    ]} />
-                </Modal>
-                <Modal size="lg" show={this.state.showModalForgotPassword} onHide={this.handleCloseModalForgotPassword} style={{ textAlign: 'center' }}>
-                    <ForgotPassword LinksExternal={[
-                        { 'text': 'Allready have an account?', 'name': 'Login', 'link': this.handleShowModalSigIn },
-                        { 'text': 'Don’t have an account?', 'name': 'Signup', 'link': this.handleShowModalSigUp }
-                    ]}
-                    />
-                </Modal>
-                <Modal size="lg" show={this.state.showModalSigUp} onHide={this.handleCloseModalSigUp} style={{ textAlign: 'center' }}>
-                    <SigUp LinksExternal={[
-                        { 'text': 'Forgot password or Active User ', 'name': 'Forgot Password', 'link': this.handleShowModalForgotPassword },
-                        { 'text': 'Allready have an account?', 'name': 'Login', 'link': this.handleShowModalSigIn },
-                    ]} />
-                </Modal>
             </Aux>
         );
     }

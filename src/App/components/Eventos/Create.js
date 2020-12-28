@@ -157,19 +157,6 @@ class Create extends React.Component {
                                                     errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
                                                 />
                                             </Form.Group>
-                                            <Form.Group controlId="formServiceDescricao">
-                                                <Form.Label>Descrição *</Form.Label>
-                                                <TextInput
-                                                    name="descricao"
-                                                    placeholder="Descrição"
-                                                    defaultValue={this.state.descricao}
-                                                    autoComplete="off"
-                                                    onChange={this.handleChange}
-                                                    required
-                                                    pattern="(?=.*[A-Za-z]).{6,50}"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
-                                                />
-                                            </Form.Group>
                                             <Form.Group controlId="formServiceDetalhes">
                                                 <Form.Label>Detalhes *</Form.Label>
                                                 <TextInput
@@ -370,6 +357,21 @@ class Create extends React.Component {
                                                     />
                                                 </Form.Group>
                                             </Form.Row>
+                                            <Form.Group controlId="formServiceDescricao">
+                                                <Form.Label>Descrição *</Form.Label>
+                                                <TextInput
+                                                    name="descricao"
+                                                    placeholder="Descrição"
+                                                    defaultValue={this.state.descricao}
+                                                    autoComplete="off"
+                                                    onChange={this.handleChange}
+                                                    multiline
+                                                    rows="10"
+                                                    required
+                                                    pattern="(?=.*[A-Za-z]).{10,5000}"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 10 e 5000 caracteres" }}
+                                                />
+                                            </Form.Group>
                                             <Form.Group style={{ marginTop: '45px', textAlign: 'right' }}>
                                                 <Button variant="secondary" onClick={this.props.handleCloseCreate}>CANCELAR</Button>
                                                 <Button type="submit" variant="primary">SALVAR</Button>
