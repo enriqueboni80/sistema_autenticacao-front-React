@@ -127,7 +127,9 @@ class Index extends Component {
                                             <p className="border-top m-b-20 p-t-10 m-t-20"></p>
                                             <div className="row" style={{ textAlign: "center" }}>
                                                 <div className="col">
-                                                    <h5>R$ {evento.preco ? convertCurrencyUStoPT(evento.preco) : ''} </h5>
+                                                    <h5>
+                                                        {evento.gratuito ? 'GRATUITO' : evento.preco ? 'R$ ' + convertCurrencyUStoPT(evento.preco) : ''}
+                                                    </h5>
                                                     <span>Investimento</span>
                                                 </div>
                                                 <div className="col">

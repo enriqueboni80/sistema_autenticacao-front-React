@@ -145,7 +145,7 @@ class Create extends React.Component {
                             <p className="border-top m-b-20 p-t-10 m-t-20"></p>
                             <div className="row" style={{ textAlign: "center" }}>
                                 <div className="col">
-                                    <h5>R$ {convertCurrencyUStoPT(this.state.evento.preco)} </h5>
+                                    <h5>{this.state.evento.gratuito ? 'GRATUITO' : this.state.evento.preco ? 'R$ ' + convertCurrencyUStoPT(this.state.evento.preco) : ''}</h5>
                                     <span>Investimento</span>
                                 </div>
                                 <div className="col">
