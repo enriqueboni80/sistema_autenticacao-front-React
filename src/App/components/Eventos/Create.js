@@ -34,7 +34,13 @@ class Create extends React.Component {
             hora_fim: "",
             prazo_inscricao: "",
             hora_fim_prazo_inscricao: "",
-            categorias: []
+            categorias: [],
+            tel_contato: '',
+            rua: '',
+            numero: '',
+            complemento: '',
+            bairro: '',
+            cidade: ''
         }
     };
 
@@ -73,6 +79,7 @@ class Create extends React.Component {
             detalhes: this.state.detalhes,
             descricao: this.state.descricao,
             categoria: this.state.categoria,
+            tel_contato: this.state.tel_contato,
             publicado: this.state.publicado ? true : false,
             gratuito: this.state.gratuito ? true : false,
             preco: convertCurrencyPTtoUS(this.state.preco),
@@ -80,7 +87,14 @@ class Create extends React.Component {
             cancelado: this.state.cancelado ? true : false,
             data_inicio: convertDatePTtoUS(this.state.data_inicio).concat(" ", this.state.hora_inicio),
             data_fim: convertDatePTtoUS(this.state.data_fim).concat(" ", this.state.hora_fim),
-            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao).concat(" ", this.state.hora_fim_prazo_inscricao)
+            prazo_inscricao: convertDatePTtoUS(this.state.prazo_inscricao).concat(" ", this.state.hora_fim_prazo_inscricao),
+            endereco: {
+                rua: this.state.rua,
+                numero: this.state.numero,
+                complemento: this.state.complemento,
+                bairro: this.state.bairro,
+                cidade: this.state.cidade
+            }
         }
 
         if (!this.props.id) {
@@ -121,12 +135,18 @@ class Create extends React.Component {
                 preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : "",
                 privado: _dataReturned.data.privado,
                 cancelado: _dataReturned.data.cancelado,
+                tel_contato: _dataReturned.data.tel_contato,
                 data_inicio: _dataReturned.data.data_inicio ? convertDateUStoPT(_dataReturned.data.data_inicio) : "",
                 hora_inicio: _dataReturned.data.data_inicio ? getTimeSplited(_dataReturned.data.data_inicio) : "",
                 data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim) : "",
                 hora_fim: _dataReturned.data.data_fim ? getTimeSplited(_dataReturned.data.data_fim) : "",
                 prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao) : "",
-                hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao) : ""
+                hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao) : "",
+                rua: _dataReturned.data.rua,
+                numero: _dataReturned.data.numero,
+                complemento: _dataReturned.data.complemento,
+                bairro: _dataReturned.data.bairro,
+                cidade: _dataReturned.data.cidade
             })
         })
     }
@@ -199,7 +219,7 @@ class Create extends React.Component {
                                                     <TextInput
                                                         type="text"
                                                         name="qtd_vagas"
-                                                        placeholder="Quantidade de vagas"
+                                                        placeholder="Qtd de vagas"
                                                         defaultValue={this.state.qtd_vagas}
                                                         autoComplete="off"
                                                         onChange={this.handleChange}
@@ -222,6 +242,20 @@ class Create extends React.Component {
                                                         prepend={<span className="input-group-text">R$</span>}
                                                     />
                                                 </Form.Group>
+                                                <Form.Group as={Col} controlId="formServicePrice">
+                                                    <Form.Label>Telefone Contato </Form.Label>
+                                                    <TextInputGroup
+                                                        name="tel_contato"
+                                                        placeholder="Telefone contato"
+                                                        defaultValue={this.state.tel_contato}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        required
+                                                        pattern="([\d,]*)"
+                                                        pattern="(?=.*[A-Za-z0-9]).{7,15}"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "Entre 7 e 15 caracteres" }}
+                                                    />
+                                                </Form.Group>
                                             </Form.Row>
                                             <Form.Group controlId="formServiceuUrlImagem">
                                                 <Form.Label>Url da Imagem *</Form.Label>
@@ -234,7 +268,6 @@ class Create extends React.Component {
                                                     onChange={this.handleChange}
                                                 />
                                             </Form.Group>
-
                                             <Form.Group controlId="formServiceCategorias">
                                                 <Form.Label>Categoria *</Form.Label>
                                                 <SelectGroup
@@ -366,21 +399,77 @@ class Create extends React.Component {
                                                     />
                                                 </Form.Group>
                                             </Form.Row>
-                                            <Form.Group controlId="formServiceDescricao">
-                                                <Form.Label>Descrição *</Form.Label>
-                                                <SunEditor name="descricao" onChange={(value) => this.descricaoChange(value)} setContents={this.state.descricao} />
-                                                {/*<TextInput
-                                                    name="descricao"
-                                                    placeholder="Descrição"
-                                                    defaultValue={this.state.descricao}
+                                            <Form.Group controlId="formServiceName">
+                                                <Form.Label>Rua</Form.Label>
+                                                <TextInput
+                                                    type="text"
+                                                    name="rua"
+                                                    placeholder="Rua"
+                                                    defaultValue={this.state.rua}
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
-                                                    multiline
-                                                    rows="10"
-                                                    required
-                                                    pattern="(?=.*[A-Za-z]).{10,5000}"
-                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 10 e 5000 caracteres" }}
-                                                />*/}
+                                                    pattern="(?=.*[A-Za-z]).{5,50}"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 5 e 50 caracteres" }}
+                                                />
+                                            </Form.Group>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formServiceName">
+                                                    <Form.Label>Numero</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="numero"
+                                                        placeholder="numero"
+                                                        defaultValue={this.state.numero}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="(?=.*[A-Za-z0-9]).{1,50}"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "Entre 1 e 50 caracteres" }}
+                                                    />
+                                                </Form.Group>
+                                                <Form.Group as={Col} controlId="formServiceName">
+                                                    <Form.Label>Complemento *</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="complemento"
+                                                        placeholder="complemento"
+                                                        defaultValue={this.state.complemento}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="(?=.*[A-Za-z0-9]).{1,50}"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "Entre 1 e 50 caracteres" }}
+                                                    />
+                                                </Form.Group>
+                                                <Form.Group as={Col} controlId="formServiceName">
+                                                    <Form.Label>Bairro</Form.Label>
+                                                    <TextInput
+                                                        type="text"
+                                                        name="bairro"
+                                                        placeholder="Bairro"
+                                                        defaultValue={this.state.bairro}
+                                                        autoComplete="off"
+                                                        onChange={this.handleChange}
+                                                        pattern="(?=.*[A-Za-z0-9]).{6,50}"
+                                                        errorMessage={{ required: "Campo Requerido", pattern: "Entre 6 e 50 caracteres" }}
+                                                    />
+                                                </Form.Group>
+
+                                            </Form.Row>
+                                            <Form.Group controlId="formServiceName">
+                                                <Form.Label>Cidade</Form.Label>
+                                                <TextInput
+                                                    type="text"
+                                                    name="cidade"
+                                                    placeholder="cidade"
+                                                    defaultValue={this.state.cidade}
+                                                    autoComplete="off"
+                                                    onChange={this.handleChange}
+                                                    pattern="(?=.*[A-Za-z0-9]).{5,50}"
+                                                    errorMessage={{ required: "Campo Requerido", pattern: "Entre 5 e 50 caracteres" }}
+                                                />
+                                            </Form.Group>
+                                            <Form.Group controlId="formServiceDescricao">
+                                                <Form.Label>Descrição</Form.Label>
+                                                <SunEditor name="descricao" onChange={(value) => this.descricaoChange(value)} setContents={this.state.descricao} />
                                             </Form.Group>
                                             <Form.Group style={{ marginTop: '45px', textAlign: 'right' }}>
                                                 <Button variant="secondary" onClick={this.props.handleCloseCreate}>CANCELAR</Button>
@@ -393,7 +482,7 @@ class Create extends React.Component {
                         </Card>
                     </Col>
                 </Row>
-            </Aux>
+            </Aux >
         );
     }
 }

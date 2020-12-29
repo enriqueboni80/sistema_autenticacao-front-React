@@ -27,7 +27,9 @@ class EventoService extends Component {
       "cancelado": formData.cancelado,
       "data_inicio": formData.data_inicio,
       "data_fim": formData.data_fim,
-      "prazo_inscricao": formData.prazo_inscricao
+      "prazo_inscricao": formData.prazo_inscricao,
+      "tel_contato": formData.tel_contato,
+      "endereco": formData.endereco
     }
   }
 
