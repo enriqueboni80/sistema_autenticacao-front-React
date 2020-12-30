@@ -83,7 +83,7 @@ class Index extends Component {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={6} xl={8}>
+                    <Col md={12} xl={12}>
                         <Card className='Recent-Users'>
                             <Card.Header>
                                 <Card.Title as='h5'>Eventos Recentes</Card.Title>

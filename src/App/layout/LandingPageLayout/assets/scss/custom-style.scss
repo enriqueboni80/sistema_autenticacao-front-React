@@ -3,14 +3,13 @@
     border: transparent !important
 }
 
-
 .main {
     padding-top: 95px;
 }
 
 .main .row {
     width: 100%;
-    padding-left: 35px;
+    padding-left: 16px;
 }
 
 .main .row > div {
@@ -21,4 +20,14 @@
 body {
     font-family: "Open Sans", sans-serif;
     line-height: 1.5;
+}
+
+.banner-principal {
+    width: 73%;
+}
+
+@media screen and (max-width: 1200px) {
+    .banner-principal {
+        width: 100%;
+    }
 }

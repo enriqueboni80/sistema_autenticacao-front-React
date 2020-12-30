@@ -12,6 +12,9 @@ import SigIn from './../../../components/Authentication/SignIn/SignIn1'
 import SigUp from './../../../components/Authentication/SignUp/SignUp1'
 import ForgotPassword from './../../../components/Authentication/ResetPassword/ResetPassword1'
 
+import { GrLocation } from 'react-icons/gr'
+import { FaRegClock } from 'react-icons/fa'
+
 import { Link } from 'react-router-dom'
 
 class Create extends React.Component {
@@ -144,18 +147,24 @@ class Create extends React.Component {
                         <Card.Body>
                             <div style={{ width: '80%', margin: 'auto' }}>
                                 <div style={{ textAlign: "center" }}>
-                                    <Card.Img style={{ width: '100%' }} src={this.state.evento.url_imagem ? this.state.evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
+                                    <Card.Img class="banner-principal" src={this.state.evento.url_imagem ? this.state.evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
                                 </div>
                             </div>
                             <div style={{ width: '95%', margin: 'auto' }}>
                                 <Row className="m-t-35">
                                     <Col md={8} xl={8}>
                                         <h5 style={{ fontWeight: "bold", fontSize: '23px' }}>{this.state.evento.name}</h5>
-                                        <span style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="m-t-10">Dia {convertDateUStoPT(this.state.evento.data_inicio)} as {getTimeSplited(this.state.evento.data_inicio)}</span>
-                                        <span className="text-muted d-block m-b-30">{this.state.evento.detalhes}</span>
+                                        <span style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="d-block m-t-10"><FaRegClock size={12}/> Dia {convertDateUStoPT(this.state.evento.data_inicio)} as {getTimeSplited(this.state.evento.data_inicio)}</span>
+                                        <span className="text-muted d-block m-t-5">
+                                            <GrLocation size={13}/>{this.state.evento.rua ? ` ${this.state.evento.rua}, ` : ""}
+                                            {this.state.evento.numero ? `${this.state.evento.numero}, ` : ""}
+                                            {this.state.evento.complemento ? `${this.state.evento.complemento}, ` : ""}
+                                            {this.state.evento.bairro ? `${this.state.evento.bairro}, ` : ""}
+                                            {this.state.evento.cidade ? `${this.state.evento.cidade}. ` : ""}
+                                        </span>
                                     </Col>
                                     <Col md={4} xl={4}>
-                                        <h5 style={{ textAlign: "center", marginBottom: "5px" }}>
+                                        <h5 style={{ textAlign: "center", marginBottom: "7px", fontWeight: "bold" }}>
                                             {this.state.evento.gratuito ? '* EVENTO GRATUITO *' : this.state.evento.preco ? 'Valor: R$ ' + convertCurrencyUStoPT(this.state.evento.preco) : ''}
                                         </h5>
                                         <div>
