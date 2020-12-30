@@ -118,7 +118,7 @@ class Index extends Component {
                     {this.state.eventos.map((evento) => {
                         if (evento.publicado) {
                             return (
-                                <Col md={6} xl={4} key={evento.id}>
+                                <Col md={6} xl={3} key={evento.id}>
                                     <Link to={`evento/${evento.id}`} className="btn btn-block">
                                         <Card>
                                             <Card.Body style={{ textAlign: "left" }}>
