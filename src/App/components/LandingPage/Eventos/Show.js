@@ -150,7 +150,7 @@ class Create extends React.Component {
                                     <Card.Img class="banner-principal" src={this.state.evento.url_imagem ? this.state.evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
                                 </div>
                             </div>
-                            <div style={{ width: '95%', margin: 'auto' }}>
+                            <div style={{ width: '100%', margin: 'auto' }}>
                                 <Row className="m-t-35">
                                     <Col md={8} xl={8}>
                                         <h5 style={{ fontWeight: "bold", fontSize: '23px' }}>{this.state.evento.name}</h5>
