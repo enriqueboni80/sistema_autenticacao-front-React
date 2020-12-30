@@ -7,8 +7,10 @@ import Aux from "../../../hoc/_Aux";
 import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
 import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../helpers/convertDate"
 
-import SunEditor from 'suneditor-react';
+import SunEditor,{video} from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css';
+
+
 
 class Create extends React.Component {
 
@@ -469,7 +471,21 @@ class Create extends React.Component {
                                             </Form.Group>
                                             <Form.Group controlId="formServiceDescricao">
                                                 <Form.Label>Descrição</Form.Label>
-                                                <SunEditor name="descricao" onChange={(value) => this.descricaoChange(value)} setContents={this.state.descricao} />
+                                                <SunEditor setOptions={{
+                                                    buttonList: [
+                                                        ['undo', 'redo',
+                                                        'font', 'fontSize', 'formatBlock',
+                                                        'paragraphStyle', 'blockquote',
+                                                        'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
+                                                        'fontColor', 'hiliteColor', 'textStyle',
+                                                        'removeFormat',
+                                                        'outdent', 'indent',
+                                                        'align', 'horizontalRule', 'list', 'lineHeight',
+                                                        'table', 'link', 'image', 'video', 'audio',
+                                                        'fullScreen', 'showBlocks', 'codeView',
+                                                        'preview', 'print']
+                                                    ]
+                                                }} name="descricao" onChange={(value) => this.descricaoChange(value)} setContents={this.state.descricao} />
                                             </Form.Group>
                                             <Form.Group style={{ marginTop: '45px', textAlign: 'right' }}>
                                                 <Button variant="secondary" onClick={this.props.handleCloseCreate}>CANCELAR</Button>
