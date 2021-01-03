@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 
 import { NavLink } from 'react-router-dom';
-import logo from '../../../../assets/images/logo.png';
+import logo from '../../../../assets/images/logo-puc-eventos-fundo-claro.png';
 
 import SigIn from './../../../components/Authentication/SignIn/SignIn1'
 import SigUp from './../../../components/Authentication/SignUp/SignUp1'

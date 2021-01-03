@@ -12,7 +12,7 @@ import './assets/scss/custom-style.scss'
 
 import Aux from "../../../hoc/_Aux";
 import Breadcrumb from "../AdminLayout/Breadcrumb";
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../assets/images/logo-puc-eventos-fundo-claro.png';
 
 
 class LandingPage extends React.Component {
@@ -59,7 +59,7 @@ class LandingPage extends React.Component {
                                     </ul>
                                     <div className="footer-text">
                                         <p>
-                                            Copyright © 2019 React Datta Able. All Rights Reserved.
+                                            Enrique Bonifacio - Pós-Graduação Web Full stack - PucMinas 2020/2021 
                                             </p>
                                     </div>
                                 </div>
