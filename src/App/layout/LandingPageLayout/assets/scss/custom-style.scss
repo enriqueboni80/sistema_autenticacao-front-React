@@ -26,6 +26,16 @@ body {
     width: 73%;
 }
 
+.card-img {
+    height: 200px;
+}
+
+@media screen and (max-width: 766px) {
+    .card-img {
+        height: 100%;
+    }
+}
+
 @media screen and (max-width: 1200px) {
     .banner-principal {
         width: 100%;
