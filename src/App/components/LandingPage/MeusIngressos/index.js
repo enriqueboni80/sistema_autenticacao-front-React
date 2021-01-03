@@ -56,7 +56,7 @@ class Index extends React.Component {
                     {this.state.eventos.map((evento) => {
                         if (evento.publicado) {
                             return (
-                                <Col md={6} xl={4} key={evento.id}>
+                                <Col md={6} xl={3} key={evento.id}>
                                     <Card>
                                         <Card.Body>
                                             <Card.Img src={evento.url_imagem ? evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
