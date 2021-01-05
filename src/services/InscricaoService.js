@@ -32,7 +32,7 @@ class InscricaoService extends Component {
       userId
     }
     var serviceObj = this.setObject(formData)
-    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes"), serviceObj, this.CONFIG);
+    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/inscrever"), serviceObj, this.CONFIG);
   }
 
   static desinscrever(eventoId, userId) {
