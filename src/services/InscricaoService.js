@@ -1,14 +1,10 @@
 import { Component } from "react";
 import axios from "axios";
+import headerJwt from "./shared/HeaderJWT"
 
 class InscricaoService extends Component {
 
-  static CONFIG = {
-    headers: {
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user_session')).jwtToken}`
-    }
-  };
-
+  
   static setObject = (formData) => {
     return {
       "evento_id": formData.eventoId,
@@ -31,7 +27,7 @@ class InscricaoService extends Component {
       userId
     }
     var serviceObj = this.setObject(formData)
-    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/inscrever"), serviceObj, this.CONFIG);
+    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/inscrever"), serviceObj, headerJwt);
   }
 
   static desinscrever(eventoId, userId) {
@@ -40,15 +36,15 @@ class InscricaoService extends Component {
       userId
     }
     var serviceObj = this.setObject(formData)
-    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/desinscrever"), serviceObj, this.CONFIG);
+    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/desinscrever"), serviceObj, headerJwt);
   }
 
   static getByEventoId(eventoId) {
-    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${eventoId}`), this.CONFIG);
+    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${eventoId}`), headerJwt);
   }
 
   static getInscricoesByUserId(userId) {
-    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${userId}/user`), this.CONFIG);
+    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${userId}/user`), headerJwt);
   }
 
   static estevePresente(eventoId, userId) {
@@ -57,7 +53,7 @@ class InscricaoService extends Component {
       userId
     }
     var serviceObj = this.setObject(formData)
-    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/esteve-presente"), serviceObj, this.CONFIG);
+    return axios.post(InscricaoService._withBaseUrl("eventos-inscricoes/esteve-presente"), serviceObj, headerJwt);
   }
 
 }

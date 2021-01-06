@@ -1,14 +1,10 @@
 import { Component } from "react";
 import axios from "axios";
 
+import headerJwt from "./shared/HeaderJWT"
+
 class EventoService extends Component {
 
-  static CONFIG = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user_session')).jwtToken}`
-    }
-  };
 
   static setObject = (formData) => {
     return {
@@ -48,18 +44,16 @@ class EventoService extends Component {
 
   static create(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.post(EventoService._withBaseUrl("eventos/store"), serviceObj, this.CONFIG)
+    return axios.post(EventoService._withBaseUrl("eventos/store"), serviceObj, headerJwt)
   }
 
   static update(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.put(EventoService._withBaseUrl(`eventos/update`), serviceObj, this.CONFIG)
+    return axios.put(EventoService._withBaseUrl(`eventos/update`), serviceObj, headerJwt)
   }
 
   static delete(id) {
-    return axios.delete(EventoService._withBaseUrl(`eventos/${id}/delete`), {
-      "id": id
-    })
+    return axios.delete(EventoService._withBaseUrl(`eventos/${id}/delete`), headerJwt)
   }
 }
 

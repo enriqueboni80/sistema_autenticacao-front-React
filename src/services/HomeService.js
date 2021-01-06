@@ -3,12 +3,6 @@ require('dotenv').config()
 
 class HomeService {
 
-  static CONFIG = {
-    headers: {
-/*       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user_session')).jwtToken}` */
-    }
-  };
 
   static _withBaseUrl(path = "") {
     const API_SERVER_URL = process.env.REACT_APP_API_SERVER_URL
@@ -16,7 +10,7 @@ class HomeService {
   }
 
   static getValues() {
-    return axios(HomeService._withBaseUrl("home"), this.CONFIG);
+    return axios(HomeService._withBaseUrl("home"));
   }
 
 }

@@ -3,13 +3,6 @@ import axios from "axios";
 
 class AuthService {
 
-  static CONFIG = {
-    headers: {
-      'Content-Type': 'application/json',
-      /* Verificar pq o token agora esta dentro do user (dentro do localstorage) 'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
-    }
-  };
-
   static setObject = (formData) => {
     return {
       "id": formData.userId,
@@ -31,7 +24,7 @@ class AuthService {
 
   static register(formData) {
     var serviceObj = this.setObject(formData)
-    return axios.post(AuthService._withBaseUrl("register"), serviceObj, this.CONFIG)
+    return axios.post(AuthService._withBaseUrl("register"), serviceObj)
   }
 
   static validateToken(formData) {
