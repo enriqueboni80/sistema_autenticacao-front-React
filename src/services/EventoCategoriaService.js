@@ -5,8 +5,8 @@ class EventoCategoriaService extends Component {
 
   static CONFIG = {
     headers: {
-      'Content-Type': 'application/json',
-      /*   'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
+      /* 'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
     }
   };
 

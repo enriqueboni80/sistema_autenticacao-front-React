@@ -5,8 +5,7 @@ class InscricaoService extends Component {
 
   static CONFIG = {
     headers: {
-      'Content-Type': 'application/json',
-      /*   'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user_session')).jwtToken}`
     }
   };
 
@@ -16,7 +15,7 @@ class InscricaoService extends Component {
       "user_id": formData.userId,
     }
   }
-  
+
   static _withBaseUrl(path = "") {
     const BACKEND_SERVER_URL = process.env.REACT_APP_API_SERVER_URL
     return `${BACKEND_SERVER_URL}/${path}`;
@@ -45,11 +44,11 @@ class InscricaoService extends Component {
   }
 
   static getByEventoId(eventoId) {
-    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${eventoId}`));
+    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${eventoId}`), this.CONFIG);
   }
 
   static getInscricoesByUserId(userId) {
-    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${userId}/user`));
+    return axios.get(InscricaoService._withBaseUrl(`eventos-inscricoes/${userId}/user`), this.CONFIG);
   }
 
   static estevePresente(eventoId, userId) {

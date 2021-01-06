@@ -6,7 +6,7 @@ class EventoService extends Component {
   static CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      /*   'Authorization': 'Bearer ' + localStorage.getItem('jwttoken') */
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user_session')).jwtToken}`
     }
   };
 

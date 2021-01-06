@@ -5,8 +5,8 @@ class HomeService {
 
   static CONFIG = {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user_session')).jwtToken}`
+/*       'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user_session')).jwtToken}` */
     }
   };
 
