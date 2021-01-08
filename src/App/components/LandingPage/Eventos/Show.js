@@ -130,13 +130,11 @@ class Create extends React.Component {
         this.setState({ showModalSigUp: false });
     }
 
-    getById = (eventoId) => {
-        Service.getById(eventoId).then((_dataReturned) => {
-            this.setState({
-                evento: _dataReturned.data
-            })
+    getById = async (eventoId) => {
+        let _dataReturned = await Service.getById(eventoId)
+        this.setState({
+            evento: _dataReturned.data
         })
-
     }
 
     render() {
@@ -154,9 +152,9 @@ class Create extends React.Component {
                                 <Row className="m-t-35">
                                     <Col md={8} xl={8}>
                                         <h5 style={{ fontWeight: "bold", fontSize: '23px' }}>{this.state.evento.name}</h5>
-                                        <span style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="d-block m-t-10"><FaRegClock size={12}/> Dia {convertDateUStoPT(this.state.evento.data_inicio)} as {getTimeSplited(this.state.evento.data_inicio)}</span>
+                                        <span style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="d-block m-t-10"><FaRegClock size={12} /> Dia {convertDateUStoPT(this.state.evento.data_inicio)} as {getTimeSplited(this.state.evento.data_inicio)}</span>
                                         <span className="text-muted d-block m-t-5">
-                                            <GrLocation size={13}/>{this.state.evento.rua ? ` ${this.state.evento.rua}, ` : ""}
+                                            <GrLocation size={13} />{this.state.evento.rua ? ` ${this.state.evento.rua}, ` : ""}
                                             {this.state.evento.numero ? `${this.state.evento.numero}, ` : ""}
                                             {this.state.evento.complemento ? `${this.state.evento.complemento}, ` : ""}
                                             {this.state.evento.bairro ? `${this.state.evento.bairro}, ` : ""}
