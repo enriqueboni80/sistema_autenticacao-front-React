@@ -35,7 +35,7 @@ class SignUp1 extends React.Component {
 
     checkEmailFree = (value) => {
         AuthService.checkEmailFree(value).then((response) => {
-            console.log(response)
+            //console.log(response)
             if (response.data.success) {
                 this.setState({ canIRegisterNewEmail: true })
             } else {
@@ -65,7 +65,7 @@ class SignUp1 extends React.Component {
         }).catch((error) => {
             if (error.response) {
                 this.setState({ returnMessage: { type: "warning", message: "Algo errado aconteceu!" } })
-                console.log(error.response.data.error)
+                //console.log(error.response.data.error)
             }
         })
     }
@@ -83,7 +83,7 @@ class SignUp1 extends React.Component {
         }).catch((error) => {
             if (error.response) {
                 this.setState({ returnMessage: { type: "error", message: "Token não validado" } })
-                console.log(error.response.data.error)
+                //console.log(error.response.data.error)
             }
         })
     }

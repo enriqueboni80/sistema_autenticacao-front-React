@@ -8,7 +8,6 @@ const Index = () => {
 
     const requestTest = async () => {
         const result = await TesteIntegracaoService.getValues()
-        console.log(result.data)
         setDadosRetornados(result.data)
     }
 

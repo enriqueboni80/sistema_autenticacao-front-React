@@ -49,7 +49,6 @@ class Index extends React.Component {
 
     getAll = () => {
         Service.getAll().then((_dataCollection) => {
-            console.log(_dataCollection.data)
             _dataCollection.data.sort(function (a, b) {
                 return (a.data_inicio > b.data_inicio) ? -1 : (a.data_inicio < b.data_inicio) ? 1 : 0
             });

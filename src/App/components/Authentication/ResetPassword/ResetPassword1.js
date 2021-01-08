@@ -45,7 +45,7 @@ class ResetPassword1 extends React.Component {
         }).catch((error) => {
             if (error.response) {
                 this.setState({ returnMessage: { type: "error", message: "Esse email não existe no sistema" } })
-                console.log(error.response.data.error)
+                //console.log(error.response.data.error)
             }
         })
     }
@@ -61,7 +61,7 @@ class ResetPassword1 extends React.Component {
         }).catch((error) => {
             if (error.response) {
                 this.setState({ returnMessage: { type: "error", message: "Token não validado" } })
-                console.log(error.response.data.error)
+                //console.log(error.response.data.error)
             }
         })
     }
@@ -79,7 +79,7 @@ class ResetPassword1 extends React.Component {
         }).catch((error) => {
             if (error.response) {
                 this.setState({ returnMessage: { type: "warning", message: "Algo errado aconteceu!" } })
-                console.log(error.response.data.error)
+                //console.log(error.response.data.error)
             }
         })
     }
