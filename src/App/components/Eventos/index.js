@@ -49,6 +49,7 @@ class Index extends React.Component {
 
     getAll = () => {
         Service.getAll().then((_dataCollection) => {
+            console.log(_dataCollection.data)
             _dataCollection.data.sort(function (a, b) {
                 return (a.data_inicio > b.data_inicio) ? -1 : (a.data_inicio < b.data_inicio) ? 1 : 0
             });
@@ -88,7 +89,7 @@ class Index extends React.Component {
                                                         <th scope="row">{data.id}</th>
                                                         <td>{data.name}</td>
                                                         <td>{data.qtd_vagas}</td>
-                                                        <td>{data.categoria}</td>
+                                                        <td>{data.categoria_name}</td>
                                                         <td>R$ {convertCurrencyUStoPT(data.preco)}</td>
                                                         <td>{data.publicado ? "Sim" : "Não"}</td>
                                                         <td>{convertDateUStoPT(data.data_inicio)}</td>

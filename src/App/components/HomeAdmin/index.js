@@ -35,6 +35,7 @@ class Index extends Component {
 
     totalInscricoes = () => {
         InscricaoService.getAll().then(_dataCollection => {
+            console.log(_dataCollection)
             this.setState({totalInscricoes: _dataCollection.data.length})
         })
     }

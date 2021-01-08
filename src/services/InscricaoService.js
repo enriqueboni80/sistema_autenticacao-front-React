@@ -18,7 +18,7 @@ class InscricaoService extends Component {
   }
 
   static getAll() {
-    return axios(InscricaoService._withBaseUrl("eventos-inscricoes"));
+    return axios(InscricaoService._withBaseUrl("eventos-inscricoes"), headerJwt);
   }
 
   static inscrever(eventoId, userId) {
