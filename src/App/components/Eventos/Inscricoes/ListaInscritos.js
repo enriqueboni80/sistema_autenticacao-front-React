@@ -47,21 +47,27 @@ class Index extends React.Component {
     }
 
     geraCrachas = () => {
-        this.state.dataCollection.map(user => {
-            var blob = new Blob(
-                [
-                    `${this.state.evento.name}
-                    ${user.username}`
-                ],
-                { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-            saveAs(blob, `${user.username}_${this.state.evento.name}_CRACHA.doc`);
-        })
+
+        if (this.state.dataCollection.length > 0) {
+            this.state.dataCollection.map(user => {
+                var blob = new Blob(
+                    [
+                        `${this.state.evento.name}
+                        ${user.username}`
+                    ],
+                    { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+                saveAs(blob, `${user.username}_${this.state.evento.name}_CRACHA.doc`);
+            })
+        }else{
+            alert('nao houveram inscritos nesse evento')
+        }
+
     }
 
     geraCertificados = () => {
         var houveAlgumaPresenca = false
         this.state.dataCollection.map(user => {
-            if(user.esteve_presente){
+            if (user.esteve_presente) {
                 houveAlgumaPresenca = true
                 var blob = new Blob(
                     [
@@ -71,7 +77,7 @@ class Index extends React.Component {
                 saveAs(blob, `${user.username}_${this.state.evento.name}_CERTIFICADO.doc`);
             }
         })
-        if(!houveAlgumaPresenca){
+        if (!houveAlgumaPresenca) {
             alert('nao houveram inscritos nesse evento')
         }
     }
