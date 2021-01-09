@@ -51,33 +51,6 @@ class Index extends Component {
         }
     }
 
-    inscricaoEvento = async (e, eventoId) => {
-        e.preventDefault()
-        let inscricoes = await InscricaoService.getInscricoesByUserId(this.state.loggedUser.id)
-        let jaInscrito = false
-        inscricoes.data.map(inscricao => {
-            if (inscricao.evento_id === eventoId) {
-                jaInscrito = true
-            }
-        })
-        if (!jaInscrito) {
-            let dadoGravado = await InscricaoService.inscrever(eventoId, this.state.loggedUser.id)
-            if (dadoGravado) {
-                this.setState({ inscrito: true })
-                window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
-            }
-        }
-        else {
-            window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
-        }
-    }
-
-    desinscricaoEvento = async (eventoId) => {
-        InscricaoService.desinscrever(eventoId, this.state.loggedUser.id).then((res) => {
-            this.setState({ inscrito: false })
-        })
-    }
-
     handleShowModalSigIn = (e) => {
         e.preventDefault()
         this.setState({ showModalSigIn: true });
