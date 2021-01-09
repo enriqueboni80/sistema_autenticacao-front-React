@@ -48,7 +48,7 @@ class Breadcrumb extends Component {
     render() {
         let main, item;
         let breadcrumb = '';
-        let title = 'Bem-vindos';
+        let title = 'Puc Minas';
         if (this.state.main && this.state.main.type === 'collapse') {
             main = (
                 <li className="breadcrumb-item">
@@ -90,7 +90,7 @@ class Breadcrumb extends Component {
 
         }
 
-        document.title = title + ' | PucMinas - Plataforma de Eventos e Cursos, Ingressos Online e Vendas de Inscrições';
+        document.title = title + ' - Plataforma de eventos acadêmicos promovidos pela universidade - Simpósios, Congressos, Seminários, Encontros etc';
 
         return (
             <Aux>
