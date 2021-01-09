@@ -48,7 +48,7 @@ class Breadcrumb extends Component {
     render() {
         let main, item;
         let breadcrumb = '';
-        let title = 'Welcome';
+        let title = 'Bem-vindos';
         if (this.state.main && this.state.main.type === 'collapse') {
             main = (
                 <li className="breadcrumb-item">
@@ -90,7 +90,7 @@ class Breadcrumb extends Component {
 
         }
 
-        document.title = title + ' | Datta Able Premium React + Redux Admin Template';
+        document.title = title + ' | PucMinas - Plataforma de Eventos e Cursos, Ingressos Online e Vendas de Inscrições';
 
         return (
             <Aux>
