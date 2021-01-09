@@ -36,8 +36,14 @@ class Index extends React.Component {
     }
 
     getInscricoesByUserId = async (userId) => {
-        let _eventos = await Service.getInscricoesByUserId(userId)
-        this.setState({ eventos: _eventos.data })
+        try {
+            let _eventos = await Service.getInscricoesByUserId(userId)
+            this.setState({ eventos: _eventos.data })
+        } catch (error) {
+            if (error.response.status === 401) {
+                alert('sessão expirada deslogue e logue novamente pra funcionar')
+            }
+        }
     }
 
     desinscricaoEvento = async (e, eventoId) => {
@@ -45,6 +51,10 @@ class Index extends React.Component {
         InscricaoService.desinscrever(eventoId, this.state.loggedUser.id).then((res) => {
             this.setState({ inscrito: false })
             this.getInscricoesByUserId(this.state.loggedUser.id)
+        }).catch(error => {
+            if (error.response.status === 401) {
+                alert('sessão expirada deslogue e logue novamente pra funcionar')
+            }
         })
     }
 
@@ -57,7 +67,7 @@ class Index extends React.Component {
                         ?
                         <div class="col-sm-12">
                             <div class="alert alert-primary" role="alert">
-                                <p style={{textAlign: 'center'}}>Você ainda não esta inscrito em nenhum evento - <a href="/" class="alert-link">HOME</a></p><br />
+                                <p style={{ textAlign: 'center' }}>Você ainda não esta inscrito em nenhum evento - <a href="/" class="alert-link">HOME</a></p><br />
                                 <label class="text-muted">O Portal de Eventos Acadêmicos PUC Minas objetiva ser espaço para que as diversas atividades
                                 acadêmicas promovidas na universidade - Simpósios, Congressos, Seminários, Encontros, Semanas ou Jornadas Acadêmicas,
                                 Conferências, Palestras e demais atividades.</label>

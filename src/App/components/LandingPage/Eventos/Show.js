@@ -72,22 +72,32 @@ class Create extends React.Component {
 
     inscricaoEvento = async (e) => {
         e.preventDefault()
-        let jaInscrito = await this.checkJaInscritoNoEvento()
+        try {
+            let jaInscrito = await this.checkJaInscritoNoEvento()
 
-        if (!jaInscrito) {
-            let dadoGravado = await InscricaoService.inscrever(this.state.id, this.state.loggedUser.id)
-            if (dadoGravado) {
-                this.setState({ inscrito: true })
+            if (!jaInscrito) {
+                let dadoGravado = await InscricaoService.inscrever(this.state.id, this.state.loggedUser.id)
+                if (dadoGravado) {
+                    this.setState({ inscrito: true })
+                    window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
+                }
+            } else {
                 window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
             }
-        } else {
-            window.location.href = `/meus-ingressos/${this.state.loggedUser.id}`
+        } catch (error) {
+            if (error.response.status === 401) {
+                alert('sessão expirada deslogue e logue novamente pra funcionar')
+            }
         }
     }
 
     desinscricaoEvento = async () => {
         InscricaoService.desinscrever(this.state.id, this.state.loggedUser.id).then((res) => {
             this.setState({ inscrito: false })
+        }).catch(error => {
+            if (error.response.status === 401) {
+                alert('sessão expirada deslogue e logue novamente pra funcionar')
+            }
         })
     }
 
