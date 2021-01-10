@@ -22,6 +22,14 @@ body {
     line-height: 1.5;
 }
 
+.footer-menu li {
+    margin: 10px;
+}
+
+.footer-text a {
+    text-decoration: none;
+}
+
 .banner-principal {
     width: 73%;
 }
@@ -30,7 +38,13 @@ body {
     height: 210px;
 }
 
-@media screen and (max-width: 766px) {
+@media (min-width: 845px) and (max-width: 1460px) {
+    .card-img {
+        height: 190px;
+    }
+}
+
+@media screen and (max-width: 830px) {
     .card-img {
         height: 100%;
     }

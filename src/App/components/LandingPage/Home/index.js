@@ -93,7 +93,7 @@ class Index extends Component {
                             return (
                                 <Col md={6} xl={3} key={evento.id}>
                                     <Link to={`evento/${evento.id}`} className="btn btn-block">
-                                        <Card>
+                                        <Card style={{border: 'none'}}>
                                             <Card.Body style={{ textAlign: "left" }}>
                                                 <Card.Img src={evento.url_imagem ? evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
                                                 <h5 style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="m-t-10">Dia {convertDateUStoPT(evento.data_inicio)} as {getTimeSplited(evento.data_inicio)}</h5>

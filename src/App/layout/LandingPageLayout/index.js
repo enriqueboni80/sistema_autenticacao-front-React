@@ -14,6 +14,12 @@ import Aux from "../../../hoc/_Aux";
 import Breadcrumb from "../AdminLayout/Breadcrumb";
 import logo from '../../../assets/images/logo-puc-eventos-fundo-claro.png';
 
+import fumarcLogo from './assets/images/fumarc.png'
+import catedralLogo from './assets/images/catedral.png'
+import santaMariaLogo from './assets/images/santa-maria.png'
+import smcLogo from './assets/images/sociedade.png'
+import arquidiocesebhLogo from './assets/images/arquidiocese-bh-100anos.png'
+
 
 class LandingPage extends React.Component {
 
@@ -50,17 +56,19 @@ class LandingPage extends React.Component {
                         <div className="footer">
                             <div className="container">
                                 <div className="col-md-12 text-center">
-                                    <img src={logo} alt="Datta Able Logo" />
-                                    <ul className="footer-menu">
-                                        <li><a href='#'>Site</a></li>
-                                        <li><a href='#'>Support</a></li>
-                                        <li><a href='#'>Terms</a></li>
-                                        <li><a href='#'>Privacy</a></li>
-                                    </ul>
                                     <div className="footer-text">
-                                        <p>
-                                            Enrique Bonifacio - Pós-Graduação Web Full stack - PucMinas 2020/2021 
-                                            </p>
+                                        <p style={{ marginBottom: '25px' }}>Instituições da Arquidiocese de Belo Horizonte</p>
+                                    </div>
+                                    <ul className="footer-menu">
+                                        <li className=""><a href="https://www.fumarc.org.br" title="FUMARC" target="_blank"><img src={fumarcLogo} alt="Fumarc Logo" /></a></li>
+                                        <li className=""><a href="https://www.arquidiocesebh.org.br/site/arquidiocese.php?id=216" title="Rede Catedral" target="_blank"><img src={catedralLogo} alt="Catedral Logo" /></a></li>
+                                        <li className=""><a href="https://www.santamaria.pucminas.br/" title="Colégio Santa Maria" target="_blank"><img src={santaMariaLogo} alt="Santa Maria Logo" /></a></li>
+                                        <li className=""><a href="https://adm.pucminas.br/institucional/Paginas/entidade-mantenedora.aspx" title="SMC"><img src={smcLogo} alt="Sociedade Mineira de Cultura Logo" /></a></li>
+                                        <li className=""><a href="https://www.arquidiocesebh.org.br/site/" title="Arquidiocese de Belo Horizonte" target="_blank"><img src={arquidiocesebhLogo} alt="Arquidiocese BH Logo" /></a></li>
+                                    </ul>
+                                    <div style={{ marginTop: '30px' }} className="footer-text">
+                                        <img src={logo} alt="Datta Able Logo" />
+                                        <p><a target="_blank" href="https://www.linkedin.com/in/enrique-bonifacio/">Enrique Bonifacio</a> - <a target="_blank" href="https://www.pucminas.br/institucional/Paginas/a-puc-minas.aspx">Pós-graducao em Web Full Stack 2019/2021</a></p>
                                     </div>
                                 </div>
                             </div>
