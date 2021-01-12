@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Card, Table, Modal, Button } from 'react-bootstrap';
 import Service from "../../../services/EventoService"
 import Aux from "../../../hoc/_Aux";
-import { FaRegTrashAlt, FaRegEdit, FaListOl } from "react-icons/fa"
+import { FaRegTrashAlt, FaRegEdit, FaListOl, FaQuestionCircle, FaRegCalendarAlt } from "react-icons/fa"
 import { convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
 import { convertDateUStoPT } from "../../../helpers/convertDate"
 import Create from "./Create"
@@ -19,7 +19,8 @@ class Index extends React.Component {
             id: '',
             showModalDelete: false,
             showModalCreate: false,
-            showModalUpdate: false
+            showModalUpdate: false,
+            showModalManualInstrucao: false
         }
     };
 
@@ -45,6 +46,14 @@ class Index extends React.Component {
 
     handleCloseDelete = () => {
         this.setState({ showModalDelete: false });
+    }
+
+    handleShowManualinstrucao = () => {
+        this.setState({ showModalManualInstrucao: true });
+    }
+
+    handleCloseManualinstrucao = () => {
+        this.setState({ showModalManualInstrucao: false });
     }
 
     getAll = () => {
@@ -78,7 +87,11 @@ class Index extends React.Component {
                                                 <th>Publicado</th>
                                                 <th>Data Início</th>
                                                 <th>Data Fim</th>
-                                                <th>Ações</th>
+                                                <th>Ações <FaQuestionCircle
+                                                    onClick={(e) => this.handleShowManualinstrucao(e)}
+                                                    style={{ cursor: 'pointer' }}
+                                                />
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -94,9 +107,17 @@ class Index extends React.Component {
                                                         <td>{convertDateUStoPT(data.data_inicio)}</td>
                                                         <td>{convertDateUStoPT(data.data_fim)}</td>
                                                         <td style={{ display: "flex", justifyContent: "center" }}>
-                                                            <Link to={`./gerenciar-eventos/inscricoes/${data.id}`}>
-                                                                <div><FaListOl size={19} style={{ cursor: 'pointer', marginRight: '5px' }} /></div>
-                                                            </Link>
+                                                            <div>
+                                                                <Link to={`./gerenciar-eventos/inscricoes/${data.id}`}>
+                                                                    <div><FaListOl size={19} style={{ cursor: 'pointer', marginRight: '5px' }} /></div>
+                                                                </Link>
+                                                            </div>
+                                                            <div>
+                                                                <Link to={`./gerenciar-eventos/${data.id}`}>
+                                                                    <div><FaRegCalendarAlt size={19} style={{ cursor: 'pointer', marginRight: '5px' }} /></div>
+                                                                </Link>
+                                                            </div>
+
                                                             <div><FaRegEdit size={19}
                                                                 onClick={(e) => this.handleShowCreate(e, data.id)}
                                                                 style={{ cursor: 'pointer' }}
@@ -125,6 +146,19 @@ class Index extends React.Component {
                 </Modal>
                 <Modal size="lg" show={this.state.showModalCreate} onHide={this.handleCloseCreate}>
                     <Create id={this.state.id} handleCloseCreate={this.handleCloseCreate} getAll={this.getAll} />
+                </Modal>
+                <Modal size="md" show={this.state.showModalManualInstrucao} onHide={this.handleCloseManualinstrucao}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Instruções</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div>
+                            <p><FaListOl />  - Gerenciamento de inscrições</p>
+                            <p><FaRegCalendarAlt /> - Informações sobre o evento</p>
+                            <p><FaRegEdit /> - Editar Evento</p>
+                            <p><FaRegTrashAlt /> - Deletar Evento</p>
+                        </div>
+                    </Modal.Body>
                 </Modal>
             </Aux>
         );
