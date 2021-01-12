@@ -216,7 +216,7 @@ class Create extends React.Component {
                                             </Form.Group>
                                             <Form.Row>
                                                 <Form.Group as={Col} controlId="formServiceQtdVagas">
-                                                    <Form.Label>Quantidade de Vagas *</Form.Label>
+                                                    <Form.Label>Nº de Vagas *</Form.Label>
                                                     <TextInput
                                                         type="text"
                                                         name="qtd_vagas"
@@ -240,11 +240,11 @@ class Create extends React.Component {
                                                         required
                                                         pattern="([\d,]*)"
                                                         errorMessage={{ required: "Campo Requerido", pattern: "Esse campo não pode conter letras" }}
-                                                        prepend={<span className="input-group-text">R$</span>}
+                                                        //prepend={<span className="input-group-text">R$</span>}
                                                     />
                                                 </Form.Group>
                                                 <Form.Group as={Col} controlId="formServicePrice">
-                                                    <Form.Label>Telefone Contato </Form.Label>
+                                                    <Form.Label>Tel Contato *</Form.Label>
                                                     <TextInputGroup
                                                         name="tel_contato"
                                                         placeholder="Telefone contato"
@@ -428,7 +428,7 @@ class Create extends React.Component {
                                                     />
                                                 </Form.Group>
                                                 <Form.Group as={Col} controlId="formServiceName">
-                                                    <Form.Label>Complemento *</Form.Label>
+                                                    <Form.Label>Complemento</Form.Label>
                                                     <TextInput
                                                         type="text"
                                                         name="complemento"
