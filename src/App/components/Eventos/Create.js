@@ -7,7 +7,7 @@ import Aux from "../../../hoc/_Aux";
 import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
 import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../helpers/convertDate"
 
-import SunEditor,{video} from 'suneditor-react'
+import SunEditor, { video } from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css';
 
 
@@ -120,36 +120,35 @@ class Create extends React.Component {
 
     }
 
-    getById = () => {
+    getById = async () => {
         let id = this.props.id
-        Service.getById(id).then((_dataReturned) => {
-            this.setState({
-                id: _dataReturned.data.id,
-                name: _dataReturned.data.name,
-                qtd_vagas: _dataReturned.data.qtd_vagas,
-                palestrante: _dataReturned.data.palestrante,
-                url_imagem: _dataReturned.data.url_imagem,
-                detalhes: _dataReturned.data.detalhes,
-                descricao: _dataReturned.data.descricao,
-                categoria: _dataReturned.data.categoria,
-                publicado: _dataReturned.data.publicado,
-                gratuito: _dataReturned.data.gratuito,
-                preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : "",
-                privado: _dataReturned.data.privado,
-                cancelado: _dataReturned.data.cancelado,
-                tel_contato: _dataReturned.data.tel_contato,
-                data_inicio: _dataReturned.data.data_inicio ? convertDateUStoPT(_dataReturned.data.data_inicio) : "",
-                hora_inicio: _dataReturned.data.data_inicio ? getTimeSplited(_dataReturned.data.data_inicio) : "",
-                data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim) : "",
-                hora_fim: _dataReturned.data.data_fim ? getTimeSplited(_dataReturned.data.data_fim) : "",
-                prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao) : "",
-                hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao) : "",
-                rua: _dataReturned.data.rua,
-                numero: _dataReturned.data.numero,
-                complemento: _dataReturned.data.complemento,
-                bairro: _dataReturned.data.bairro,
-                cidade: _dataReturned.data.cidade
-            })
+        let _dataReturned = await Service.getById(id)
+        this.setState({
+            id: _dataReturned.data.id,
+            name: _dataReturned.data.name,
+            qtd_vagas: _dataReturned.data.qtd_vagas,
+            palestrante: _dataReturned.data.palestrante,
+            url_imagem: _dataReturned.data.url_imagem,
+            detalhes: _dataReturned.data.detalhes,
+            descricao: _dataReturned.data.descricao,
+            categoria: _dataReturned.data.categoria,
+            publicado: _dataReturned.data.publicado,
+            gratuito: _dataReturned.data.gratuito,
+            preco: _dataReturned.data.preco ? convertCurrencyUStoPT(_dataReturned.data.preco) : 0,
+            privado: _dataReturned.data.privado,
+            cancelado: _dataReturned.data.cancelado,
+            tel_contato: _dataReturned.data.tel_contato,
+            data_inicio: _dataReturned.data.data_inicio ? convertDateUStoPT(_dataReturned.data.data_inicio) : "",
+            hora_inicio: _dataReturned.data.data_inicio ? getTimeSplited(_dataReturned.data.data_inicio) : "",
+            data_fim: _dataReturned.data.data_fim ? convertDateUStoPT(_dataReturned.data.data_fim) : "",
+            hora_fim: _dataReturned.data.data_fim ? getTimeSplited(_dataReturned.data.data_fim) : "",
+            prazo_inscricao: _dataReturned.data.prazo_inscricao ? convertDateUStoPT(_dataReturned.data.prazo_inscricao) : "",
+            hora_fim_prazo_inscricao: _dataReturned.data.prazo_inscricao ? getTimeSplited(_dataReturned.data.prazo_inscricao) : "",
+            rua: _dataReturned.data.rua,
+            numero: _dataReturned.data.numero,
+            complemento: _dataReturned.data.complemento,
+            bairro: _dataReturned.data.bairro,
+            cidade: _dataReturned.data.cidade
         })
     }
 
@@ -474,16 +473,16 @@ class Create extends React.Component {
                                                 <SunEditor setOptions={{
                                                     buttonList: [
                                                         ['undo', 'redo',
-                                                        'font', 'fontSize', 'formatBlock',
-                                                        'paragraphStyle', 'blockquote',
-                                                        'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
-                                                        'fontColor', 'hiliteColor', 'textStyle',
-                                                        'removeFormat',
-                                                        'outdent', 'indent',
-                                                        'align', 'horizontalRule', 'list', 'lineHeight',
-                                                        'table', 'link', 'image', 'video', 'audio',
-                                                        'fullScreen', 'showBlocks', 'codeView',
-                                                        'preview', 'print']
+                                                            'font', 'fontSize', 'formatBlock',
+                                                            'paragraphStyle', 'blockquote',
+                                                            'bold', 'underline', 'italic', 'strike', 'subscript', 'superscript',
+                                                            'fontColor', 'hiliteColor', 'textStyle',
+                                                            'removeFormat',
+                                                            'outdent', 'indent',
+                                                            'align', 'horizontalRule', 'list', 'lineHeight',
+                                                            'table', 'link', 'image', 'video', 'audio',
+                                                            'fullScreen', 'showBlocks', 'codeView',
+                                                            'preview', 'print']
                                                     ]
                                                 }} name="descricao" onChange={(value) => this.descricaoChange(value)} setContents={this.state.descricao} />
                                             </Form.Group>
