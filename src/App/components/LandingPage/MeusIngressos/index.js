@@ -35,13 +35,20 @@ class Index extends React.Component {
     }
 
     getInscricoesByUserId = async (userId) => {
-        try {
-            let _eventos = await Service.getInscricoesByUserId(userId)
-            this.setState({ eventos: _eventos.data })
-        } catch (error) {
-            if (error.response.status === 401) {
-                alert('sessão expirada deslogue e logue novamente pra funcionar')
+
+        let idUsuarioLogado = JSON.parse(localStorage.getItem('user_session')).id
+
+        if (parseInt(idUsuarioLogado) === parseInt(userId)) {
+            try {
+                let _eventos = await Service.getInscricoesByUserId(userId)
+                this.setState({ eventos: _eventos.data })
+            } catch (error) {
+                if (error.response.status === 401) {
+                    alert('sessão expirada deslogue e logue novamente pra funcionar')
+                }
             }
+        } else {
+            window.location.href = `/meus-ingressos/${idUsuarioLogado}`
         }
     }
 
