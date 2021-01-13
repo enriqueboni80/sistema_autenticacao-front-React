@@ -10,7 +10,6 @@ const Eventos = React.lazy(() => import('./App/components/Eventos'));
 const EventosInscricoes = React.lazy(() => import('./App/components/Eventos/Inscricoes/ListaInscritos'));
 const EventosDetalhes = React.lazy(() => import('./App/components/Eventos/Show'));
 const TesteIntegracao = React.lazy(() => import('./App/components/TesteIntregacao'));
-const PrivatedAccess = React.lazy(() => import('./App/components/PrivatedAccess'));
 
 const routes = [
     { path: '/home', exact: true, name: 'Sample Page', component: HomeAdmin },

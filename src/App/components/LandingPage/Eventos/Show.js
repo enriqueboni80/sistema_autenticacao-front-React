@@ -1,12 +1,11 @@
 import React from 'react';
-import { Row, Col, Card, Form, Button, Modal } from 'react-bootstrap';
-import { ValidationForm, TextInput, TextInputGroup, SelectGroup } from 'react-bootstrap4-form-validation';
+import { Row, Col, Card, Modal } from 'react-bootstrap';
 import Service from "../../../../services/EventoService"
 import CategoriaService from "../../../../services/EventoCategoriaService"
 import InscricaoService from "./../../../../services/InscricaoService"
 import Aux from "../../../../hoc/_Aux";
-import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
-import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
+import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
+import { convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
 
 import SigIn from './../../../components/Authentication/SignIn/SignIn1'
 import SigUp from './../../../components/Authentication/SignUp/SignUp1'
@@ -15,7 +14,6 @@ import ForgotPassword from './../../../components/Authentication/ResetPassword/R
 import { GrLocation } from 'react-icons/gr'
 import { FaRegClock } from 'react-icons/fa'
 
-import { Link } from 'react-router-dom'
 
 class Create extends React.Component {
 
@@ -56,8 +54,8 @@ class Create extends React.Component {
         if (usuarioAutenticado) {
             let inscricoes = await InscricaoService.getInscricoesByUserId(usuarioAutenticado.id)
             let jaInscrito = false
-            inscricoes.data.map(inscricao => {
-                if (parseInt(inscricao.evento_id) == this.state.id) {
+            inscricoes.data.forEach(inscricao => {
+                if (parseInt(inscricao.evento_id) === parseInt(this.state.id)) {
                     jaInscrito = true
                 }
             })
@@ -177,9 +175,9 @@ class Create extends React.Component {
                                         </h5>
                                         <div>
                                             {this.state.isAuthenticated && this.state.inscrito
-                                                ? <a href='#' className="btn btn-danger text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e)}>Desinscrever</a>
-                                                : this.state.isAuthenticated ? <a href='#' className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.inscricaoEvento(e)}>Inscrever</a>
-                                                    : <a href='#' className="btn btn-success text-uppercase btn-block" onClick={(e) => this.handleShowModalSigIn(e)}>Inscrever</a>
+                                                ? <button className="btn btn-danger text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e)}>Desinscrever</button>
+                                                : this.state.isAuthenticated ? <button className="btn btn-primary text-uppercase btn-block" onClick={(e) => this.inscricaoEvento(e)}>Inscrever</button>
+                                                    : <button className="btn btn-success text-uppercase btn-block" onClick={(e) => this.handleShowModalSigIn(e)}>Inscrever</button>
                                             }
                                         </div>
                                     </Col>

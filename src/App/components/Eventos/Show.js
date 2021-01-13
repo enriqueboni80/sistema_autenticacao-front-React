@@ -1,13 +1,10 @@
 import React from 'react';
-import { Row, Col, Card, Form, Button } from 'react-bootstrap';
-import { ValidationForm, TextInput, TextInputGroup, SelectGroup } from 'react-bootstrap4-form-validation';
+import { Row, Col, Card } from 'react-bootstrap';
 import Service from "../../../services/EventoService"
-import CategoriaService from "../../../services/EventoCategoriaService"
 import InscricaoService from "../../../services/InscricaoService"
 import Aux from "../../../hoc/_Aux";
-import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
-import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../helpers/convertDate"
-import { FaRegClock } from 'react-icons/fa'
+import { convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
+import { convertDateUStoPT, getTimeSplited } from "../../../helpers/convertDate"
 
 class Show extends React.Component {
 

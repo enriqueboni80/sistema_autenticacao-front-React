@@ -1,13 +1,13 @@
 import React from 'react';
-import { Row, Col, Card, Table, Modal, Button } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import Service from "../../../../services/InscricaoService"
 import EventoService from "../../../../services/EventoService"
 import Aux from "../../../../hoc/_Aux";
-import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
+import { convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
 import { FaRegCheckSquare, FaRegSquare } from "react-icons/fa"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
-import { FileSaver, saveAs } from 'file-saver'
+import { saveAs } from 'file-saver'
 
 
 class Index extends React.Component {
@@ -47,9 +47,8 @@ class Index extends React.Component {
     }
 
     geraCrachas = () => {
-
         if (this.state.dataCollection.length > 0) {
-            this.state.dataCollection.map(user => {
+            this.state.dataCollection.forEach(user => {
                 var blob = new Blob(
                     [
                         `${this.state.evento.name}
@@ -58,7 +57,7 @@ class Index extends React.Component {
                     { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
                 saveAs(blob, `${user.username}_${this.state.evento.name}_CRACHA.doc`);
             })
-        }else{
+        } else {
             alert('nao houveram inscritos nesse evento')
         }
 
@@ -66,7 +65,7 @@ class Index extends React.Component {
 
     geraCertificados = () => {
         var houveAlgumaPresenca = false
-        this.state.dataCollection.map(user => {
+        this.state.dataCollection.forEach(user => {
             if (user.esteve_presente) {
                 houveAlgumaPresenca = true
                 var blob = new Blob(

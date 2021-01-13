@@ -7,7 +7,7 @@ import Aux from "../../../hoc/_Aux";
 import { convertCurrencyPTtoUS, convertCurrencyUStoPT } from "../../../helpers/convertCurrency"
 import { convertDatePTtoUS, convertDateUStoPT, getTimeSplited } from "../../../helpers/convertDate"
 
-import SunEditor, { video } from 'suneditor-react'
+import SunEditor from 'suneditor-react'
 import 'suneditor/dist/css/suneditor.min.css';
 
 
@@ -252,7 +252,6 @@ class Create extends React.Component {
                                                         autoComplete="off"
                                                         onChange={this.handleChange}
                                                         required
-                                                        pattern="([\d,]*)"
                                                         pattern="(?=.*[A-Za-z0-9]).{7,15}"
                                                         errorMessage={{ required: "Campo Requerido", pattern: "Entre 7 e 15 caracteres" }}
                                                     />

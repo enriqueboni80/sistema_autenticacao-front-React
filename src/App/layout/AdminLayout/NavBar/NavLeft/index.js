@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Dropdown} from 'react-bootstrap';
+/* import {Dropdown} from 'react-bootstrap'; */
 import windowSize from 'react-window-size';
 
 import NavSearch from './NavSearch';
@@ -14,14 +14,14 @@ class NavLeft extends Component {
         let iconFullScreen = ['feather'];
         iconFullScreen = (this.props.isFullScreen) ? [...iconFullScreen, 'icon-minimize'] : [...iconFullScreen, 'icon-maximize'];
 
-        let navItemClass = ['nav-item'];
+/*         let navItemClass = ['nav-item'];
         if (this.props.windowWidth <= 575) {
             navItemClass = [...navItemClass, 'd-none'];
         }
         let dropdownRightAlign = false;
         if (this.props.rtlLayout) {
             dropdownRightAlign = true;
-        }
+        } */
 
 
         return (

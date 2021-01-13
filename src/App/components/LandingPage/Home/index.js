@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, Modal } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 
 import Aux from "./../../../../hoc/_Aux";
-/* import Card from "./../../../../App/components/MainCard"; */
 
 import EventoService from "./../../../../services/EventoService"
-import InscricaoService from "./../../../../services/InscricaoService"
-import SigIn from './../../../components/Authentication/SignIn/SignIn1'
-import SigUp from './../../../components/Authentication/SignUp/SignUp1'
-import ForgotPassword from './../../../components/Authentication/ResetPassword/ResetPassword1'
-
-import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
 import { convertDateUStoPT, getTimeSplited } from "../../../../helpers/convertDate"
 
 import { Link } from 'react-router-dom'
@@ -39,9 +32,8 @@ class Index extends Component {
 
 
     getTodosEventos = async () => {
-        EventoService.getAll().then((res) => {
-            this.setState({ 'eventos': res.data })
-        })
+        var res = await EventoService.getAll()
+        this.setState({ 'eventos': res.data })
     }
 
     checkIsAuth = async () => {
@@ -93,7 +85,7 @@ class Index extends Component {
                             return (
                                 <Col md={6} xl={3} key={evento.id}>
                                     <Link to={`evento/${evento.id}`} className="btn btn-block">
-                                        <Card style={{border: 'none'}}>
+                                        <Card style={{ border: 'none' }}>
                                             <Card.Body style={{ textAlign: "left" }}>
                                                 <Card.Img src={evento.url_imagem ? evento.url_imagem : `${process.env.REACT_APP_FRONTEND_SERVER_URL}/images/evento-padrao-img.png`} />
                                                 <h5 style={{ fontSize: "13px", color: "Red", fontWeight: "bold" }} className="m-t-10">Dia {convertDateUStoPT(evento.data_inicio)} as {getTimeSplited(evento.data_inicio)}</h5>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Table, Modal, Button } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import Service from "../../../../services/InscricaoService"
 import Aux from "../../../../hoc/_Aux";
 import { convertCurrencyUStoPT } from "../../../../helpers/convertCurrency"
@@ -95,7 +95,7 @@ class Index extends React.Component {
                                                 </div>
                                                 <div className="row m-t-30" style={{ marginTop: "30px auto 1px" }}>
                                                     <div className="col-6">
-                                                        {this.state.isAuthenticated ? <a href='#' className="btn btn-danger text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e, evento.evento_id)}>cancelar</a> : ""}
+                                                        {this.state.isAuthenticated ? <button className="btn btn-danger text-uppercase btn-block" onClick={(e) => this.desinscricaoEvento(e, evento.evento_id)}>cancelar</button> : ""}
                                                     </div>
                                                     <div className="col-6">
                                                         <Link to={`../evento/${evento.id}`} className="btn text-uppercase border btn-block btn-outline-secondary">+ detalhes</Link>
