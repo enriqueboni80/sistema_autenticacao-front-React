@@ -103,7 +103,7 @@
     "suneditor-react": "^2.14.10",
     "sweetalert2": "^8.2.6",
     "sweetalert2-react-content": "^1.0.3",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
